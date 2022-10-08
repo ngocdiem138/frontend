@@ -25,6 +25,24 @@ export const updateUserInfo = (userData, history) => async (dispatch) => {
     history.push("/account");
 };
 
+export const updateUserProfile = (userData, history) => async (dispatch) => {
+    axios({
+        method: "PUT",
+        url: API_BASE_URL + "/user/editProfile",
+        data: userData,
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization": localStorage.getItem("token")
+        }
+    });
+
+    dispatch({
+        type: USER_UPDATED_SUCCESS
+    })
+
+    history.push("/accountProfile");
+};
+
 export const addReviewToPerfume = (data) => async (dispatch) => {
     try {
         await axios.post(API_BASE_URL + "/user/review", data);

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { faList, faLock, faPlusSquare, faShoppingBag, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faList, faLock, faPlusSquare, faShoppingBag, faUsers, faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../pages/Menu/MenuStyle.css";
 
@@ -34,7 +34,7 @@ const AccountNavbar = () => {
                     </li>
                     <li className="mb-2">
                         <Link to={"/user/orders"} className="nav-link mx-3">
-                            <FontAwesomeIcon className="mr-2" icon={faRectangleHistory} />List of orders</Link>
+                            <FontAwesomeIcon className="mr-2" icon={faHistory} />History</Link>
                     </li>
                 </ul>
             }
