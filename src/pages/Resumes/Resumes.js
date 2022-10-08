@@ -20,7 +20,7 @@ function Resumes() {
     <>
       <ChakraProvider>
         <ResumeProvider>
-          <Navbar />
+          {/* <Navbar /> */}
           {/* <Header /> */}
           <Main />
           {/* <Footer /> */}

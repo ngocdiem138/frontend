@@ -31,9 +31,9 @@ class UserEditProfile extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container d-flex">
                 <AccountNavbar/>
-                <div className="container mt-5">
+                <div className="container-fluid margin: 0px">
                     <h4><FontAwesomeIcon className="mr-2" icon={faLock}/> Change Password</h4>
                     {/*<h5 th:text="${username}"></h5>*/}
                     <form onSubmit={this.onFormSubmit}>

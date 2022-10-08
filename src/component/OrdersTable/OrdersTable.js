@@ -7,9 +7,9 @@ import AccountNavbar from "../AccountNavbar/AccountNavbar";
 
 const OrdersTable = ({orders}) => {
     return (
-        <div>
+        <div className="container d-flex">
             <AccountNavbar/>
-            <div className="container mt-5">
+            <div className="container-fluid">
                 <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faShoppingBag}/> List of all orders</h4>
                 <table className="table mt-4">
                     <thead>

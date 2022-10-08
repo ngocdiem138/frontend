@@ -30,7 +30,7 @@ const Main = () => {
             id='builder'
         >
 
-            <Heading as='h4' size='lg' textAlign={'center'} color={'gray.700'} style={{ fontFamily: 'Poppins' }} fontWeight={'medium'}>Builder Dashboard</Heading>
+            <Heading as='h4' size='lg' textAlign={'center'} color={'gray.700'} style={{ fontFamily: 'Poppins' }} fontWeight={'medium'}>Create Resume</Heading>
 
             <Container maxW={'7xl'} px={8} my={3}>
 
