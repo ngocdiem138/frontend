@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { faList, faLock, faPlusSquare, faShoppingBag, faUsers, faHistory } from "@fortawesome/free-solid-svg-icons";
+import { faList, faLock, faPlusSquare, faShoppingBag, faUsers, faHistory, faHouseUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../pages/Menu/MenuStyle.css";
+import UserProfile from "../Profile/UserProfile";
 
 const AccountNavbar = () => {
     return (
@@ -35,6 +36,11 @@ const AccountNavbar = () => {
                     <li className="mb-2">
                         <Link to={"/user/orders"} className="nav-link mx-3">
                             <FontAwesomeIcon className="mr-2" icon={faHistory} />History</Link>
+                    </li>
+                    <li className="mb-2">
+                    {/* <Route path="/userprofile" component={UserProfile}/> */}
+                        <Link to={"/user/profile"} className="nav-link mx-3">
+                            <FontAwesomeIcon className="mr-2" icon={faHouseUser} />Profile</Link>
                     </li>
                 </ul>
             }

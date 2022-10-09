@@ -25,11 +25,11 @@ export const updateUserInfo = (userData, history) => async (dispatch) => {
     history.push("/account");
 };
 
-export const updateUserProfile = (userData, history) => async (dispatch) => {
+export const updateUserProfile = (userProfileData, history) => async (dispatch) => {
     axios({
         method: "PUT",
         url: API_BASE_URL + "/user/editProfile",
-        data: userData,
+        data: userProfileData,
         headers: {
             "Content-Type" : "application/json",
             "Authorization": localStorage.getItem("token")
@@ -40,7 +40,7 @@ export const updateUserProfile = (userData, history) => async (dispatch) => {
         type: USER_UPDATED_SUCCESS
     })
 
-    history.push("/accountProfile");
+    history.push("/account");
 };
 
 export const addReviewToPerfume = (data) => async (dispatch) => {
