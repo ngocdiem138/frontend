@@ -11,7 +11,7 @@ const AccountNavbar = () => {
             {(localStorage.getItem("userRole") === "ADMIN") ?
                 <ul className="navbar-nav list-unstyled components">
                     <li className="nav-item">
-                        <Link to={"/admin/orders"} className="nav-link text-light mx-3">
+                        <Link to={"/user/jobs"} className="nav-link text-light mx-3">
                             <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />List of all orders</Link>
                     </li>
                     <li className="nav-item">
@@ -34,7 +34,7 @@ const AccountNavbar = () => {
                             <FontAwesomeIcon className="mr-2" icon={faLock} />Change password</Link>
                     </li>
                     <li className="mb-2">
-                        <Link to={"/user/orders"} className="nav-link mx-3">
+                        <Link to={"/user/jobs"} className="nav-link mx-3">
                             <FontAwesomeIcon className="mr-2" icon={faHistory} />History</Link>
                     </li>
                     <li className="mb-2">

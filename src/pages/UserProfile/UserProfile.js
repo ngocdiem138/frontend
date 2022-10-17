@@ -4,9 +4,15 @@ import { connect } from "react-redux";
 import { faEdit, faLock, faHouseUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { fetchAllUsersOrders } from "../../actions/admin-actions";
 import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
+import Skill from "../../component/Skill/Skill";
+import Experience from "../../component/Experience/Experience";
 import { updateUserProfile } from "../../actions/user-actions";
 import "../../assets/img/photo-1431578500526-4d9613015464.jpeg";
+import OrdersTable from "../../component/OrdersTable/OrdersTable";
+import { TabList, Tabs, Tab, TabPanels, TabPanel, Box, Text } from '@chakra-ui/react';
+import "./UserProfile.css";
 import {
     Badge,
     Button,
@@ -64,10 +70,32 @@ class UserProfile extends Component {
         });
     };
 
+    componentDidMount() {
+        this.props.fetchAllUsersOrders();
+    }
+
+
     render() {
         return (
             <div className="container d-flex">
+                {/* <Box
+                    bg={'white'}
+                    maxW={'xl'}
+                    minH={'80vh'}
+                    rounded={'md'}
+                    shadow={'md'}
+                    overflow={'hidden'}
+                    minW={'60vw'}
+                > */}
                 <AccountNavbar />
+                {/* <Tabs isFitted size="sm" variant='enclosed'>
+                        <TabList>
+                            <Tab><Text fontWeight={'medium'}>About</Text></Tab>
+                            <Tab><Text fontWeight={'medium'}>Experience</Text></Tab>
+                            <Tab><Text fontWeight={'medium'}>Skills</Text></Tab>
+                        </TabList> */}
+                {/* <TabPanels> */}
+                {/* <TabPanel> */}
                 <Container fluid>
                     <Row>
                         <Col md="9">
@@ -249,6 +277,26 @@ class UserProfile extends Component {
                             </Card>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col md="12">
+                            <Card>
+                                <Card.Header>
+                                    <Card.Title as="h4">Experience</Card.Title>
+                                </Card.Header>
+                                <Experience />
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="12">
+                            <Card>
+                                <Card.Header>
+                                    <Card.Title as="h4">Skill</Card.Title>
+                                </Card.Header>
+                                <Skill skill={this.props.skill} />
+                            </Card>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
@@ -257,11 +305,14 @@ class UserProfile extends Component {
 
 UserProfile.propTypes = {
     updateUserInfo: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    fetchAllUsersOrders: PropTypes.func.isRequired,
+    skill: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    skill: state.admin.orders,
 });
 
-export default connect(mapStateToProps, { updateUserProfile })(UserProfile);
+export default connect(mapStateToProps, { fetchAllUsersOrders })(UserProfile);

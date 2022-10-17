@@ -20,7 +20,7 @@ import EditUser from "../EditUser/EditUser";
 import UserEditProfile from "../UserEditProfile/UserEditProfile";
 import EditPerfumesList from "../EditPerfumesList/EditPerfumesList";
 import EditPerfume from "../EditPerfume/EditPerfume";
-import UserOrdersList from "../UserOrdersList/UserOrdersList";
+import UserJobsList from "../UserOrdersList/UserOrdersList";
 import UserProfile from "../UserProfile/UserProfile";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import ResetPassword from "../ResetPassword/ResetPassword";
@@ -65,8 +65,8 @@ class App extends Component {
                         (<Route component={UserEditProfile} />) : (<Route component={Home} />)} /> */}
                     <Route exact path="/user/edit" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserEditProfile} />) : (<Route component={UserEditProfile} />)} />
-                    <Route exact path="/user/orders" render={() => localStorage.getItem("isLoggedIn") ?
-                        (<Route component={UserOrdersList} />) : (<Route component={UserOrdersList} />)} />
+                    <Route exact path="/user/jobs" render={() => localStorage.getItem("isLoggedIn") ?
+                        (<Route component={UserJobsList} />) : (<Route component={UserJobsList} />)} />
                     {/* <Route exact path="/user/orders" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserOrdersList} />) : (<Route component={Home} />)} /> */}
                     <Route exact path="/user/profile" render={() => localStorage.getItem("isLoggedIn") ?
