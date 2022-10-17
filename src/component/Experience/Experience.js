@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons"
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '@chakra-ui/react';
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, VStack, Textarea, Select, Text } from '@chakra-ui/react';
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, VStack, Textarea, Select, Text, Col } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 
 import AccountNavbar from "../AccountNavbar/AccountNavbar";
@@ -42,28 +39,6 @@ const Experience = () => {
     }
 
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (!skill || skill === " ") {
-    //         toast({
-    //             title: 'Empty Input',
-    //             status: 'error',
-    //             isClosable: true,
-    //         })
-    //         return;
-    //     }
-    //     const newSkill = {
-    //         id: uuidv4(),
-    //         name: skill,
-    //     }
-    //     setSkills([...skills, newSkill]);
-    //     setSkill("");
-    // }
-
-    // const deleteSkill = (id) => {
-    //     setSkills(skills.filter((elem) => elem.id !== id))
-    // }
-
     return (
         <>
             <Accordion allowToggle defaultIndex={[0]}>
@@ -80,11 +55,11 @@ const Experience = () => {
                             </h2>
                             <AccordionPanel pb={4}>
 
-                                <Input value={work.position} onChange={(e) => handleChange(e, work.id)} name='position' type='text' variant='filled' placeholder='Position' mb={3} />
 
-                                <HStack spacing={3}>
-                                    <Input value={work.company} onChange={(e) => handleChange(e, work.id)} name='company' type='text' variant='filled' placeholder='Company' />
-                                    <Select value={work.type} onChange={(e) => handleChange(e, work.id)} name='type' variant='filled' placeholder='Employment Type'>
+                                <HStack spacing={30}>
+                                    <Input width="30%" value={work.position} onChange={(e) => handleChange(e, work.id)} name='position' type='text' variant='filled' placeholder='Position' />
+                                    <Input width="30%" value={work.company} onChange={(e) => handleChange(e, work.id)} name='company' type='text' variant='filled' placeholder='Company' />
+                                    <Select width="30%" value={work.type} onChange={(e) => handleChange(e, work.id)} name='type' variant='filled' placeholder='Employment Type'>
                                         <option value='Full-time'>Full-time</option>
                                         <option value='Part-time'>Part-time</option>
                                         <option value='Internship'>Internship</option>
@@ -92,26 +67,26 @@ const Experience = () => {
                                     </Select>
                                 </HStack>
 
-                                <HStack spacing={3} mt={4}>
-                                    <FormControl>
+                                <HStack spacing={30} mt={6}>
+                                    <FormControl width="45%">
                                         <FormLabel htmlFor='startDate'>Start Date</FormLabel>
-                                        <Input value={work.startDate} onChange={(e) => handleChange(e, work.id)} name='startDate' id='startDate' type='month' variant='filled' placeholder='Start Date' />
+                                        <Input width="90%" value={work.startDate} onChange={(e) => handleChange(e, work.id)} name='startDate' id='startDate' type='date' variant='filled' placeholder='Start Date' />
                                     </FormControl>
 
-                                    <FormControl>
+                                    <FormControl width="45%">
                                         <FormLabel htmlFor='endDate'>End Date</FormLabel>
-                                        <Input value={work.endDate} onChange={(e) => handleChange(e, work.id)} name='endDate' id='endDate' type='month' variant='filled' placeholder='Start Date' />
+                                        <Input width="90%" value={work.endDate} onChange={(e) => handleChange(e, work.id)} name='endDate' id='endDate' type='date' variant='filled' placeholder='Start Date' />
                                     </FormControl>
 
                                 </HStack>
 
                                 <FormControl mt={3}>
                                     <FormLabel htmlFor='description'>Description</FormLabel>
-                                    <Textarea value={work.description} onChange={(e) => handleChange(e, work.id)} name='description' id='description' variant='filled' placeholder='Description...' />
+                                    <Textarea width="90%" value={work.description} onChange={(e) => handleChange(e, work.id)} name='description' id='description' variant='filled' placeholder='Description...' />
                                 </FormControl>
 
                                 <FormControl mt={3}>
-                                    <Skill/>
+                                    <Skill />
                                 </FormControl>
 
                                 <Button rightIcon={<MdDelete />} onClick={() => deleteExperience(work.id)} mt={3} colorScheme={'red'}>Delete</Button>
