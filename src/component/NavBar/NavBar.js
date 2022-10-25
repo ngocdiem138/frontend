@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignInAlt, faSignOutAlt, faUser, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignInAlt, faSignOutAlt, faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
-import {logout} from "../../actions/auth-actions";
-import {fetchCart} from "../../actions/cart-actions";
+import { logout } from "../../actions/auth-actions";
+import { fetchCart } from "../../actions/cart-actions";
 import "./NavBar.css";
+import logo from '../../assets/img/logo.png';
+import { Container, Row, Col, Nav, input } from 'react-bootstrap';
 
 class NavBar extends Component {
     componentDidMount() {
@@ -27,19 +29,19 @@ class NavBar extends Component {
             links = (
                 <li className="nav-item">
                     <Link to={"/account"}><span className="nav-link pl-5 pr-5">
-                         <FontAwesomeIcon className="mr-2" icon={faUser}/>MY ACCOUNT</span></Link>
+                        <FontAwesomeIcon className="mr-2" icon={faUser} />MY ACCOUNT</span></Link>
                 </li>
             );
             signOut = (
                 <Link to={"/"} onClick={this.handleLogout}>
-                    <button className="btn btn-dark mr-3" style={{color: "white"}}>
-                        <FontAwesomeIcon className="mr-2" icon={faSignOutAlt}/>Exit
+                    <button className="btn btn-dark mr-3" style={{ color: "white" }}>
+                        <FontAwesomeIcon className="mr-2" icon={faSignOutAlt} />Exit
                     </button>
                 </Link>
             );
             cart = (
                 <h5 className="d-inline"
-                    style={{position: "relative", right: "15px", bottom: "8px"}}>
+                    style={{ position: "relative", right: "15px", bottom: "8px" }}>
                     <span className="badge badge-success">{this.props.cartItems.length}</span>
                 </h5>
             );
@@ -48,11 +50,11 @@ class NavBar extends Component {
                 <>
                     <li className="nav-item">
                         <Link to={"/login"} className="nav-link pl-5 pr-3">
-                            <FontAwesomeIcon className="mr-2" icon={faSignInAlt}/>SIGN IN</Link>
+                            <FontAwesomeIcon className="mr-2" icon={faSignInAlt} />SIGN IN</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={"/registration"} className="nav-link">
-                            <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>SIGN UP</Link>
+                            <FontAwesomeIcon className="mr-2" icon={faUserPlus} />SIGN UP</Link>
                     </li>
                 </>
             );
@@ -60,42 +62,48 @@ class NavBar extends Component {
         }
 
         return (
-            <div>
-                <div id="header" className="container-fluid d-none d-md-block">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM6m3sy35QEGdIzWTd5uzUUgLTVkZE6f1PTw&usqp=CAU" className="rounded mx-auto d-block"/>
-                </div>
-                <div className="container-fluid bg-black">
-                    <nav id="navbar-main" className={`container navbar navbar-expand-lg bg-black text-white `}
-                         style={{fontSize: "18px"}}>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto ">
-                                <li className="nav-item">
-                                    <Link to={"/"}><span className="nav-link pl-5 pr-5">HOME</span></Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={{pathname: "/menu", state: {id: "all"}}}>
-                                        <span className="nav-link pl-5 pr-5">PERFUMES</span></Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={"/contacts"}><span className="nav-link pl-5 pr-5">CONTACTS</span></Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={"/resumes"}><span className="nav-link pl-5 pr-5">RESUMES</span></Link>
-                                </li>
-                            </ul>
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <Link className="nav-link" to={"/cart"}>
-                                        <i className="fas fa-shopping-cart fa-lg pl-5" style={{color: "white"}}></i>
-                                        {cart}
-                                    </Link>
-                                </li>
-                                {links}
-                            </ul>
-                            {signOut}
-                        </div>
-                    </nav>
-                </div>
+            <div className="content">
+                <Container fluid>
+                    <Row>
+                        <Col xl={1}>
+                            <img className="logo" src={logo} alt="logo" />
+                        </Col>
+                        <Col xl={11}>
+                            <div className="container-fluid bg-black">
+                                <nav id="navbar-main" className={`container navbar navbar-expand-lg bg-black text-white `}
+                                    style={{ fontSize: "18px" }}>
+                                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                                        <ul className="navbar-nav mr-auto ">
+                                            <li className="nav-item">
+                                                <Link to={"/"}><span className="nav-link pl-5 pr-5">HOME</span></Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link to={{ pathname: "/menu", state: { id: "all" } }}>
+                                                    <span className="nav-link pl-5 pr-5">PERFUMES</span></Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link to={"/contacts"}><span className="nav-link pl-5 pr-5">CONTACTS</span></Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link to={"/resumes"}><span className="nav-link pl-5 pr-5">RESUMES</span></Link>
+                                            </li>
+                                        </ul>
+                                        <ul className="navbar-nav ml-auto">
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to={"/jobs"}>
+                                                    <i className="fas fa-lg pl-5" style={{ color: "white" }}>Jobs</i>
+                                                    {cart}
+                                                </Link>
+                                            </li>
+                                            {links}
+                                        </ul>
+                                        {signOut}
+                                    </div>
+                                </nav>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }

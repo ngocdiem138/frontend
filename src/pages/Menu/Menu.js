@@ -79,7 +79,7 @@ class Menu extends Component {
                         <h3>Perfumes</h3>
                     </div>
                     <ul className="list-unstyled components">
-                        <h5>Brand</h5>
+                        <h5>Company</h5>
                         <li className="active mb-2" id="homeSubmenu">
                             <Checkbox list={perfumer}
                                       handleFilters={(filters) => this.handleFilters(filters, "perfumers")}/>
@@ -89,7 +89,7 @@ class Menu extends Component {
                             <Checkbox list={gender}
                                       handleFilters={(filters) => this.handleFilters(filters, "genders")}/>
                         </li>
-                        <h5>Price</h5>
+                        <h5>Salary</h5>
                         <li className="active mb-2">
                             <CheckboxRadio list={price}
                                            handleFilters={(filters) => this.handleFilters(filters, "prices")}/>
