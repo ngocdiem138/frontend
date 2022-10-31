@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { faEdit, faLock, faHouseUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { fetchAllUsersOrders } from "../../actions/admin-actions";
 import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
 import Skill from "../../component/Skill/Skill";
 import Experience from "../../component/Experience/Experience";
-import { updateUserProfile } from "../../actions/user-actions";
 import "../../assets/img/photo-1431578500526-4d9613015464.jpeg";
-import OrdersTable from "../../component/OrdersTable/OrdersTable";
-import { TabList, Tabs, Tab, TabPanels, TabPanel, Box, Text } from '@chakra-ui/react';
 import "./UserProfile.css";
-import {
-    Badge,
-    Button,
-    Card,
-    Form,
-    Navbar,
-    Nav,
-    Container,
-    Row,
-    Col
-} from "react-bootstrap";
+import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 class UserProfile extends Component {
     state = {

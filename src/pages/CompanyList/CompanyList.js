@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Button, ButtonGroup, Table } from 'reactstrap';
-import { Container, Row, Col, Nav, Form } from 'react-bootstrap';
+import React from 'react';
+import { Button, Table } from 'reactstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './CompanyList.css';
 import { format } from 'date-fns';
@@ -50,16 +50,16 @@ const CompanyList = () => {
             setChecked(updatedList);
         })
     }
-    const projectList = companys.map(project => {
-        return <tr key={project.id}>
-            <td><input type="checkbox" disabled={project.status == "NEW" ? false : true} value={project.id} onChange={handleCheck}></input></td>
-            <td style={{ whiteSpace: 'nowrap' }}><Link to={"/projects/" + project.id} >{project.number}</Link></td>
-            <td>{project.name}</td>
-            <td>{project.status}</td>
-            <td>{project.customer}</td>
-            <td>{project.startDate ? format(new Date(project.startDate), 'dd.MM.yyyy') : project.startDate}</td>
+    const companyList = companys.map(company => {
+        return <tr key={company.id}>
+            <td><input type="checkbox" disabled={company.status == "NEW" ? false : true} value={company.id} onChange={handleCheck}></input></td>
+            <td style={{ whiteSpace: 'nowrap' }}><Link to={"/companys/" + company.id} >{company.number}</Link></td>
+            <td>{company.name}</td>
+            <td>{company.status}</td>
+            <td>{company.customer}</td>
+            <td>{company.startDate ? format(new Date(company.startDate), 'dd.MM.yyyy') : company.startDate}</td>
             <td>
-                {project.status == "NEW" ? <Button className='btn-delete' onClick={() => remove(project.id)}><Trash /></Button> : ""}
+                {company.status == "NEW" ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
             </td>
         </tr>
     });
@@ -89,7 +89,7 @@ const CompanyList = () => {
                                     <div className="col-md-3">
                                         <select name="status" id="status" class="form-control" value={status}
                                             onChange={(e) => setStatus(e.target.value)}>
-                                            <option value="" selected  >Projects status</option>
+                                            <option value="" selected  >Company status</option>
                                             <option value="NEW">NEW</option>
                                             <option value="PLA">Planned</option>
                                             <option value="INP">In progress</option>
@@ -97,7 +97,7 @@ const CompanyList = () => {
                                         </select>
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button submit" class="btn btn-primary" onClick={handleSearch}>Search Project</button>
+                                        <button type="button submit" class="btn btn-primary" onClick={handleSearch}>Search Company</button>
                                     </div>
                                     <div class="col-md-2">
                                         <button type="button" class="btn btn-light">Reset Search</button>
@@ -122,7 +122,7 @@ const CompanyList = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {projectList}
+                                    {companyList}
                                     <tr>
                                         <td colspan="5">{checked.length} items selected</td>
                                         <td colspan="2" >delete selected items <Button className='btn-delete' onClick={() => removeSelected(checked)} ><Trash /></Button></td>
