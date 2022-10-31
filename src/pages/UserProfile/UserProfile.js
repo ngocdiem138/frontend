@@ -51,17 +51,6 @@ class UserProfile extends Component {
         this.setState({ uploadedFile: event.target.files[0] });
     }
 
-    onFormSubmit = (event) => {
-        event.preventDefault();
-
-        const userData = {
-            password: this.state.password,
-            email: localStorage.getItem("email")
-        };
-
-        this.props.updateUserProfile(userData, this.props.history);
-    }
-
     handleInputChange = (event) => {
         const { name, value } = event.target;
 

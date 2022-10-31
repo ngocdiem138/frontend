@@ -8,11 +8,16 @@ import UserProfile from "../Profile/UserProfile";
 const AccountNavbar = () => {
     return (
         <nav id="sidebar">
-            {(localStorage.getItem("userRole") === "ADMIN") ?
+            {!(localStorage.getItem("userRole") === "ADMIN") ?
+            // (localStorage.getItem("userRole") === "ADMIN")?
                 <ul className="navbar-nav list-unstyled components">
                     <li className="nav-item">
+                        <Link to={"/admin/companys/all"} className="nav-link text-light mx-3">
+                            <FontAwesomeIcon className="mr-2" icon={faUsers} />List of all company</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link to={"/user/jobs"} className="nav-link text-light mx-3">
-                            <FontAwesomeIcon className="mr-2" icon={faShoppingBag} />List of all orders</Link>
+                            <FontAwesomeIcon className="mr-2" icon={faHistory} />History</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={"/admin/users/all"} className="nav-link text-light mx-3">

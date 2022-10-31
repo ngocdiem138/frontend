@@ -16,6 +16,7 @@ import OrderFinalize from "../OrderFinalize/OrderFinalize";
 import AddProduct from "../AddProduct/AddProduct";
 import OrdersList from "../OrdersList/OrdersList";
 import UserList from "../UserList/UserList";
+import CompanyList from "../CompanyList/CompanyList";
 import EditUser from "../EditUser/EditUser";
 import UserEditProfile from "../UserEditProfile/UserEditProfile";
 import EditPerfumesList from "../EditPerfumesList/EditPerfumesList";
@@ -45,7 +46,7 @@ class App extends Component {
                     <Route exact path="/contacts" component={Contacts} />
                     <Route exact path="/resumes" component={Resumes} />
                     <Route exact path="/account" component={Account} />
-                    <Route exact path="/cart" render={() => localStorage.getItem("isLoggedIn") ?
+                    <Route exact path="/job" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={Cart} />) : (<Route component={Login} />)} />
                     <Route exact path="/order" component={Order} />
                     <Route exact path="/order/finalize" component={OrderFinalize} />
@@ -53,6 +54,9 @@ class App extends Component {
                         (<Route component={AddProduct} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/orders" render={() => (isAdmin) ?
                         (<Route component={OrdersList} />) : (<Route component={Home} />)} />
+                    <Route exact path="/admin/companys/all" render={() => (isAdmin) ?
+                        // (<Route component={CompanyList} />) : (<Route component={Home} />)} />
+                        (<Route component={CompanyList} />) : (<Route component={CompanyList} />)} />
                     <Route exact path="/admin/users/all" render={() => (isAdmin) ?
                         (<Route component={UserList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/user/:id" render={() => (isAdmin) ?
