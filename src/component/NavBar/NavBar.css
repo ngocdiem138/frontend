@@ -1,28 +1,57 @@
 .bg-black {
-    background-color: black;
+    background-color: #22277A;
+
+}
+.content{
+    background-color: #22277A;
+    padding-bottom: 1rem;
 }
 
 #navbar-main a {
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
+    font-size: large;
+    font-weight: 300;
+    color: #B9BFFF;
     transition: .3s;
 }
 
 #navbar-main a:hover {
-    color: #00A1DF;
+    color: #8B74BD;
+    font-size: larger;
     text-decoration: none;
 }
 
 #header {
     width: 100%;
-    height: 230px;
+    height: 60px;
     background-color: black;
+    position:fixed;
+    top:0;
+    
     /*position: relative;*/
 }
 
 #header img {
     height: 230px;
+}
+
+/* Search css */
+.search-group{
+    width: 80%;
+    display: flex;
+}
+
+.search-box{
+    border-radius: 100px 0px 0px 100px;
+    border-color: #22277A;
+    height: 2.5rem;
+}
+
+.search-button{
+    border-radius: 0px 50px 50px 0px;
+    background-color: #7953A9;
+    color: white;
+    border: none;
+    width: 5%;
 }
 
 .fixed {
@@ -39,6 +68,29 @@
     width: 2vw;
 }
 
+.brand-title{
+    margin-top: 1rem;
+    margin-left: 1rem;       
+    font-size: medium;
+    font-weight: bolder;
+    color: white;
+    
+}
+
 .col {
     padding: 0 !important;
+}
+
+.logo-wrapper{
+    display: flex;
+}
+
+/* .header-link{
+    font-size: large;
+    font-weight: 300;
+} */
+
+/* //active for navLink */
+.active{
+    text-decoration: underline;
 }
