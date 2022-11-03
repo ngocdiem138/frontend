@@ -5,6 +5,7 @@ import {
     PERFUME_UPDATED_FAILURE,
     FETCH_USER_SUCCESS,
     FETCH_ALL_USERS_SUCCESS,
+    FETCH_ALL_COMPANYS_SUCCESS,
     FETCH_ALL_USERS_ORDERS_SUCCESS,
     FORM_RESET
 } from "../utils/constants/actions-types";

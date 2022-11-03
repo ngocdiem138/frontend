@@ -18,14 +18,35 @@ import {
 } from "../utils/constants/actions-types";
 import {API_BASE_URL} from "../utils/constants/url";
 
+function cutInformation(start, end, string){
+    let indexStart = string.indexOf(start) + start.length();
+    let indexEnd = string.indexOf(end);
+    return string.substring(indexStart, indexEnd);
+}
+
+function setRole(roles){
+    if(roles.find(role => role==='ADMIN'))
+        return 'ADMIN';
+    else if(roles.find(role => role==='EMPLOYER'))
+        return 'EMPLOYER';
+    else if(roles.find(role => role==='CANDIDATE'))
+        return 'CANDIDATE';
+    else 
+        return 'UESR';
+};
+
 export const login = (data, history) => async (dispatch) => {
     try {
         const response = await axios.post(API_BASE_URL + "/login", data);
-        console.log(data);
-        localStorage.setItem("email", response.data.email);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userRole", response.data.userRole);
-        localStorage.setItem("isLoggedIn", true);
+        if(response.data.status===200)
+        {
+
+            let inforUser = response.config.data.replaceAll("\"","");
+            localStorage.setItem("email", cutInformation("email:",",",inforUser));
+            localStorage.setItem("token", response.data.data.jwt);
+            localStorage.setItem("userRole", setRole(response.data.data.roles));
+            localStorage.setItem("isLoggedIn", true);
+        }
 
         dispatch({
             type: LOGIN_SUCCESS,
