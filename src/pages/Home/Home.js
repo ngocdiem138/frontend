@@ -8,7 +8,7 @@ import SliderCards from "../../component/PerfumeCardsSlider/PerfumeCardsSlider";
 const Home = () => {
     return (
         <div>
-            <CarouselImageSlider/>
+            {/* <CarouselImageSlider/> */}
             <SliderBrands/>
             <HomePageTheme/>
             <SliderCards/>

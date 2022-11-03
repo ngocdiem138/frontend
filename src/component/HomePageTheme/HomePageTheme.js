@@ -4,7 +4,8 @@ import {Link} from "react-router-dom";
 const HomePageTheme = () => {
     return (
         <div className="container mt-5">
-            <div className="row">
+            HomePage
+            {/* <div className="row">
                 <div className="col-lg-6">
                     <div className="card mb-5" >
                         <Link to={{pathname: "/menu", state: { id: "female" }}}>
@@ -19,7 +20,7 @@ const HomePageTheme = () => {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,15 @@ import "./NavBar.css";
 import logo from '../../assets/img/logo.png';
 import { Container, Row, Col, Nav, input } from 'react-bootstrap';
 
+// use for root navlink not active in another address
+const checkActive = (match, location) => {
+    //some additional logic to verify you are in the home URI
+    if(!location) return false;
+    const {pathname} = location;
+    console.log(pathname);
+    return pathname === "/";
+}
+
 class NavBar extends Component {
     componentDidMount() {
         this.props.fetchCart();
@@ -19,6 +28,7 @@ class NavBar extends Component {
     handleLogout = () => {
         this.props.logout();
     }
+
 
     render() {
         let cart;
@@ -66,7 +76,10 @@ class NavBar extends Component {
                 <Container fluid>
                     <Row>
                         <Col xl={1}>
-                            <img className="logo" src={logo} alt="logo" />
+                            <div className='logo-wrapper'>
+                                <img className="logo" src='/images/puzzle.svg' alt="logo" />
+                                <div className="brand-title">Puzzle</div>
+                            </div>
                         </Col>
                         <Col xl={11}>
                             <div className="container-fluid bg-black">
@@ -74,26 +87,26 @@ class NavBar extends Component {
                                     style={{ fontSize: "18px" }}>
                                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                         <ul className="navbar-nav mr-auto ">
-                                            <li className="nav-item">
-                                                <Link to={"/"}><span className="nav-link pl-5 pr-5">HOME</span></Link>
+                                            <li className="nav-item ">
+                                                <NavLink to={"/"} activeClassName="active" isActive={checkActive}><span className="nav-link pl-5 pr-5 header-link">Trang chủ</span></NavLink>
                                             </li>
-                                            <li className="nav-item">
-                                                <Link to={{ pathname: "/menu", state: { id: "all" } }}>
-                                                    <span className="nav-link pl-5 pr-5">PERFUMES</span></Link>
+                                            <li className="nav-item ">
+                                                <NavLink to={{ pathname: "/menu", state: { id: "all" } }}>
+                                                    <span className="nav-link pl-5 pr-5 header-link">Việc làm</span></NavLink>
                                             </li>
-                                            <li className="nav-item">
-                                                <Link to={"/contacts"}><span className="nav-link pl-5 pr-5">CONTACTS</span></Link>
+                                            <li className="nav-item ">
+                                                <NavLink to={"/contacts"}><span className="nav-link pl-5 pr-5 header-link">Công ty</span></NavLink>
                                             </li>
-                                            <li className="nav-item">
-                                                <Link to={"/resumes"}><span className="nav-link pl-5 pr-5">RESUMES</span></Link>
+                                            <li className="nav-item ">
+                                                <NavLink to={"/resumes"}><span className="nav-link pl-5 pr-5 header-link">Cv</span></NavLink>
                                             </li>
                                         </ul>
                                         <ul className="navbar-nav ml-auto">
                                             <li className="nav-item">
-                                                <Link className="nav-link" to={"/jobs"}>
-                                                    <i className="fas fa-lg pl-5" style={{ color: "white" }}>Jobs</i>
+                                                <NavLink className="nav-link" to={"/jobs"}>
+                                                    <i className="fas fa-lg pl-5" style={{ color: "white" }}>JOBS</i>
                                                     {cart}
-                                                </Link>
+                                                </NavLink>
                                             </li>
                                             {links}
                                         </ul>
@@ -103,6 +116,13 @@ class NavBar extends Component {
                             </div>
                         </Col>
                     </Row>
+                        <div className='search-group' style={{marginLeft: "auto", marginRight: "auto"}}>
+                            <input className='search-box'/>
+                            <button className='search-button'>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
                 </Container>
             </div>
         );

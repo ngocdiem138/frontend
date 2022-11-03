@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faLock, faSignInAlt} from "@fortawesome/free-solid-svg-icons";
-
+import './Login.css'
 import {login, formReset, activateAccount} from "../../actions/auth-actions";
 
 class Login extends Component {
@@ -52,38 +52,42 @@ class Login extends Component {
                 <hr align="left" width="550"/>
                 {error ? <div className="alert alert-danger col-6" role="alert">{error}</div> : null}
                 {success ? <div className="alert alert-success col-6" role="alert">{success}</div> : null}
-                <form onSubmit={this.onClickSignIn}>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">E-mail: </label>
-                        <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
-                        <div className="col-sm-4">
-                            <input
-                                className="form-control"
-                                type="email"
-                                name="email"
-                                value={email}
-                                onChange={this.handleInputChange}/>
+                <div className='login-wrapper'>
+                    <form onSubmit={this.onClickSignIn}>
+                        <div className="input-group">
+                            <label className="col-sm-1 col-form-label">E-mail: </label>
+                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
+                            <div className="col-sm-4">
+                                <input
+                                    className="form-control input"
+                                    type="email"
+                                    name="email"
+                                    placeholder='Email đăng nhập'
+                                    value={email}
+                                    onChange={this.handleInputChange}/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Password: </label>
-                        <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
-                        <div className="col-sm-4">
-                            <input
-                                className="form-control"
-                                type="password"
-                                name="password"
-                                value={password}
-                                onChange={this.handleInputChange}/>
+                        <div className="form-group row  input-group">
+                            <label className="col-sm-1 col-form-label" style={{marginRight: "1rem"}}>Password: </label>
+                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
+                            <div className="col-sm-4">
+                                <input
+                                    className="form-control input"
+                                    type="password"
+                                    name="password"
+                                    placeholder='Mật khẩu đăng nhập'
+                                    value={password}
+                                    onChange={this.handleInputChange}/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <button type="submit" className="btn btn-dark mx-3">
-                            <FontAwesomeIcon className="mr-3" icon={faSignInAlt}/>Sign in
-                        </button>
-                        <Link to={"/forgot"} style={{position: "relative", top: "8px"}}>Forgot password?</Link>
-                    </div>
-                </form>
+                        <div className="form-group row" style={{width:"55%", margin:"auto"}}>
+                            <button type="submit" className="btn btn-dark mx-3">
+                                <FontAwesomeIcon className="mr-3" icon={faSignInAlt}/>Sign in
+                            </button>
+                            <Link to={"/forgot"} style={{position: "relative", top: "8px"}}>Forgot password?</Link>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }
