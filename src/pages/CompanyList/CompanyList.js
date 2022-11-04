@@ -12,23 +12,44 @@ import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
 const CompanyList = () => {
 
     const [companys, setCompanys] = useState([]);
+    console.log(companys)
     useEffect(() => {
-        CompanyService.getAllProjects().then((response) => { setCompanys(response.data) });
+        CompanyService.getAllCompanys().then((response) => { setCompanys(response.data.data) });
     }, [])
 
     const [keyword, setKeyword] = useState('');
     const [status, setStatus] = useState('');
 
+    function setCompanysList(data){
+        if(data){
+            data.map(company => {
+                return <tr key={company.id}>
+                    <td><input type="checkbox" disabled={company.status == "NEW" ? false : true} value={company.id} onChange={handleCheck}></input></td>
+                    <td style={{ whiteSpace: 'nowrap' }}><Link to={"/companys/" + company.id} >{company.number}</Link></td>
+                    <td>{company.name}</td>
+                    <td>{company.active}</td>
+                    <td>{company.description}</td>
+                    <td>{company.followingCandidate.length}</td>
+                    <td>{company.jobPostEntities.length}</td>
+                    {/* <td>{company.startDate ? format(new Date(company.startDate), 'dd.MM.yyyy') : company.startDate}</td> */}
+                    <td>
+                        {company.active == false ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
+                    </td>
+                </tr>
+            });        
+        }
+    }
+
     function handleInputChange(e) {
         setKeyword(e.target.value)
     }
     async function handleSearch() {
-        const { data } = await CompanyService.getProjectByKeyWordAndStatus(keyword, status);
+        const { data } = await CompanyService.getCompanyByKeyWordAndStatus(keyword, status);
         console.log(data);
         setCompanys(data);
     }
     function remove(number) {
-        CompanyService.deleteProject(number).then(() => CompanyService.getAllProjects().then((response) => { setCompanys(response.data) }));
+        CompanyService.deleteCompany(number).then(() => CompanyService.getAllCompanys().then((response) => { setCompanys(response.data) }));
     }
     const [checked, setChecked] = useState([]);
     // Add/Remove checked item from list
@@ -44,7 +65,7 @@ const CompanyList = () => {
     };
     function removeSelected(checked) {
         checked.map(item => {
-            CompanyService.deleteProject(item).then(() => CompanyService.getAllProjects().then((response) => { setCompanys(response.data) }));
+            CompanyService.deleteCompany(item).then(() => CompanyService.getAllCompanys().then((response) => { setCompanys(response.data.data) }));
             var updatedList = [...checked];
             updatedList.splice(checked.indexOf(item), 1);
             setChecked(updatedList);
@@ -52,17 +73,19 @@ const CompanyList = () => {
     }
     const companyList = companys.map(company => {
         return <tr key={company.id}>
-            <td><input type="checkbox" disabled={company.status == "NEW" ? false : true} value={company.id} onChange={handleCheck}></input></td>
-            <td style={{ whiteSpace: 'nowrap' }}><Link to={"/companys/" + company.id} >{company.number}</Link></td>
+            <td><input type="checkbox" disabled={company.active == false ? false : true} value={company.id} onChange={handleCheck}></input></td>
+            <td style={{ whiteSpace: 'nowrap' }}><Link to={"/companys/" + company.id} >{company.id}</Link></td>
             <td>{company.name}</td>
-            <td>{company.status}</td>
-            <td>{company.customer}</td>
-            <td>{company.startDate ? format(new Date(company.startDate), 'dd.MM.yyyy') : company.startDate}</td>
-            <td>
-                {company.status == "NEW" ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
+            <td>{company.active == false ? "INACTIVE" : "ACTIVE"}</td>
+            <td>{company.description}</td>
+            <td>{company.followingCandidate.length}</td>
+            <td>{company.jobPostEntities.length}</td>
+            {/* <td>{company.startDate ? format(new Date(company.startDate), 'dd.MM.yyyy') : company.startDate}</td> */}
+            <td  style={{ textAlign: 'right' }}>
+                {company.active == false ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
             </td>
         </tr>
-    });
+    });        
 
     return (
         <div>
@@ -83,7 +106,7 @@ const CompanyList = () => {
                             <div class="container">
                                 <div class="row">
                                     <div className="col-md-5">
-                                        <input className='form-control' value={keyword} onChange={handleInputChange} placeholder='Project number, name, customer' >
+                                        <input className='form-control' value={keyword} onChange={handleInputChange} placeholder='Company number, name' >
                                         </input>
                                     </div>
                                     <div className="col-md-3">
@@ -114,18 +137,19 @@ const CompanyList = () => {
                                     <tr>
                                         <th width="5%"></th>
                                         <th width="10%">Number</th>
-                                        <th width="40%">Name</th>
+                                        <th width="25%">Name</th>
                                         <th width="10%">Status</th>
-                                        <th width="20%">Customer</th>
-                                        <th width="15%">Start Date</th>
-                                        <th width="10%">Delete</th>
+                                        <th width="25%">Description</th>
+                                        <th width="8%">Candidate</th>
+                                        <th width="8%">JobPost</th>
+                                        <th width="9%">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {companyList}
                                     <tr>
-                                        <td colspan="5">{checked.length} items selected</td>
-                                        <td colspan="2" >delete selected items <Button className='btn-delete' onClick={() => removeSelected(checked)} ><Trash /></Button></td>
+                                        <td colspan="6">{checked.length} items selected</td>
+                                        <td  style={{ textAlign: 'right' }} colspan="2" >delete selected items <Button className='btn-delete' onClick={() => removeSelected(checked)} ><Trash /></Button></td>
                                     </tr>
                                 </tbody>
                             </Table>

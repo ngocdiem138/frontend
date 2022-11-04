@@ -250,6 +250,7 @@ class UserProfile extends Component {
                             </Card>
                         </Col>
                     </Row>
+                    
                     <Row>
                         <Col md="12">
                             <Card>

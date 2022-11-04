@@ -16,27 +16,27 @@ const COMPANY_BASE_REST_API_URL = 'http://localhost:8080/api';
 
 class CompanyService {
 
-    getAllProjects() {
+    getAllCompanys() {
         return axios.get(COMPANY_BASE_REST_API_URL + "/company")
     }
 
-    createProject(company) {
+    createCompany(company) {
         return axios.put(COMPANY_BASE_REST_API_URL + "/new", company)
     }
 
-    getProjectById(companyId) {
+    getCompanyById(companyId) {
         return axios.get(COMPANY_BASE_REST_API_URL + '/' + companyId);
     }
 
-    getProjectByKeyWordAndStatus(keyword, status) {
+    getCompanyByKeyWordAndStatus(keyword, status) {
         return axios.get(COMPANY_BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
     }
 
-    updateProject(companyId, company) {
+    updateCompany(companyId, company) {
         return axios.put(COMPANY_BASE_REST_API_URL + '/update/' + companyId, company);
     }
 
-    deleteProject(companyId) {
+    deleteCompany(companyId) {
         return axios.delete(COMPANY_BASE_REST_API_URL + '/delete/' + companyId);
     }
 
