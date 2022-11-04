@@ -19,7 +19,7 @@ import {
 import {API_BASE_URL} from "../utils/constants/url";
 
 function cutInformation(start, end, string){
-    let indexStart = string.indexOf(start) + start.length();
+    let indexStart = string.indexOf(start) + start.length;
     let indexEnd = string.indexOf(end);
     return string.substring(indexStart, indexEnd);
 }
@@ -32,7 +32,7 @@ function setRole(roles){
     else if(roles.find(role => role==='CANDIDATE'))
         return 'CANDIDATE';
     else 
-        return 'UESR';
+        return 'USER';
 };
 
 export const login = (data, history) => async (dispatch) => {

@@ -18,7 +18,6 @@ import OrdersList from "../OrdersList/OrdersList";
 import UserList from "../UserList/UserList";
 import CompanyList from "../CompanyList/CompanyList";
 import EditUser from "../EditUser/EditUser";
-import UserEditProfile from "../UserEditProfile/UserEditProfile";
 import EditPerfumesList from "../EditPerfumesList/EditPerfumesList";
 import EditPerfume from "../EditPerfume/EditPerfume";
 import UserJobsList from "../UserOrdersList/UserOrdersList";
@@ -55,8 +54,7 @@ class App extends Component {
                     <Route exact path="/admin/orders" render={() => (isAdmin) ?
                         (<Route component={OrdersList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/companys/all" render={() => (isAdmin) ?
-                        // (<Route component={CompanyList} />) : (<Route component={Home} />)} />
-                        (<Route component={CompanyList} />) : (<Route component={CompanyList} />)} />
+                        (<Route component={CompanyList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/users/all" render={() => (isAdmin) ?
                         (<Route component={UserList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/user/:id" render={() => (isAdmin) ?
@@ -65,16 +63,14 @@ class App extends Component {
                         (<Route component={EditPerfumesList} />) : (<Route component={Home} />)} />
                     <Route exact path="/product/list/edit/:id" render={() => (isAdmin) ?
                         (<Route component={EditPerfume} />) : (<Route component={Home} />)} />
-                    {/* <Route exact path="/user/edit" render={() => localStorage.getItem("isLoggedIn") ?
-                        (<Route component={UserEditProfile} />) : (<Route component={Home} />)} /> */}
-                    <Route exact path="/user/edit" render={() => localStorage.getItem("isLoggedIn") ?
-                        (<Route component={UserEditProfile} />) : (<Route component={UserEditProfile} />)} />
+                    <Route exact path="/user/editPassword" render={() => localStorage.getItem("isLoggedIn") ?
+                        (<Route component={ResetPassword} />) : (<Route component={ResetPassword} />)} />
                     <Route exact path="/user/jobs" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserJobsList} />) : (<Route component={UserJobsList} />)} />
                     {/* <Route exact path="/user/orders" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserOrdersList} />) : (<Route component={Home} />)} /> */}
                     <Route exact path="/user/profile" render={() => localStorage.getItem("isLoggedIn") ?
-                        (<Route component={UserProfile} />) : (<Route component={UserProfile} />)} />
+                        (<Route component={UserProfile} />) : (<Route component={Home} />)} />
                     <Route path="*" component={Home} />
                 </Switch>
                 <Footer />

@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLock, faSync, faUndo} from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faSync, faUndo } from "@fortawesome/free-solid-svg-icons";
 
-import {resetPassword, fetchResetPasswordCode, formReset} from "../../actions/auth-actions";
-import {checkPasswords, validatePassword} from "../../utils/input-validators";
+import { resetPassword, fetchResetPasswordCode, formReset } from "../../actions/auth-actions";
+import { checkPasswords, validatePassword } from "../../utils/input-validators";
+import AccountNavbar from '../../component/AccountNavbar/AccountNavbar';
+import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 class ResetPassword extends Component {
     state = {
+        oldpassword: "",
         password: "",
         password2: "",
         validatePasswordError: "",
@@ -26,8 +29,9 @@ class ResetPassword extends Component {
     onClickReset = (event) => {
         event.preventDefault();
 
-        const {password, password2} = this.state;
+        const { oldpassword,password, password2 } = this.state;
         const validateErrors = {};
+        validateErrors.validatePasswordError = validatePassword(oldpassword);
         validateErrors.validatePasswordError = validatePassword(password);
         validateErrors.validateRepeatPasswordError = checkPasswords(password, password2);
 
@@ -38,6 +42,7 @@ class ResetPassword extends Component {
         } else {
             const data = {
                 email: this.props.user.email,
+                oldpassword: this.props.user.password,
                 password,
                 password2
             };
@@ -47,7 +52,7 @@ class ResetPassword extends Component {
     };
 
     handleInputChange = (event) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
 
         this.setState({
             [name]: value
@@ -55,48 +60,68 @@ class ResetPassword extends Component {
     };
 
     render() {
-        const {password, password2, validatePasswordError, validateRepeatPasswordError} = this.state;
-        const {passwordError, password2Error} = this.props.errors;
+        const { oldpassword, password, password2, validatePasswordError, validateRepeatPasswordError } = this.state;
+        const { passwordError, password2Error } = this.props.errors;
 
         return (
-            <div className="container mt-5">
-                <h4><FontAwesomeIcon className="mr-2" icon={faSync}/> RESET PASSWORD</h4>
-                <hr align="left" width="550"/>
+            <div className="container d-flex">
+                <AccountNavbar />
+                <Container fluid>
+                <Row>
+                    <h4><FontAwesomeIcon className="mr-2" icon={faSync} /> RESET PASSWORD</h4>
+                </Row>
+                {/* <hr align="left" width="550"/> */}
                 {this.props.error ?
                     <div className="alert alert-danger col-6" role="alert">{this.props.error}</div> : null}
-                <form onSubmit={this.onClickReset}>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Password: </label>
-                        <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
-                        <div className="col-sm-4">
-                            <input
-                                type="password"
-                                name="password"
-                                value={password}
-                                className={passwordError || validatePasswordError ? "form-control is-invalid" : "form-control"}
-                                onChange={this.handleInputChange}/>
-                            <div className="invalid-feedback">{passwordError || validatePasswordError}</div>
+                <Row>
+                    <form onSubmit={this.onClickReset} style={{ position: "relative", width: "100%" }}>
+                        <div className="form-group row" style={{ marginTop: "2%" }}>
+                            <label className="col-sm-3 col-form-label">Current password: </label>
+                            <FontAwesomeIcon style={{ position: "relative", top: "8px" }} icon={faLock} />
+                            <div className="col-sm-6">
+                                <input
+                                    type="password"
+                                    name="oldpassword"
+                                    value={oldpassword}
+                                    className={passwordError || validatePasswordError ? "form-control is-invalid" : "form-control"}
+                                    onChange={this.handleInputChange} />
+                                <div className="invalid-feedback">{passwordError || validatePasswordError}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Confirm password: </label>
-                        <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
-                        <div className="col-sm-4">
-                            <input
-                                type="password"
-                                name="password2"
-                                value={password2}
-                                className={password2Error || validateRepeatPasswordError ? "form-control is-invalid" : "form-control"}
-                                onChange={this.handleInputChange}/>
-                            <div className="invalid-feedback">{password2Error || validateRepeatPasswordError}</div>
+                        <div className="form-group row" style={{ marginTop: "2%" }}>
+                            <label className="col-sm-3 col-form-label">New password: </label>
+                            <FontAwesomeIcon style={{ position: "relative", top: "8px" }} icon={faLock} />
+                            <div className="col-sm-6">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={password}
+                                    className={passwordError || validatePasswordError ? "form-control is-invalid" : "form-control"}
+                                    onChange={this.handleInputChange} />
+                                <div className="invalid-feedback">{passwordError || validatePasswordError}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <button type="submit" className="btn btn-dark mx-3">
-                            <FontAwesomeIcon className="mr-3" icon={faUndo}/>Reset
-                        </button>
-                    </div>
-                </form>
+                        <div className="form-group row" style={{ marginTop: "2%" }}>
+                            <label className="col-sm-3 col-form-label">Confirm password: </label>
+                            <FontAwesomeIcon style={{ position: "relative", top: "8px" }} icon={faLock} />
+                            <div className="col-sm-6">
+                                <input
+                                    type="password"
+                                    name="password2"
+                                    value={password2}
+                                    className={password2Error || validateRepeatPasswordError ? "form-control is-invalid" : "form-control"}
+                                    onChange={this.handleInputChange} />
+                                <div className="invalid-feedback">{password2Error || validateRepeatPasswordError}</div>
+                            </div>
+                        </div>
+                        <div className="form-group row" style={{ marginTop: "2%" }}>
+                            <button type="submit" className="btn btn-dark mx-3">
+                                <FontAwesomeIcon className="mr-3" icon={faUndo} />Reset
+                            </button>
+                        </div>
+                    </form>
+                </Row>
+                </Container>
             </div>
         );
     }
@@ -116,4 +141,4 @@ const mapStateToProps = (state) => ({
     error: state.auth.error
 });
 
-export default connect(mapStateToProps, {resetPassword, fetchResetPasswordCode, formReset})(ResetPassword);
+export default connect(mapStateToProps, { resetPassword, fetchResetPasswordCode, formReset })(ResetPassword);

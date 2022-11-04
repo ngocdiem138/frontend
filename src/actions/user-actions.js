@@ -10,7 +10,7 @@ import {API_BASE_URL} from "../utils/constants/url";
 export const updateUserInfo = (userData, history) => async (dispatch) => {
     axios({
         method: "PUT",
-        url: API_BASE_URL + "/user/edit",
+        url: API_BASE_URL + "/user/editPassword",
         data: userData,
         headers: {
             "Content-Type" : "application/json",
