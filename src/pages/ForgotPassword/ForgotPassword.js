@@ -69,7 +69,7 @@ class ForgotPassword extends Component {
                             </div>
                         </div>
                         <div className="form-group row">
-                            <button type="submit" className="btn btn-dark mx-3" id="send-btn">
+                            <button type="submit" className="btn btn-dark mx-3 py-2 font-weight-bold" id="send-btn">
                                 <FontAwesomeIcon className="mr-3" icon={faPaperPlane}/>Send
                             </button>
                         </div>

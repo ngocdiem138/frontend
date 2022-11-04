@@ -141,7 +141,7 @@ class Registration extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <button type="submit" className="btn btn-dark mx-3 btn-signup" style={{width:"50%"}}>
+                        <button type="submit" className="btn btn-dark mx-3 py-2 font-weight-bold" style={{width:"20%"}}>
                             <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>Sign up
                         </button>
                     </div>

@@ -80,8 +80,8 @@ class Login extends Component {
                                     onChange={this.handleInputChange}/>
                             </div>
                         </div>
-                        <div className="form-group row" style={{width:"55%", margin:"auto"}}>
-                            <button type="submit" className="btn btn-dark mx-3">
+                        <div className="form-group row" style={{width:"20%", margin:"auto"}}>
+                            <button type="submit" className="btn btn-dark mx-3 py-2 font-weight-bold">
                                 <FontAwesomeIcon className="mr-3" icon={faSignInAlt}/>Sign in
                             </button>
                             <Link to={"/forgot"} style={{position: "relative", top: "8px"}}>Forgot password?</Link>
