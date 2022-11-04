@@ -7,6 +7,7 @@ import {faEnvelope, faKey, faPaperPlane} from "@fortawesome/free-solid-svg-icons
 import {forgotPassword, formReset} from "../../actions/auth-actions";
 import {validateEmail} from "../../utils/input-validators";
 
+import './ForgotPassword.css'
 class ForgotPassword extends Component {
     state = {
         email: "",
@@ -52,26 +53,28 @@ class ForgotPassword extends Component {
                 <p>Enter your email address that you used to create your account.</p>
                 {error ? <div className="alert alert-danger col-6" role="alert">{error}</div> : null}
                 {success ? <div className="alert alert-success col-6" role="alert">{success}</div> : null}
-                <form onSubmit={this.onClickSend}>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">E-mail: </label>
-                        <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
-                        <div className="col-sm-4">
-                            <input
-                                type="email"
-                                name="email"
-                                value={email}
-                                className={validateEmailError ? "form-control is-invalid" : "form-control"}
-                                onChange={this.handleInputChange}/>
-                            <div className="invalid-feedback">{validateEmailError}</div>
+                <div className="form-wrapper">
+                    <form onSubmit={this.onClickSend}>
+                        <div className="form-group">
+                            <label className="col-form-label">E-mail: </label>
+                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
+                            <div className="col-sm-4">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={email}
+                                    className={validateEmailError ? "form-control is-invalid" : "form-control"}
+                                    onChange={this.handleInputChange}/>
+                                <div className="invalid-feedback">{validateEmailError}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <button type="submit" className="btn btn-dark mx-3">
-                            <FontAwesomeIcon className="mr-3" icon={faPaperPlane}/>Send
-                        </button>
-                    </div>
-                </form>
+                        <div className="form-group row">
+                            <button type="submit" className="btn btn-dark mx-3" id="send-btn">
+                                <FontAwesomeIcon className="mr-3" icon={faPaperPlane}/>Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

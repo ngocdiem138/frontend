@@ -17,7 +17,13 @@
 #navbar-main a:hover {
     color: #8B74BD;
     font-size: larger;
-    text-decoration: none;
+}
+
+
+#navbar-main a:active {
+    color: #8A64D6;
+    font-size: larger;
+    text-decoration: underline;
 }
 
 #header {
@@ -52,6 +58,14 @@
     color: white;
     border: none;
     width: 5%;
+}
+
+.search-button:hover{
+    background-color: #8A64D6;
+}
+
+.search-button:active{
+    background-color: #729EFD;
 }
 
 .fixed {
