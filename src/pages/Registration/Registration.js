@@ -7,6 +7,7 @@ import {faEnvelope, faLock, faUser, faUserPlus} from "@fortawesome/free-solid-sv
 
 import {registration, formReset} from "../../actions/auth-actions";
 import {checkPasswords, validateEmail, validatePassword} from "../../utils/input-validators";
+import './Registration.css'
 
 class Registration extends Component {
     initialState = {
@@ -86,7 +87,7 @@ class Registration extends Component {
                 {this.props.isRegistered ? <div className="alert alert-success col-6" role="alert">
                     Activation code has been sent to your email!
                 </div> : null}
-                <form onSubmit={this.onClickSignUp}>
+                <form className='form' onSubmit={this.onClickSignUp}>
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">E-mail: </label>
                         <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
@@ -140,12 +141,14 @@ class Registration extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <button type="submit" className="btn btn-dark mx-3">
+                        <button type="submit" className="btn btn-dark mx-3 py-2 font-weight-bold" style={{width:"20%"}}>
                             <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>Sign up
                         </button>
                     </div>
-                    <ReCAPTCHA onChange={this.onChangeRecaptcha} sitekey="6Lc5cLkZAAAAAN8mFk85HQieB9toPcWFoW0RXCNR"/>
                 </form>
+                <div className='captcha-wrapper'>
+                    <ReCAPTCHA onChange={this.onChangeRecaptcha} sitekey="6Lc5cLkZAAAAAN8mFk85HQieB9toPcWFoW0RXCNR"/>
+                </div>
             </div>
         );
     }

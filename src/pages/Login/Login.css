@@ -10,15 +10,15 @@
 }
 
 .input-group{
-    padding: 0rem 1rem 1rem 0rem;
     justify-content: center;
 }
 
 
-login-wrapper{
+.login-wrapper{
     margin-left: auto;
     margin-right: auto;
 }
+
 
 #container{
     padding-top: 10px;
