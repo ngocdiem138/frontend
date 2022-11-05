@@ -1,10 +1,9 @@
 import React from 'react';
-
-import HomePageTheme from "../../component/HomePageTheme/HomePageTheme";
 import CarouselImageSlider from "../../component/CarouselImageSlider/CarouselImageSlider";
 import SliderBrands from "../../component/SliderBrands/SliderBrands";
 import SliderCards from "../../component/PerfumeCardsSlider/PerfumeCardsSlider";
 import { JobPostServiceIml } from '../../actions/user-actions';
+import './main.css'
 import { useState, useEffect } from 'react';
 import HotJobs from "./HotJobs";
 
@@ -15,9 +14,9 @@ const Home = () => {
 
     useEffect(() => {
         JobPostServiceIml.getAllJobPosts().then((response) => {
-            if (response.data.resp === 1) {
-                console.log(response);
-                setJobs(response.data.hot_jobs);
+            if (response.data.data.length != 0) {
+                console.log(response.data.data);
+                setJobs(response.data.data);
                 setLoading(false);
             }
         })
@@ -30,7 +29,6 @@ const Home = () => {
         <div>
             {/* <CarouselImageSlider/> */}
             <SliderBrands />
-            <HomePageTheme />
             <SliderCards />
             {!loading ? (
                 <HotJobs jobs={jobs} />

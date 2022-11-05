@@ -18,7 +18,7 @@ export const fetchCart = () => async (dispatch) => {
         url: API_BASE_URL + "/job/" + localStorage.getItem("email"),
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 
@@ -35,7 +35,7 @@ export const addToCart = (perfume, history) => async (dispatch) => {
         data: perfume,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     })
 
@@ -53,7 +53,7 @@ export const removeFromCart = (perfume) => async (dispatch) => {
         data: perfume,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 

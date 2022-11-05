@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from "react-bootstrap/Carousel";
-import {brandsItem1, brandsItem2, brandsItem3} from "./SliderBrandsData";
+import {companysItem1, companysItem2, companysItem3} from "./SliderBrandsData";
 import "./SliderBrands.css";
 import {Link} from "react-router-dom";
 
@@ -12,36 +12,36 @@ const SliderBrands = () => {
 
     return (
         <div className="container text-center my-3 mt-5">
-            <h3>BRANDS</h3>
+            <h3>COMPANYS</h3>
             <Carousel {...settings}>
                 <Carousel.Item className="row">
-                    {brandsItem1.map((brand, i) => {
+                    {companysItem1.map((company, i) => {
                         return (
                             <div className="col-2 float-left" key={i}>
-                                <Link to={{pathname: "/menu", state: {id: brand.name}}}>
-                                    <img className="img-fluid" src={brand.url} alt={brand.name}/>
+                                <Link to={{pathname: "/menu", state: {id: company.name}}}>
+                                    <img className="img-fluid" src={company.url} alt={company.name}/>
                                 </Link>
                             </div>
                         )
                     })}
                 </Carousel.Item>
                 <Carousel.Item className="row">
-                    {brandsItem2.map((brand, i) => {
+                    {companysItem2.map((company, i) => {
                         return (
                             <div className="col-2 float-left" key={i}>
-                                <Link to={{pathname: "/menu", state: {id: brand.name}}}>
-                                    <img className="img-fluid" src={brand.url} alt={brand.name}/>
+                                <Link to={{pathname: "/menu", state: {id: company.name}}}>
+                                    <img className="img-fluid" src={company.url} alt={company.name}/>
                                 </Link>
                             </div>
                         )
                     })}
                 </Carousel.Item>
                 <Carousel.Item className="row">
-                    {brandsItem3.map((brand, i) => {
+                    {companysItem3.map((company, i) => {
                         return (
                             <div className="col-2 float-left" key={i}>
-                                <Link to={{pathname: "/menu", state: {id: brand.name}}}>
-                                    <img className="img-fluid" src={brand.url} alt={brand.name}/>
+                                <Link to={{pathname: "/menu", state: {id: company.name}}}>
+                                    <img className="img-fluid" src={company.url} alt={company.name}/>
                                 </Link>
                             </div>
                         )
