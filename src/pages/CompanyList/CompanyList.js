@@ -6,50 +6,30 @@ import './CompanyList.css';
 import { format } from 'date-fns';
 import { Trash } from 'react-bootstrap-icons';
 import { useState, useEffect } from 'react';
-import CompanyService from '../../actions/admin-actions';
+import {CompanyServiceIml} from '../../actions/admin-actions';
 import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
 
 const CompanyList = () => {
 
+    const isAdmin = localStorage.getItem("userRole") === "ADMIN";
     const [companys, setCompanys] = useState([]);
-    console.log(companys)
     useEffect(() => {
-        CompanyService.getAllCompanys().then((response) => { setCompanys(response.data.data) });
+        CompanyServiceIml.getAllCompanys().then((response) => { setCompanys(response.data.data) });
     }, [])
 
     const [keyword, setKeyword] = useState('');
     const [status, setStatus] = useState('');
 
-    function setCompanysList(data){
-        if(data){
-            data.map(company => {
-                return <tr key={company.id}>
-                    <td><input type="checkbox" disabled={company.status == "NEW" ? false : true} value={company.id} onChange={handleCheck}></input></td>
-                    <td style={{ whiteSpace: 'nowrap' }}><Link to={"/companys/" + company.id} >{company.number}</Link></td>
-                    <td>{company.name}</td>
-                    <td>{company.active}</td>
-                    <td>{company.description}</td>
-                    <td>{company.followingCandidate.length}</td>
-                    <td>{company.jobPostEntities.length}</td>
-                    {/* <td>{company.startDate ? format(new Date(company.startDate), 'dd.MM.yyyy') : company.startDate}</td> */}
-                    <td>
-                        {company.active == false ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
-                    </td>
-                </tr>
-            });        
-        }
-    }
-
     function handleInputChange(e) {
         setKeyword(e.target.value)
     }
     async function handleSearch() {
-        const { data } = await CompanyService.getCompanyByKeyWordAndStatus(keyword, status);
+        const { data } = await CompanyServiceIml.getCompanyByKeyWordAndStatus(keyword, status);
         console.log(data);
         setCompanys(data);
     }
     function remove(number) {
-        CompanyService.deleteCompany(number).then(() => CompanyService.getAllCompanys().then((response) => { setCompanys(response.data) }));
+        CompanyServiceIml.deleteCompany(number).then(() => CompanyServiceIml.getAllCompanys().then((response) => { setCompanys(response.data.data) }));
     }
     const [checked, setChecked] = useState([]);
     // Add/Remove checked item from list
@@ -65,7 +45,7 @@ const CompanyList = () => {
     };
     function removeSelected(checked) {
         checked.map(item => {
-            CompanyService.deleteCompany(item).then(() => CompanyService.getAllCompanys().then((response) => { setCompanys(response.data.data) }));
+            CompanyServiceIml.deleteCompany(item).then(() => CompanyServiceIml.getAllCompanys().then((response) => { setCompanys(response.data.data) }));
             var updatedList = [...checked];
             updatedList.splice(checked.indexOf(item), 1);
             setChecked(updatedList);
@@ -74,13 +54,12 @@ const CompanyList = () => {
     const companyList = companys.map(company => {
         return <tr key={company.id}>
             <td><input type="checkbox" disabled={company.active == false ? false : true} value={company.id} onChange={handleCheck}></input></td>
-            <td style={{ whiteSpace: 'nowrap' }}><Link to={"/companys/" + company.id} >{company.id}</Link></td>
+            <td style={{ whiteSpace: 'nowrap' }}><Link to={"/admin/companys/addOrUpdateCompany/" + company.id} >{company.id}</Link></td>
             <td>{company.name}</td>
             <td>{company.active == false ? "INACTIVE" : "ACTIVE"}</td>
             <td>{company.description}</td>
             <td>{company.followingCandidate.length}</td>
             <td>{company.jobPostEntities.length}</td>
-            {/* <td>{company.startDate ? format(new Date(company.startDate), 'dd.MM.yyyy') : company.startDate}</td> */}
             <td  style={{ textAlign: 'right' }}>
                 {company.active == false ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
             </td>
@@ -88,10 +67,10 @@ const CompanyList = () => {
     });        
 
     return (
-        <div>
+        <div className="container d-flex" style={{ minWidth: "90vw"}}>
             <AccountNavbar />
 
-            <div className="content">
+            <div className="content" style={{ minWidth: "82%"}}>
                 <Container fluid>
                     <Row>
                         <Col xl={11}>
@@ -105,18 +84,16 @@ const CompanyList = () => {
                         <Col xl={11} className="search">
                             <div class="container">
                                 <div class="row">
-                                    <div className="col-md-5">
+                                    <div className="col-md-4">
                                         <input className='form-control' value={keyword} onChange={handleInputChange} placeholder='Company number, name' >
                                         </input>
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="col-md-2">
                                         <select name="status" id="status" class="form-control" value={status}
                                             onChange={(e) => setStatus(e.target.value)}>
                                             <option value="" selected  >Company status</option>
-                                            <option value="NEW">NEW</option>
-                                            <option value="PLA">Planned</option>
-                                            <option value="INP">In progress</option>
-                                            <option value="FIN">Finished</option>
+                                            <option value="false">INACTIVE</option>
+                                            <option value="true">ACTIVE</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -124,6 +101,9 @@ const CompanyList = () => {
                                     </div>
                                     <div class="col-md-2">
                                         <button type="button" class="btn btn-light">Reset Search</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-light"><Link to={"/admin/companys/addOrUpdateCompany/new"} >New Company</Link></button>
                                     </div>
                                 </div>
                             </div>
@@ -148,8 +128,8 @@ const CompanyList = () => {
                                 <tbody>
                                     {companyList}
                                     <tr>
-                                        <td colspan="6">{checked.length} items selected</td>
-                                        <td  style={{ textAlign: 'right' }} colspan="2" >delete selected items <Button className='btn-delete' onClick={() => removeSelected(checked)} ><Trash /></Button></td>
+                                        <td colspan="5">{checked.length} items selected</td>
+                                        <td  style={{ textAlign: 'right' }} colspan="3" >delete selected items <Button className='btn-delete' onClick={() => removeSelected(checked)} ><Trash /></Button></td>
                                     </tr>
                                 </tbody>
                             </Table>

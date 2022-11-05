@@ -7,7 +7,7 @@ import UserProfile from "../Profile/UserProfile";
 
 const AccountNavbar = () => {
     return (
-        <nav id="sidebar">
+        <nav id="sidebar" style={{ marginLeft: "1vw"}}>
             {(localStorage.getItem("userRole") === "ADMIN") ?
                 <ul className="list-unstyled">
                     <li className="mb-2">

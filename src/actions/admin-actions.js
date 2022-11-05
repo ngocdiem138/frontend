@@ -12,37 +12,98 @@ import {
 } from "../utils/constants/actions-types";
 import { API_BASE_URL } from "../utils/constants/url";
 
-const COMPANY_BASE_REST_API_URL = 'http://localhost:8080/api';
+const BASE_REST_API_URL = 'http://localhost:8080/api';
 
 class CompanyService {
 
     getAllCompanys() {
-        return axios.get(COMPANY_BASE_REST_API_URL + "/company")
+        return axios.get(BASE_REST_API_URL + "/company")
     }
 
     createCompany(company) {
-        return axios.put(COMPANY_BASE_REST_API_URL + "/new", company)
+        return axios.post(BASE_REST_API_URL + "/admin/add-company", company)
     }
 
     getCompanyById(companyId) {
-        return axios.get(COMPANY_BASE_REST_API_URL + '/' + companyId);
+        return axios.get(BASE_REST_API_URL + '/admin/get-one-company/' + companyId);
     }
 
     getCompanyByKeyWordAndStatus(keyword, status) {
-        return axios.get(COMPANY_BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
+        return axios.get(BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
     }
 
-    updateCompany(companyId, company) {
-        return axios.put(COMPANY_BASE_REST_API_URL + '/update/' + companyId, company);
+    updateCompany(company) {
+        return axios.put(BASE_REST_API_URL + '/admin/update-info-company', company);
     }
 
     deleteCompany(companyId) {
-        return axios.delete(COMPANY_BASE_REST_API_URL + '/delete/' + companyId);
+        return axios.delete(BASE_REST_API_URL + '/company/' + companyId);
     }
 
 }
 
-export default new CompanyService();
+export const CompanyServiceIml = new CompanyService();
+
+
+export class EmployerService {
+
+    getAllEmployers() {
+        return axios.get(BASE_REST_API_URL + "/account")
+    }
+
+    createEmployer(account) {
+        return axios.post(BASE_REST_API_URL + "/admin/add-compan", account)
+    }
+
+    getEmployerById(accountId) {
+        return axios.get(BASE_REST_API_URL + '/' + accountId);
+    }
+
+    getEmployerByKeyWordAndStatus(keyword, status) {
+        return axios.get(BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
+    }
+
+    updateEmployer(account) {
+        return axios.put(BASE_REST_API_URL + '/admin/update-info-account', account);
+    }
+
+    deleteEmployer(accountId) {
+        return axios.delete(BASE_REST_API_URL + '/account/' + accountId);
+    }
+
+}
+
+export const EmployerServiceIml = new EmployerService();
+
+export class AccountService {
+
+    getAllAccounts() {
+        return axios.get(BASE_REST_API_URL + "/admin/get-all-account")
+    }
+
+    createAccount(employer) {
+        return axios.post(BASE_REST_API_URL + "/admin/add-account", employer)
+    }
+
+    getAccountById(employerId) {
+        return axios.get(BASE_REST_API_URL + '/' + employerId);
+    }
+
+    getAccountByKeyWordAndStatus(keyword, status) {
+        return axios.get(BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
+    }
+
+    updateAccount(employer) {
+        return axios.put(BASE_REST_API_URL + '/admin/update-account/', employer);
+    }
+
+    deleteAccount(employerId) {
+        return axios.delete(BASE_REST_API_URL + '/admin/delete-account/' + employerId);
+    }
+
+}
+export const AccountServiceIml = new AccountService();
+
 
 export const addCompany = (data) => async (dispatch) => {
     try {

@@ -25,6 +25,8 @@ import UserProfile from "../UserProfile/UserProfile";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import ResetPassword from "../ResetPassword/ResetPassword";
 import Resumes from '../Resumes/Resumes';
+import AddCompanyComponent from '../AddCompany/AddCompany';
+import AddAccountComponent from '../AddAccount/AddAccount';
 
 class App extends Component {
     render() {
@@ -55,6 +57,10 @@ class App extends Component {
                         (<Route component={OrdersList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/companys/all" render={() => (isAdmin) ?
                         (<Route component={CompanyList} />) : (<Route component={Home} />)} />
+                    <Route exact path="/admin/companys/addOrUpdateCompany/:id" render={() => (isAdmin) ?
+                        (<Route component={AddCompanyComponent} />) : (<Route component={Home} />)} />
+                    <Route exact path="/admin/accounts/addOrUpdateAccount/:id" render={() => (isAdmin) ?
+                        (<Route component={AddAccountComponent} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/users/all" render={() => (isAdmin) ?
                         (<Route component={UserList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/user/:id" render={() => (isAdmin) ?

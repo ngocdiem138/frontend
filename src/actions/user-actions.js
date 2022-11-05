@@ -7,6 +7,37 @@ import {
 } from "../utils/constants/actions-types";
 import {API_BASE_URL} from "../utils/constants/url";
 
+const BASE_REST_API_URL = 'http://localhost:8080/api';
+class JobPostService {
+
+    getAllJobPosts() {
+        return axios.get(BASE_REST_API_URL + "/jobPost")
+    }
+
+    createJobPost(jobPost) {
+        return axios.post(BASE_REST_API_URL + "/admin/add-jobPost", jobPost)
+    }
+
+    getJobPostById(jobPostId) {
+        return axios.get(BASE_REST_API_URL + '/admin/get-one-jobPost/' + jobPostId);
+    }
+
+    getJobPostByKeyWordAndStatus(keyword, status) {
+        return axios.get(BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
+    }
+
+    updateJobPost(jobPost) {
+        return axios.put(BASE_REST_API_URL + '/admin/update-info-jobPost', jobPost);
+    }
+
+    deleteJobPost(jobPostId) {
+        return axios.delete(BASE_REST_API_URL + '/jobPost/' + jobPostId);
+    }
+
+}
+
+export const JobPostServiceIml = new JobPostService();
+
 export const updateUserInfo = (userData, history) => async (dispatch) => {
     axios({
         method: "PUT",
