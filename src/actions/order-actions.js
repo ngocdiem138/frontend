@@ -15,7 +15,7 @@ export const fetchOrder = () => async (dispatch) => {
         url: API_BASE_URL + "/order",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 
@@ -33,7 +33,7 @@ export const addOrder = (order, history) => async (dispatch) => {
             data: order,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }
         });
 
@@ -57,7 +57,7 @@ export const fetchUserOrders = () => async (dispatch) => {
         url: API_BASE_URL + "/user/orders",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 

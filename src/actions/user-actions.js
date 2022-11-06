@@ -19,7 +19,7 @@ class JobPostService {
     }
 
     getJobPostById(jobPostId) {
-        return axios.get(BASE_REST_API_URL + '/admin/get-one-jobPost/' + jobPostId);
+        return axios.get(BASE_REST_API_URL + '/admin/get-one/' + jobPostId);
     }
 
     getJobPostByKeyWordAndStatus(keyword, status) {
@@ -45,7 +45,7 @@ export const updateUserInfo = (userData, history) => async (dispatch) => {
         data: userData,
         headers: {
             "Content-Type" : "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 
@@ -63,7 +63,7 @@ export const updateUserProfile = (userProfileData, history) => async (dispatch) 
         data: userProfileData,
         headers: {
             "Content-Type" : "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 

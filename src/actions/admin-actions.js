@@ -56,7 +56,7 @@ export class EmployerService {
     }
 
     getEmployerById(accountId) {
-        return axios.get(BASE_REST_API_URL + '/' + accountId);
+        return axios.get(BASE_REST_API_URL + '/employer/' + accountId);
     }
 
     getEmployerByKeyWordAndStatus(keyword, status) {
@@ -113,7 +113,7 @@ export const addCompany = (data) => async (dispatch) => {
             data: data,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }
         });
 
@@ -135,7 +135,7 @@ export const fetchAllCompanys = () => async (dispatch) => {
         url: API_BASE_URL + "/company",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 
@@ -153,7 +153,7 @@ export const updateCompany = (data) => async (dispatch) => {
             data: data,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }
         });
 
@@ -177,7 +177,7 @@ export const addPerfume = (data) => async (dispatch) => {
             data: data,
             headers: {
                 "Content-Type": "multipart/form-data",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }
         });
 
@@ -201,7 +201,7 @@ export const updatePerfume = (data, history) => async (dispatch) => {
             data: data,
             headers: {
                 "Content-Type": "multipart/form-data",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }
         });
 
@@ -225,7 +225,7 @@ export const fetchAllUsersOrders = () => async (dispatch) => {
         url: API_BASE_URL + "/admin/orders",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 
@@ -241,7 +241,7 @@ export const fetchAllUsers = () => async (dispatch) => {
         url: API_BASE_URL + "/admin/user/all",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 
@@ -257,7 +257,7 @@ export const fetchUser = (id) => async (dispatch) => {
         url: API_BASE_URL + "/admin/user/" + id,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }
     });
 

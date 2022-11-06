@@ -27,6 +27,7 @@ import ResetPassword from "../ResetPassword/ResetPassword";
 import Resumes from '../Resumes/Resumes';
 import AddCompanyComponent from '../AddCompany/AddCompany';
 import AddAccountComponent from '../AddAccount/AddAccount';
+import JobPage from '../Home/JobPage'
 
 class App extends Component {
     render() {
@@ -61,6 +62,7 @@ class App extends Component {
                         (<Route component={AddCompanyComponent} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/accounts/addOrUpdateAccount/:id" render={() => (isAdmin) ?
                         (<Route component={AddAccountComponent} />) : (<Route component={Home} />)} />
+                    <Route exact path="/job-post/get-one/:id" component={JobPage} />
                     <Route exact path="/admin/users/all" render={() => (isAdmin) ?
                         (<Route component={UserList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/user/:id" render={() => (isAdmin) ?
