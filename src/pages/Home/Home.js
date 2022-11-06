@@ -28,15 +28,11 @@ const Home = () => {
     return (
         <div>
             {/* <CarouselImageSlider/> */}
-<<<<<<< HEAD
             {/* <SliderBrands /> */}
             {/* <HomePageTheme /> */}
             {/* <SliderCards /> */}
             {/* <JobBoxSm/> */}
-=======
-            <SliderBrands />
-            <SliderCards />
->>>>>>> c85f95814835311f4424fb18d897b5bee314f8c3
+
             {!loading ? (
                 <HotJobs jobs={jobs} />
             ) : (

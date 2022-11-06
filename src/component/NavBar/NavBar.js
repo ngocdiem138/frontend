@@ -39,7 +39,7 @@ class NavBar extends Component {
             links = (
                 <li className="nav-item">
                     <Link to={"/account"}><span className="nav-link pl-5 pr-5">
-                        <FontAwesomeIcon className="mr-2" icon={faUser} />MY ACCOUNT</span></Link>
+                        <FontAwesomeIcon className="mr-2" icon={faUser} />Tài khoản</span></Link>
                 </li>
             );
             signOut = (
@@ -73,13 +73,13 @@ class NavBar extends Component {
 
         return (
             <div className="content">
-                <Container fluid>
+                <Container fluid className='navbar-wrapper'>
                     <Row>
                         <Col xl={1}>
-                            <div className='logo-wrapper'>
+                            <Link to={'/'} className='logo-wrapper'>
                                 <img className="logo" src='/images/puzzle.svg' alt="logo" />
                                 <div className="brand-title">Puzzle</div>
-                            </div>
+                            </Link>
                         </Col>
                         <Col xl={11}>
                             <div className="container-fluid bg-black">

@@ -5,7 +5,7 @@ import BannerEmployer from "./BannerEmployer";
 import Loader from "./Loader";
 import { EmployerServiceIml } from "../../actions/admin-actions";
 
-const BASE_REST_API_URL = 'http://localhost:8080/api';
+const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api';
 
 class JobPage extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class JobPage extends Component {
 
           this.setState({
             job: response.data.data,
-            employer: await fetch(`http://localhost:8080/api/employer/${text}`, settings)
+            employer: await fetch(`https://puzzle-ute.herokuapp.com/api/employer/${text}`, settings)
               .then((response) => {
                 let dataJson = response.json()
                 if (dataJson.data) {
@@ -69,7 +69,7 @@ class JobPage extends Component {
     if (!isAuthenticated) {
       alert("you must login to apply for jobs");
     } else {
-      const BASE_REST_API_URL = "http://localhost:8080/api";
+      const BASE_REST_API_URL = "https://puzzle-ute.herokuapp.com/api";
 
       axios
         .get(BASE_REST_API_URL + "/candidate/apply-job-post/" + this.state.job.id, {
@@ -110,10 +110,10 @@ class JobPage extends Component {
                   <h5 className="mb-3 mr-5">Employer Details</h5>
                   <ul>
                     <li>
-                      First Name: <span>{employer.data.firstname}</span>
+                      Họ và tên: <span>{`${employer.data.lastname} ${employer.data.firstname} `}</span>
                     </li>
                     <li>
-                      Last Address: <span>{employer.data.lastname}</span>
+                      Địa chỉ: <span>{employer.data.address}</span>
                     </li>
                     <li>
                       Email: <span>{employer.data.recruitmentEmail}</span>
@@ -130,11 +130,11 @@ class JobPage extends Component {
                   <h5>Basic Job Information</h5>
                   <ul>
                     <li>
-                      Title: <span>{job.title}</span>
+                      Công việc: <span>{job.title}</span>
                     </li>
-                    <li>
+                    {/* <li>
                       Active: <span>{job.active.toString()}</span>
-                    </li>
+                    </li> */}
                     <li>
                       Blind: <span>{job.blind.toString()}</span>
                     </li>
