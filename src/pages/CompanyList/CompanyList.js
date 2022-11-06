@@ -58,8 +58,8 @@ const CompanyList = () => {
             <td>{company.name}</td>
             <td>{company.active == false ? "INACTIVE" : "ACTIVE"}</td>
             <td>{company.description}</td>
-            <td>{company.followingCandidate.length}</td>
-            <td>{company.jobPostEntities.length}</td>
+            <td>{company.followingCandidateIds.length}</td>
+            <td>{company.jobPostIds.length}</td>
             <td  style={{ textAlign: 'right' }}>
                 {company.active == false ? <Button className='btn-delete' onClick={() => remove(company.id)}><Trash /></Button> : ""}
             </td>

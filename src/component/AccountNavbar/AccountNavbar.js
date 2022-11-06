@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { faList, faLock, faUsers, faHistory, faHouseUser, faStickyNote } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../pages/Menu/MenuStyle.css";
-import UserProfile from "../Profile/UserProfile";
 
 const AccountNavbar = () => {
     return (
