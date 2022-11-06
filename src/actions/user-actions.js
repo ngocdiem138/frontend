@@ -7,7 +7,8 @@ import {
 } from "../utils/constants/actions-types";
 import {API_BASE_URL} from "../utils/constants/url";
 
-const BASE_REST_API_URL = 'http://localhost:8080/api';
+const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api';
+// const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api';
 class JobPostService {
 
     getAllJobPosts() {
