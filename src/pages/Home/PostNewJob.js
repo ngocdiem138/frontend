@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Editor from "../widgets/Editor";
-import {
-  DEFAULT_JOB_LEVELS,
-  DEFAULT_JOB_CATEGORIES,
-  DEFAULT_JOB_TYPES,
-  apiPath,
-} from "../utils/Consts";
+import Editor from "./widgets/Editor";
 import { printError, removeError } from "../utils/Helpers";
 import { validatePostNewJob } from "../utils/Helpers";
 import ErrorMessage from "../components/ErrorMessage";

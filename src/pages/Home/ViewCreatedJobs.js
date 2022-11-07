@@ -98,6 +98,9 @@ const ViewCreatedJobs = () => {
                   <div class="col-md-2">
                     <button type="button" class="btn btn-light">Reset Search</button>
                   </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-light"><Link to={"/employer/jobPost/new"} >New Job</Link></button>
+                  </div>
                 </div>
               </div>
             </Col>
