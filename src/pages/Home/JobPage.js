@@ -5,7 +5,7 @@ import BannerEmployer from "./BannerEmployer";
 import Loader from "./Loader";
 import { EmployerServiceIml } from "../../actions/admin-actions";
 
-const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api';
+const BASE_REST_API_URL = 'http://localhost:8080/api';
 
 class JobPage extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class JobPage extends Component {
 
           this.setState({
             job: response.data.data,
-            employer: await fetch(`https://puzzle-ute.herokuapp.com/api/employer/${text}`, settings)
+            employer: await fetch(`http://localhost:8080/api/employer/${text}`, settings)
               .then((response) => {
                 let dataJson = response.json()
                 if (dataJson.data) {
@@ -69,7 +69,7 @@ class JobPage extends Component {
     if (!isAuthenticated) {
       alert("you must login to apply for jobs");
     } else {
-      const BASE_REST_API_URL = "https://puzzle-ute.herokuapp.com/api";
+      const BASE_REST_API_URL = "http://localhost:8080/api";
 
       axios
         .get(BASE_REST_API_URL + "/candidate/apply-job-post/" + this.state.job.id, {

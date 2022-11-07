@@ -29,6 +29,8 @@ import AddCompanyComponent from '../AddCompany/AddCompany';
 import AddAccountComponent from '../AddAccount/AddAccount';
 import JobPage from '../Home/JobPage'
 import Page404 from '../Page404/404';
+import SkillList from '../SkillList/SkillList';
+import ViewAppliedJobs from '../Home/ViewAppliedJobs'
 
 class App extends Component {
     render() {
@@ -59,6 +61,8 @@ class App extends Component {
                         (<Route component={OrdersList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/companys/all" render={() => (isAdmin) ?
                         (<Route component={CompanyList} />) : (<Route component={Home} />)} />
+                    <Route exact path="/admin/skills/all" render={() => (isAdmin) ?
+                        (<Route component={SkillList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/companys/addOrUpdateCompany/:id" render={() => (isAdmin) ?
                         (<Route component={AddCompanyComponent} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/accounts/addOrUpdateAccount/:id" render={() => (isAdmin) ?
@@ -74,13 +78,15 @@ class App extends Component {
                         (<Route component={EditPerfume} />) : (<Route component={Home} />)} />
                     <Route exact path="/user/editPassword" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={ResetPassword} />) : (<Route component={ResetPassword} />)} />
-                    <Route exact path="/user/jobs" render={() => localStorage.getItem("isLoggedIn") ?
-                        (<Route component={UserJobsList} />) : (<Route component={UserJobsList} />)} />
+                    <Route exact path="/candidate/jobs" render={() => localStorage.getItem("isLoggedIn") ?
+                        (<Route component={ViewAppliedJobs} />) : (<Route component={ViewAppliedJobs} />)} />
+                    <Route exact path="/employer/jobs" render={() => localStorage.getItem("isLoggedIn") ?
+                        (<Route component={ViewAppliedJobs} />) : (<Route component={ViewAppliedJobs} />)} />
                     {/* <Route exact path="/user/orders" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserOrdersList} />) : (<Route component={Home} />)} /> */}
                     <Route exact path="/user/profile" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserProfile} />) : (<Route component={Home} />)} />
-                <Route path="*" component={Page404} />
+                    <Route path="*" component={Page404} />
                 </Switch>
                 <Footer />
             </div>

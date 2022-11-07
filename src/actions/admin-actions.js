@@ -12,7 +12,7 @@ import {
 } from "../utils/constants/actions-types";
 import { API_BASE_URL } from "../utils/constants/url";
 
-const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api/jobPost/api';
+const BASE_REST_API_URL = 'http://localhost:8080/api';
 
 class CompanyService {
 
@@ -43,6 +43,37 @@ class CompanyService {
 }
 
 export const CompanyServiceIml = new CompanyService();
+
+
+class SkillService {
+
+    getAllSkills(type) {
+        return axios.get(BASE_REST_API_URL + "/get-all-extra-info-by-type?type="+type)
+    }
+
+    createCompany(company) {
+        return axios.post(BASE_REST_API_URL + "/admin/add-company", company)
+    }
+
+    getCompanyById(companyId) {
+        return axios.get(BASE_REST_API_URL + '/admin/get-one-company/' + companyId);
+    }
+
+    getCompanyByKeyWordAndStatus(keyword, status) {
+        return axios.get(BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
+    }
+
+    updateCompany(company) {
+        return axios.put(BASE_REST_API_URL + '/admin/update-info-company', company);
+    }
+
+    deleteCompany(companyId) {
+        return axios.delete(BASE_REST_API_URL + '/company/' + companyId);
+    }
+
+}
+
+export const SkillServiceIml = new SkillService();
 
 
 export class EmployerService {

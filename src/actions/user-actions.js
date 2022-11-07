@@ -7,12 +7,28 @@ import {
 } from "../utils/constants/actions-types";
 import {API_BASE_URL} from "../utils/constants/url";
 
-const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api';
-// const BASE_REST_API_URL = 'https://puzzle-ute.herokuapp.com/api';
+const BASE_REST_API_URL = 'http://localhost:8080/api';
+// const BASE_REST_API_URL = 'http://localhost:8080/api';
 class JobPostService {
 
     getAllJobPosts() {
         return axios.get(BASE_REST_API_URL + "/job-post/get-all")
+    }
+
+    getJobPostAppliedByCandidate(){
+        return axios.get(BASE_REST_API_URL + "/candidate/get-job-post-applied", {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
+    }
+
+    getJobPostCreateByEmployer(){
+        return axios.get(BASE_REST_API_URL + "/employer/post-job", {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
     }
 
     createJobPost(jobPost) {
