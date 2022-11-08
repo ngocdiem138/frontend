@@ -24,7 +24,7 @@ class JobPostService {
     }
 
     getJobPostCreateByEmployer(){
-        return axios.get(BASE_REST_API_URL + "/employer/post-job", {
+        return axios.get(BASE_REST_API_URL + "/employer/get-all-job-post-created", {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token")
             }
@@ -32,7 +32,10 @@ class JobPostService {
     }
 
     createJobPost(jobPost) {
-        return axios.post(BASE_REST_API_URL + "/admin/add-jobPost", jobPost)
+        return axios.post(BASE_REST_API_URL + "/employer/post-job", jobPost, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }})
     }
 
     getJobPostById(jobPostId) {
@@ -44,7 +47,10 @@ class JobPostService {
     }
 
     updateJobPost(jobPost) {
-        return axios.put(BASE_REST_API_URL + '/admin/update-info-jobPost', jobPost);
+        return axios.put(BASE_REST_API_URL + '/employer/update-job-post', jobPost, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }});
     }
 
     deleteJobPost(jobPostId) {

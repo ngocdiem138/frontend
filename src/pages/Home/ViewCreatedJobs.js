@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SingleJob from "./ViewSingleJob";
 import { Button, Table } from 'reactstrap';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -12,7 +11,7 @@ const ViewCreatedJobs = () => {
 
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    JobPostServiceIml.getJobPostAppliedByCandidate().then((response) => { setJobs(response.data.data) });
+    JobPostServiceIml.getJobPostCreateByEmployer().then((response) => { setJobs(response.data.data) });
   }, [])
 
   const [keyword, setKeyword] = useState('');
@@ -42,7 +41,7 @@ const ViewCreatedJobs = () => {
   };
   function removeSelected(checked) {
     checked.map(item => {
-      JobPostServiceIml.deleteJob(item).then(() => JobPostServiceIml.getAllJobs().then((response) => { setJobs(response.data.data) }));
+      JobPostServiceIml.deleteJob(item).then(() => JobPostServiceIml.getJobPostCreateByEmployer().then((response) => { setJobs(response.data.data) }));
       var updatedList = [...checked];
       updatedList.splice(checked.indexOf(item), 1);
       setChecked(updatedList);
@@ -52,7 +51,7 @@ const ViewCreatedJobs = () => {
   const jobList = jobs.length ? (jobs.map(job => {
     return <tr key={job.id}>
       <td><input type="checkbox" value={job.id} onChange={handleCheck}></input></td>
-      <td style={{ whiteSpace: 'nowrap' }}><Link to={"/job-post/get-one/" + job.id} >{job.id}</Link></td>
+      <td style={{ whiteSpace: 'nowrap' }}><Link to={"/employer/jobPost/" + job.id} >{job.id}</Link></td>
       <td>{job.title}</td>
       <td>{job.applicationIds.length}</td>
       <td>{job.savedCandidateIds.length}</td>
@@ -66,7 +65,7 @@ const ViewCreatedJobs = () => {
     </tr>
   })) : (
     <tr>
-      <td colSpan="5">No applied jobs yet</td>
+      <td colSpan="5">No jobs created yet</td>
     </tr>
   );
 
@@ -113,12 +112,12 @@ const ViewCreatedJobs = () => {
                   <tr>
                     <th width="5%"></th>
                     <th width="5%">S.N</th>
-                    <th width="10%">Job Title</th>
-                    <th width="10%">N.Application</th>
+                    <th width="15%">Job Title</th>
+                    <th width="10%">N.Applied</th>
                     <th width="10%">N.Saved</th>
                     <th width="10%">Quantity</th>
                     <th width="15%">City</th>
-                    <th width="20%">Salary</th>
+                    <th width="15%">Salary</th>
                     <th width="10%">Expiry Date</th>
                     <th width="5%">Delete</th>
                   </tr>
@@ -126,7 +125,7 @@ const ViewCreatedJobs = () => {
                 <tbody>
                   {jobList}
                   <tr>
-                    <td colspan="5">{checked.length} items selected</td>
+                    <td colspan="7">{checked.length} items selected</td>
                     <td colspan="3" > <Button style={{ textAlign: 'right' }} className='btn-delete' onClick={() => removeSelected(checked)} >delete selected items <Trash /></Button></td>
                   </tr>
                 </tbody>

@@ -45,7 +45,7 @@ const AccountNavbar = () => {
                                 <FontAwesomeIcon className="mr-2" icon={faList} />List of all JobPost</Link>
                         </li>
                         <li className="mb-2">
-                            <Link to={"/user/jobPost/all"} className="nav-link mx-3">
+                            <Link to={"/employer/jobPost/new"} className="nav-link mx-3">
                                 <FontAwesomeIcon className="mr-2" icon={faKeyboard} />Create new JobPost</Link>
                         </li>
                         <li className="mb-2">
