@@ -22,6 +22,7 @@
 #navbar-main a:hover {
     color: #8B74BD;
     font-size: larger;
+    position: relative;
 }
 
 
