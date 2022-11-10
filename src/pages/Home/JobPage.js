@@ -130,17 +130,24 @@ class JobPage extends Component {
 
               <div className="col-lg-8">
                 <div className="job-info-container">
+                  <h5 className="border-0">Basic Job Information</h5>
                   <div className="info-header border-bottom">
-                    <h5 className="border-0">Basic Job Information</h5>
                       <h1 className="border-0 ">
                         <span>{job.title}</span>
                       </h1>
-                      <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5">Ứng tuyển</button>
+                      <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
+                      onClick={this.applyForJob}>Ứng tuyển</button>
                     </div>
                   <ul>
-                    <div className="basic-info border-bottom mb-2">
+                    <div className="basic-info border-bottom mb-2 mt-2">
                     <li className="border-0 " style={{fontSize:"medium"}}>
                       Cần tuyển: <span>{job.quantity}</span>
+                    </li>
+                    <li className="border-0" style={{fontSize:"small"}}>
+                      Salary:
+                      <span>
+                        {job.minBudget}$ - {job.maxBudget}
+                      </span>
                     </li>
                     <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
                       Địa chỉ: <span>{`${job.address}, ${job.city}`}</span>
@@ -198,12 +205,6 @@ class JobPage extends Component {
                     </li>
                     <li>
                       Type: <span>{job.employmentType}</span>
-                    </li>
-                    <li>
-                      Salary:{" "}
-                      <span>
-                        {job.minBudget}$ - {job.maxBudget}${" "}
-                      </span>
                     </li>
                     <li>
                       Deadline: <span>{job.dueTime}</span>
