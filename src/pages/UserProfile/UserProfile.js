@@ -309,22 +309,22 @@ class UserProfile extends Component {
                             <Col md="12">
                                 <Card>
                                     <Card.Header>
-                                        <Card.Title as="h4">Experience</Card.Title>
+                                        <Card.Title as="h2">Experience</Card.Title>
                                     </Card.Header>
                                     <Experience />
                                 </Card>
                             </Col>
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <Col md="12">
                                 <Card>
                                     <Card.Header>
-                                        <Card.Title as="h4">Skill</Card.Title>
+                                        <Card.Title as="h2">Skill</Card.Title>
                                     </Card.Header>
                                     <Skill skill={this.props.skill} />
                                 </Card>
                             </Col>
-                        </Row>
+                        </Row> */}
                     </Container>
                 </div>
             </div >

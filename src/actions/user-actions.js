@@ -39,7 +39,7 @@ class JobPostService {
     }
 
     getJobPostById(jobPostId) {
-        return axios.get(BASE_REST_API_URL + '/admin/get-one/' + jobPostId);
+        return axios.get(BASE_REST_API_URL + '/job-post/get-one/'+jobPostId);
     }
 
     getJobPostByKeyWordAndStatus(keyword, status) {
@@ -52,7 +52,7 @@ class JobPostService {
               Authorization: "Bearer " + localStorage.getItem("token")
             }});
     }
-
+                                                                                                                                               
     deleteJobPost(jobPostId) {
         return axios.delete(BASE_REST_API_URL + '/jobPost/' + jobPostId);
     }
@@ -60,6 +60,61 @@ class JobPostService {
 }
 
 export const JobPostServiceIml = new JobPostService();
+
+class ExperienceService {
+
+    getAllJobPosts() {
+        return axios.get(BASE_REST_API_URL + "/job-post/get-all")
+    }
+
+    getExperienceByCandidate(){
+        return axios.get(BASE_REST_API_URL + "/candidate/get-experience", {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
+    }
+
+    getJobPostCreateByEmployer(){
+        return axios.get(BASE_REST_API_URL + "/employer/get-all-job-post-created", {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
+    }
+
+    createExperience(experience) {
+        return axios.post(BASE_REST_API_URL + "/candidate/add-experience", experience, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }})
+    }
+
+    getJobPostById(jobPostId) {
+        return axios.get(BASE_REST_API_URL + '/job-post/get-one/'+jobPostId);
+    }
+
+    getJobPostByKeyWordAndStatus(keyword, status) {
+        return axios.get(BASE_REST_API_URL + '/search?' + 'keyword=' + keyword + '&status=' + status);
+    }
+
+    updateExperience(experience) {
+        return axios.put(BASE_REST_API_URL + '/candidate/update-experience', experience, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }});
+    }
+                                                                                                                                               
+    deleteExperience(experienceId) {
+        return axios.get(BASE_REST_API_URL + '/candidate/delete-experience/' + experienceId,  {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }});
+    }
+
+}
+
+export const ExperienceServiceIml = new ExperienceService();
 
 export const updateUserInfo = (userData, history) => async (dispatch) => {
     axios({

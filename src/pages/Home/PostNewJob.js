@@ -9,7 +9,7 @@ import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
 const AddJobPostComponent = () => {
 
   const [number, setNumber] = useState('')
-  const [name, setName] = useState('')
+  const [title, setTitle] = useState('')
   const [blind, setBlind] = useState('')
   const [deaf, setDeaf] = useState('')
   const [handDis, setHandDis] = useState('')
@@ -26,7 +26,7 @@ const AddJobPostComponent = () => {
   const [quantity, setQuantity] = useState('')
   const [experienceYear, setExperienceYear] = useState('')
   const [educationLevel, setEducationLevel] = useState('')
-  const [employmentType, setEmploymentType] = useState([])
+  const [employmentType, setEmploymentType] = useState('')
   const [minBudget, setMinBudget] = useState('INACTIVE')
   const [maxBudget, setMaxBudget] = useState('')
   const [dueTime, setDueTime] = useState('')
@@ -55,12 +55,13 @@ const AddJobPostComponent = () => {
     e.preventDefault();
 
     const jobPost = {
-      number, name, blind, deaf, handDis, description, labor, city, address, workplaceType, workStatus, communicationDis
+      id, number, title, blind, deaf, handDis, description, labor, city, address, workplaceType, workStatus, communicationDis
       , communicationDis, skills, level, type, quantity, experienceYear, educationLevel, employmentType, minBudget, maxBudget, dueTime
     }
 
     if (id != 'new') {
-      JobPostServiceIml.updateJobPost(id, jobPost).then((response) => {
+      jobPost.id=id;
+      JobPostServiceIml.updateJobPost(jobPost).then((response) => {
         navigate.push('/employer/jobs')
       }).catch(error => {
         console.log(error)
@@ -84,13 +85,14 @@ const AddJobPostComponent = () => {
   useEffect(() => {
     JobPostServiceIml.getJobPostById(id).then((response) => {
       setNumber(response.data.data.id)
-      setName(response.data.data.title)
+      setTitle(response.data.data.title)
       setBlind(response.data.data.blind)
       setDeaf(response.data.data.deaf)
       setHandDis(response.data.data.handDis)
       setLabor(response.data.data.labor)
       setCity(response.data.data.city)
       setAddress(response.data.data.address)
+      setDescription(response.data.data.description)
       setWorkplaceType(response.data.data.workplaceType)
       setWorkStatus(response.data.data.workStatus)
       setSkills(response.data.data.skills)
@@ -106,7 +108,7 @@ const AddJobPostComponent = () => {
       setDueTime(response.data.data.dueTime)
     }).catch(error => {
       setNumber('')
-      setName('')
+      setTitle('')
       setBlind('')
       setDeaf('')
       setHandDis('')
@@ -129,7 +131,7 @@ const AddJobPostComponent = () => {
     })
   }, [id])
 
-  const title = <h2>{id != 'new' ? 'Edit JobPost information' : 'New JobPost'}</h2>;
+  const titlePage = <h2>{id != 'new' ? 'Edit JobPost information' : 'New JobPost'}</h2>;
   const action = <div>{id != 'new' ? 'Edit JobPost' : 'Create JobPost'}</div>
 
   return (
@@ -140,7 +142,7 @@ const AddJobPostComponent = () => {
           <Row>
             <Col xl={11}>
               <p className="name-jobPost">
-                <h1>{title}</h1>
+                <h1>{titlePage}</h1>
               </p>
             </Col>
           </Row>
@@ -151,8 +153,8 @@ const AddJobPostComponent = () => {
                 <div class="row form-group ">
                   <div class="col-md-2 template required">JobPost name</div>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" value={name}
-                      onChange={(e) => setName(e.target.value)} required></input>
+                    <input type="text" class="form-control" value={title}
+                      onChange={(e) => setTitle(e.target.value)} required></input>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                   </div>
@@ -190,7 +192,7 @@ const AddJobPostComponent = () => {
                   <div class="col-md-1"></div>
                   <div class="col-md-2 template required">HandDis</div>
                   <div class="col-md-3">
-                    <select name="handDis" id="handDis" class="form-control" value={handDis}
+                    <select name="handDis" id="handDis" class="form-control" defaultValue={true} value={handDis}
                       onChange={(e) => setHandDis(e.target.value)} >
                       <option value="false">Allow</option>
                       <option value="true">Not Allow</option>
