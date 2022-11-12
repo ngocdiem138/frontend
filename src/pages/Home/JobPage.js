@@ -4,8 +4,10 @@ import axios from "axios";
 import BannerEmployer from "./BannerEmployer";
 import Loader from "./Loader";
 import { EmployerServiceIml } from "../../actions/admin-actions";
+import './main.css'
 
-const BASE_REST_API_URL = 'http://localhost:8080/api';
+const BASE_REST_API_URL = "http://localhost:8080/api";
+
 
 class JobPage extends Component {
   constructor(props) {
@@ -17,8 +19,6 @@ class JobPage extends Component {
       isLoading: true,
     };
   }
-
-
 
   componentDidMount() {
     const getParams = (pathname) => {
@@ -35,31 +35,30 @@ class JobPage extends Component {
     if (this.state.isLoading) {
       axios
         .get(`${BASE_REST_API_URL}/job-post/get-one/${currentParams.id}`)
-        .then(async response => {
+        .then(async (response) => {
           const text = response.data.data.createdEmployerId;
           const settings = {
-            method: 'GET',
+            method: "GET",
           };
 
           this.setState({
             job: response.data.data,
-            employer: await fetch(`http://localhost:8080/api/employer/${text}`, settings)
-              .then((response) => {
-                let dataJson = response.json()
-                if (dataJson.data) {
-                  return dataJson.data.data
-                } else {
-                  return dataJson
-                }
-              }),
+            employer: await fetch(
+              `http://localhost:8080/api/employer/${text}`,
+              settings
+            ).then((response) => {
+              let dataJson = response.json();
+              if (dataJson.data) {
+                return dataJson.data.data;
+              } else {
+                return dataJson;
+              }
+            }),
             isLoading: false,
-          })
+          });
         });
-
-
     }
   }
-
 
   applyForJob = () => {
     const auth = localStorage.getItem("userRole");
@@ -72,12 +71,15 @@ class JobPage extends Component {
       const BASE_REST_API_URL = "http://localhost:8080/api";
 
       axios
-        .get(BASE_REST_API_URL + "/candidate/apply-job-post/" + this.state.job.id, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          },
-          job_id: this.state.job.id,
-        })
+        .get(
+          BASE_REST_API_URL + "/candidate/apply-job-post/" + this.state.job.id,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            job_id: this.state.job.id,
+          }
+        )
         .then((response) => {
           if (response.data.data) {
             //show success message
@@ -110,7 +112,8 @@ class JobPage extends Component {
                   <h5 className="mb-3 mr-5">Employer Details</h5>
                   <ul>
                     <li>
-                      Họ và tên: <span>{`${employer.data.lastname} ${employer.data.firstname} `}</span>
+                      Họ và tên:{" "}
+                      <span>{`${employer.data.lastname} ${employer.data.firstname} `}</span>
                     </li>
                     <li>
                       Địa chỉ: <span>{employer.data.address}</span>
@@ -127,38 +130,55 @@ class JobPage extends Component {
 
               <div className="col-lg-8">
                 <div className="job-info-container">
-                  <h5>Basic Job Information</h5>
+                  <h5 className="border-0">Basic Job Information</h5>
+                  <div className="info-header border-bottom">
+                      <h1 className="border-0 ">
+                        <span>{job.title}</span>
+                      </h1>
+                      <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
+                      onClick={this.applyForJob}>Ứng tuyển</button>
+                    </div>
                   <ul>
-                    <li>
-                      Công việc: <span>{job.title}</span>
+                    <div className="basic-info border-bottom mb-2 mt-2">
+                    <li className="border-0 " style={{fontSize:"medium"}}>
+                      Cần tuyển: <span>{job.quantity}</span>
                     </li>
+                    <li className="border-0" style={{fontSize:"small"}}>
+                      Salary:
+                      <span>
+                        {job.minBudget}$ - {job.maxBudget}
+                      </span>
+                    </li>
+                    <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
+                      Địa chỉ: <span>{`${job.address}, ${job.city}`}</span>
+                    </li>
+                    <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
+                      Làm việc tại: <span>{job.workplaceType}</span>
+                    </li>
+                    <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
+                      Tình trạng công việc: <span>{job.workStatus}</span>
+                    </li>
+                    </div>
                     {/* <li>
                       Active: <span>{job.active.toString()}</span>
                     </li> */}
-                    <li>
-                      Blind: <span>{job.blind.toString()}</span>
+                    <li className="border-0">
+                      Tình trạng:
                     </li>
-                    <li>
-                      Deaf: <span>{job.deaf.toString()}</span>
-                    </li>
-                    <li>
-                      HandDis: <span>{job.handDis.toString()}</span>
-                    </li>
-                    <li>
-                      Labor: <span>{job.labor.toString()}</span>
-                    </li>
-                    <li>
-                      City: <span>{job.city}</span>
-                    </li>
-                    <li>
-                      Address: <span>{job.address}</span>
-                    </li>
-                    <li>
-                      Workplace Type: <span>{job.workplaceType}</span>
-                    </li>
-                    <li>
-                      Work Status: <span>{job.workStatus}</span>
-                    </li>
+                    <div className="disability-wrap d-flex" style={{columnGap:"10rem"}}>
+                      <li className="border-0">
+                        Blind: <span>{job.blind ? "✅" : ""}</span>
+                      </li>
+                      <li className="border-0">
+                        Deaf: <span>{job.deaf ? "✅" : ""}</span>
+                      </li >
+                      <li className="border-0">
+                        HandDis: <span>{job.handDis ? "✅" : ""}</span>
+                      </li>
+                      <li className="border-0">
+                        Labor: <span>{job.labor ? "✅" : ""}</span>
+                      </li>
+                    </div>
                     <li>
                       Skills: <span>{job.skills}</span>
                     </li>
@@ -172,14 +192,11 @@ class JobPage extends Component {
                       Type: <span>{job.type}</span>
                     </li>
                     <li>
-                      Quality: <span>{job.quantity}</span>
-                    </li>
-                    <li>
                       Application: <span>{job.applicationIds.length}</span>
                     </li>
-                    <li>
+                    {/* <li>
                       Saved Candidate: <span>{job.savedCandidateIds.length}</span>
-                    </li>
+                    </li> */}
                     <li>
                       Experience Year: <span>{job.experienceYear}</span>
                     </li>
@@ -188,9 +205,6 @@ class JobPage extends Component {
                     </li>
                     <li>
                       Type: <span>{job.employmentType}</span>
-                    </li>
-                    <li>
-                      Salary: <span>{job.minBudget}$ - {job.maxBudget}$ </span>
                     </li>
                     <li>
                       Deadline: <span>{job.dueTime}</span>

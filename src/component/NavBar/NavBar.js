@@ -116,12 +116,12 @@ class NavBar extends Component {
                             </div>
                         </Col>
                     </Row>
-                        <div className='search-group' style={{marginLeft: "auto", marginRight: "auto"}}>
+                        {/* <div className='search-group' style={{marginLeft: "auto", marginRight: "auto"}}>
                             <input className='search-box' placeholder='Nhập công việc bạn cần tìm ...'/>
                             <button className='search-button'>
-                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <i className="fa fa-search" aria-hidden="true"></i>
                             </button>
-                        </div>
+                        </div> */}
 
                 </Container>
             </div>
