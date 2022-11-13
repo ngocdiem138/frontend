@@ -62,7 +62,7 @@ const UserList = () => {
             {/* <td>{account.password}</td> */}
             <td>{account.phone}</td>
             <td>{account.avatar}</td>
-            <td>{account.isOnline == false ? "INACTIVE" : "ACTIVE"}</td>
+            <td>{account.isOnline == false ? "🕛" : "✅"}</td>
             {/* <td>{account.joinDate}</td>
             <td>{account.lastOnline}</td> */}
             <td>{account.active == false ? "INACTIVE" : "ACTIVE"}</td>
@@ -134,7 +134,7 @@ const UserList = () => {
                                         <th width="7%">Online</th>
                                         {/* <th width="5%">Join Date</th>
                                         <th width="5%">Last Online</th> */}
-                                        <th width="7%">Status</th>
+                                        <th width="10%">Status</th>
                                         <th width="15%">Role</th>
                                         <th width="7%">Delete</th>
                                     </tr>

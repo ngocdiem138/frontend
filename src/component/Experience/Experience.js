@@ -8,6 +8,8 @@ import AccountNavbar from "../AccountNavbar/AccountNavbar";
 import Skill from '../Skill/Skill';
 import { ExperienceServiceIml } from '../../actions/user-actions';
 
+import './Experience.css'
+
 const Experience = () => {
     const [experienceList, setExperienceList] = useState([]);
     useEffect(() => {
@@ -24,6 +26,9 @@ const Experience = () => {
             description: "",
             skills: "",
         }]);
+        const skill = document.getElementById("skills")
+        skill.value = ""
+        
     }
     const saveOrUpdate = () => {
         experienceList.map((work) => (
@@ -73,9 +78,9 @@ const Experience = () => {
                     experienceList.map((work, index) => (
                         <AccordionItem key={index}>
                             <h2>
-                                <AccordionButton>
+                                <AccordionButton  className='main-color'>
                                     <Box flex='1' textAlign='left'>
-                                        <Text fontWeight={'medium'}>{work.title ? work.title : "Title"}</Text>
+                                        <h3 fontWeight={'medium'}>{work.title ? work.title : "Title"}</h3>
                                     </Box>
                                     <AccordionIcon />
                                 </AccordionButton>
@@ -83,9 +88,9 @@ const Experience = () => {
                             <AccordionPanel pb={4}>
 
 
-                                <HStack spacing={30}>
-                                    <Input width="30%" value={work.title} onChange={(e) => handleChange(e, work.id)} name='title' type='text' variant='filled' placeholder='Title' />
-                                    <Input width="30%" value={work.company} onChange={(e) => handleChange(e, work.id)} name='company' type='text' variant='filled' placeholder='Company' />
+                                <HStack spacing={30} paddingTop={10} paddingLeft={10}>
+                                    <Input width="30%" className='input-field' value={work.title} onChange={(e) => handleChange(e, work.id)} name='title' type='text' variant='filled' placeholder='Title' />
+                                    <Input width="30%" className='input-field' value={work.company} onChange={(e) => handleChange(e, work.id)} name='company' type='text' variant='filled' placeholder='Company' />
                                     <Select width="30%" value={work.employmentType} onChange={(e) => handleChange(e, work.id)} name='employmentType' variant='filled' placeholder='Employment Type'>
                                         <option value='Full-time'>Full-time</option>
                                         <option value='Part-time'>Part-time</option>
@@ -97,41 +102,44 @@ const Experience = () => {
                                 <HStack spacing={30} mt={6}>
                                     <FormControl width="45%">
                                         <FormLabel htmlFor='startDate'>Start Date</FormLabel>
-                                        <Input width="90%" value={work.startDate} onChange={(e) => handleChange(e, work.id)} name='startDate' id='startDate' type='date' variant='filled' placeholder='Start Date' />
+                                        <Input className='input-field' width="90%" value={work.startDate} onChange={(e) => handleChange(e, work.id)} name='startDate' id='startDate' type='date' variant='filled' placeholder='Start Date' />
                                     </FormControl>
 
                                     <FormControl width="45%">
                                         <FormLabel htmlFor='endDate'>End Date</FormLabel>
-                                        <Input width="90%" value={work.endDate} onChange={(e) => handleChange(e, work.id)} name='endDate' id='endDate' type='date' variant='filled' placeholder='Start Date' />
+                                        <Input className='input-field' width="90%" value={work.endDate} onChange={(e) => handleChange(e, work.id)} name='endDate' id='endDate' type='date' variant='filled' placeholder='Start Date' />
                                     </FormControl>
 
                                 </HStack>
 
                                 <FormControl mt={3}>
                                     <FormLabel htmlFor='description'>Description</FormLabel>
-                                    <Textarea width="90%" value={work.description} onChange={(e) => handleChange(e, work.id)} name='description' id='description' variant='filled' placeholder='Description...' />
+                                    <Textarea className='input-field' width="90%" value={work.description} onChange={(e) => handleChange(e, work.id)} name='description' id='description' variant='filled' placeholder='Description...' />
                                 </FormControl>
 
                                 <FormControl mt={3}>
                                     <HStack spacing={4} alignItems={'flex-end'} as='form' onSubmit={(e) =>handleSkill(e, work.id)}>
                                         <FormControl>
-                                            <FormLabel htmlFor='skill'>Add Skills</FormLabel>
-                                            <Input onChange={(e) => setSkill(e.target.value)} value={skill} name='skills' id='skills' type='text' variant='filled' placeholder='Skill' />
+                                            <FormLabel htmlFor='skill'>Kỹ năng</FormLabel>
+                                            <Input className='input-field' onChange={(e) => setSkill(e.target.value)} value={skill} name='skills' id='skills' type='text' variant='filled' placeholder='Skill' />
                                         </FormControl>
-                                        <Button type='submit' colorScheme={'purple'}>Add</Button>
+                                        <Button id="add-skill-button" type='submit' colorScheme={'purple'}>Add</Button>
                                     </HStack>
 
-                                    <Box borderWidth={'1px'} rounded={'sm'} my={4} p={2}>
+                                    <Box  borderWidth={'1px'} rounded={'sm'} my={4} p={2} marginLeft={20}>
                                         {work.skills ? work.skills.split(',').map((skill) => (
                                             <Tag
+                                                className='skill-tag'
                                                 size={'lg'}
                                                 borderRadius='full'
                                                 variant='solid'
                                                 colorScheme='purple'
                                                 m={0.5}
+                                                marginLeft={2}
+                                                marginRight={2}
                                             >
                                                 <TagLabel>{skill}</TagLabel>
-                                                {skill ? <TagCloseButton onClick={() => deleteSkill(skill,work.id)}/>:""}
+                                                {skill ? <TagCloseButton className='delete-skill' onClick={() => deleteSkill(skill,work.id)}/>:""}
                                                 
                                             </Tag>
                                         )) : (
@@ -140,7 +148,7 @@ const Experience = () => {
                                     </Box>
                                 </FormControl>
 
-                                <Button rightIcon={<MdDelete />} onClick={() => deleteExperience(work.id)} mt={3} colorScheme={'red'}>Delete</Button>
+                                <Button id="delete-button" rightIcon={<MdDelete />} onClick={() => deleteExperience(work.id)} mt={3} colorScheme={'red'}>Xóa</Button>
 
                             </AccordionPanel>
                         </AccordionItem>
@@ -150,8 +158,8 @@ const Experience = () => {
 
             {
                 (
-                    <><Button colorScheme={'purple'} my={5} onClick={addMore}>Add More</Button>
-                        <Button colorScheme={'purple'} my={5} onClick={saveOrUpdate}>Save</Button></>
+                    <><Button className='action-button' colorScheme={'purple'} my={5} onClick={addMore}>Add More</Button>
+                        <Button className='action-button' colorScheme={'purple'} my={5} onClick={saveOrUpdate}>Save</Button></>
                 )
 
             }
