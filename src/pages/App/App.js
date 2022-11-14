@@ -72,7 +72,7 @@ class App extends Component {
                         (<Route component={PostNewJob} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/accounts/addOrUpdateAccount/:id" render={() => (isAdmin) ?
                         (<Route component={AddAccountComponent} />) : (<Route component={Home} />)} />
-                    <Route exact path="/job-post/get-one/:id" component={JobPage} />
+                    <Route exact path="/common/job-post/get-one/:id" component={JobPage} />
                     <Route exact path="/admin/users/all" render={() => (isAdmin) ?
                         (<Route component={UserList} />) : (<Route component={Home} />)} />
                     <Route exact path="/admin/user/:id" render={() => (isAdmin) ?

@@ -23,7 +23,7 @@ class JobPage extends Component {
   componentDidMount() {
     const getParams = (pathname) => {
       const matchJobPath = matchPath(pathname, {
-        path: `/job-post/get-one/:id`,
+        path: `/common/job-post/get-one/:id`,
       });
       return (matchJobPath && matchJobPath.params) || {};
     };
@@ -61,6 +61,7 @@ class JobPage extends Component {
     }
   }
 
+
   applyForJob = () => {
     const auth = localStorage.getItem("userRole");
     // console.log(auth.entity);
@@ -96,6 +97,8 @@ class JobPage extends Component {
         });
     }
   };
+
+ 
 
   render() {
     const { employer, job } = this.state;

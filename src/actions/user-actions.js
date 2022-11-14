@@ -39,7 +39,7 @@ class JobPostService {
     }
 
     getJobPostById(jobPostId) {
-        return axios.get(BASE_REST_API_URL + '/job-post/get-one/'+jobPostId);
+        return axios.get(BASE_REST_API_URL + '/common/job-post/get-one/'+jobPostId);
     }
 
     getJobPostByKeyWordAndStatus(keyword, status) {
@@ -91,7 +91,7 @@ class ExperienceService {
     }
 
     getJobPostById(jobPostId) {
-        return axios.get(BASE_REST_API_URL + '/job-post/get-one/'+jobPostId);
+        return axios.get(BASE_REST_API_URL + '/common/job-post/get-one/'+jobPostId);
     }
 
     getJobPostByKeyWordAndStatus(keyword, status) {

@@ -6,7 +6,7 @@ import usePagination from "../../component/Pagination/usePagination";
 import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
 import PaginationItem from "../../component/Pagination/PaginationItem";
 import SearchForm from "../../component/SearchForm/SearchForm";
-import PerfumeCardItem from "../../component/PerfumeCardItem/PerfumeCardItem";
+import JobItem from "../../component/JobItem/JobItem";
 
 function EditPerfumes({data, itemsPerPage, startFrom, searchByData}) {
     const {slicedData, pagination, prevPage, nextPage, changePage, setFilteredData, setSearching} = usePagination({
@@ -39,7 +39,7 @@ function EditPerfumes({data, itemsPerPage, startFrom, searchByData}) {
                     <div className="row">
                         {slicedData.map((job) => {
                             return (
-                                <PerfumeCardItem
+                                <JobItem
                                     perfume={job}
                                     colSize={2}
                                     link={"/product/list/edit"}
