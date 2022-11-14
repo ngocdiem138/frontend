@@ -108,7 +108,7 @@ class JobPage extends Component {
             <BannerEmployer cover={employer.cover} logo={employer.logo} />
             <div className="row justify-content-around job-page-wrapper mb-5 mx-0">
               <div className="col-lg-3">
-                <div className="employer-detail-box">
+                <div className="employer-detail-box info-header">
                   <h5 className="mb-3 mr-5">Employer Details</h5>
                   <ul>
                     <li>
@@ -132,9 +132,9 @@ class JobPage extends Component {
                 <div className="job-info-container">
                   <h5 className="border-0">Basic Job Information</h5>
                   <div className="info-header border-bottom">
-                      <h1 className="border-0 ">
+                      <h3 className="border-0 ">
                         <span>{job.title}</span>
-                      </h1>
+                      </h3>
                       <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
                       onClick={this.applyForJob}>Ứng tuyển</button>
                     </div>
@@ -163,47 +163,50 @@ class JobPage extends Component {
                       Active: <span>{job.active.toString()}</span>
                     </li> */}
                     <li className="border-0">
-                      Tình trạng:
+                      Tình trạng người làm:
                     </li>
                     <div className="disability-wrap d-flex" style={{columnGap:"10rem"}}>
                       <li className="border-0">
-                        Blind: <span>{job.blind ? "✅" : ""}</span>
+                        <span>{job.blind ? "Blind: ✅" : ""}</span>
                       </li>
                       <li className="border-0">
-                        Deaf: <span>{job.deaf ? "✅" : ""}</span>
+                        <span>{job.deaf ? "Deaf: ✅" : ""}</span>
                       </li >
                       <li className="border-0">
-                        HandDis: <span>{job.handDis ? "✅" : ""}</span>
+                        <span>{job.handDis ? "HandDis: ✅" : ""}</span>
                       </li>
                       <li className="border-0">
-                        Labor: <span>{job.labor ? "✅" : ""}</span>
+                        <span>{job.labor ? "Labor: ✅" : ""}</span>
                       </li>
                     </div>
-                    <li>
-                      Skills: <span>{job.skills}</span>
-                    </li>
-                    <li>
-                      CommunicationDis: <span>{job.communicationDis}</span>
-                    </li>
-                    <li>
-                      Level: <span>{job.level}</span>
-                    </li>
-                    <li>
-                      Type: <span>{job.type}</span>
-                    </li>
-                    <li>
-                      Application: <span>{job.applicationIds.length}</span>
-                    </li>
-                    {/* <li>
-                      Saved Candidate: <span>{job.savedCandidateIds.length}</span>
-                    </li> */}
-                    <li>
-                      Experience Year: <span>{job.experienceYear}</span>
-                    </li>
-                    <li>
-                      Education: <span>{job.educationLevel}</span>
-                    </li>
-                    <li>
+                    <div>
+                      <h3>Yêu cầu</h3>
+                      <li className="border-0">
+                        Skills: <span>{job.skills}</span>
+                      </li>
+                      <li className="border-0">
+                        CommunicationDis: <span>{job.communicationDis}</span>
+                      </li>
+                      <li className="border-0">
+                        Level: <span>{job.level}</span>
+                      </li>
+                      <li className="border-0">
+                        Type: <span>{job.type}</span>
+                      </li>
+                      <li className="border-0">
+                        Application: <span>{job.applicationIds.length}</span>
+                      </li>
+                      {/* <li>
+                        Saved Candidate: <span>{job.savedCandidateIds.length}</span>
+                      </li> */}
+                      <li className="border-0">
+                        Experience Year: <span>{job.experienceYear}</span>
+                      </li>
+                      <li className="border-0">
+                        Education: <span>{job.educationLevel}</span>
+                      </li>
+                    </div>
+                    <li className="border-0">
                       Type: <span>{job.employmentType}</span>
                     </li>
                     <li>
