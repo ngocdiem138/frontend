@@ -23,7 +23,7 @@ class JobPage extends Component {
   componentDidMount() {
     const getParams = (pathname) => {
       const matchJobPath = matchPath(pathname, {
-        path: `/job-post/get-one/:id`,
+        path: `/common/job-post/get-one/:id`,
       });
       return (matchJobPath && matchJobPath.params) || {};
     };
@@ -34,7 +34,7 @@ class JobPage extends Component {
 
     if (this.state.isLoading) {
       axios
-        .get(`${BASE_REST_API_URL}/job-post/get-one/${currentParams.id}`)
+        .get(`${BASE_REST_API_URL}/common/job-post/get-one/${currentParams.id}`)
         .then(async (response) => {
           const text = response.data.data.createdEmployerId;
           const settings = {

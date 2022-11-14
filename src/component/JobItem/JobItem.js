@@ -40,7 +40,7 @@ const PerfumeCardItem = ({job, colSize, link, btnName1, btnName2}) => {
                     </Link>
                 </div>
                 <div className="text-center align-items-end mb-1">
-                    <Link to={`${link}/${job.id}`}>
+                    <Link to={`/candidate/save-job-post/${job.id}`}>
                         <span className="btn btn-dark">{btnName2}</span>
                     </Link>
                 </div>

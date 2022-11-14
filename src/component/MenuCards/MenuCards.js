@@ -1,7 +1,7 @@
 import React from 'react';
 
 import usePagination from "../Pagination/usePagination";
-import PerfumeCardItem from "../PerfumeCardItem/PerfumeCardItem";
+import JobItem from "../JobItem/JobItem";
 import PaginationItem from "../Pagination/PaginationItem";
 import SearchForm from "../SearchForm/SearchForm";
 
@@ -31,10 +31,10 @@ const MenuCards = ({ data, itemsPerPage, startFrom, searchByData }) => {
                     <div className="row">
                         {slicedData.map((job) => {
                             return (
-                                <PerfumeCardItem
+                                <JobItem
                                     job={job}
                                     colSize={4}
-                                    link={"/product"}
+                                    link={"/common/job-post/get-one"}
                                     btnName1={"SHOW MORE"}
                                     btnName2={"SAVE JOB"} />
                             );
