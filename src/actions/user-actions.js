@@ -12,7 +12,7 @@ const BASE_REST_API_URL = 'http://localhost:8080/api';
 class JobPostService {
 
     getAllJobPosts() {
-        return axios.get(BASE_REST_API_URL + "/job-post/get-all")
+        return axios.get(BASE_REST_API_URL + "/common/job-post/get-all")
     }
 
     getJobPostAppliedByCandidate(){

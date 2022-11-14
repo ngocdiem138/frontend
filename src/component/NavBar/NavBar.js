@@ -91,7 +91,7 @@ class NavBar extends Component {
                                                 <NavLink to={"/"} activeClassName="active" isActive={checkActive}><span className="nav-link pl-5 pr-5 header-link">Trang chủ</span></NavLink>
                                             </li>
                                             <li className="nav-item ">
-                                                <NavLink to={{ pathname: "/jobs", state: { id: "all" } }}>
+                                                <NavLink to={{ pathname: "/menu", state: { id: "all" } }}>
                                                     <span className="nav-link pl-5 pr-5 header-link">Việc làm</span></NavLink>
                                             </li>
                                             <li className="nav-item ">

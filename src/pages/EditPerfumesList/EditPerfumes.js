@@ -37,10 +37,10 @@ function EditPerfumes({data, itemsPerPage, startFrom, searchByData}) {
                 </div>
                 <div className="container-fluid mt-3">
                     <div className="row">
-                        {slicedData.map((perfume) => {
+                        {slicedData.map((job) => {
                             return (
                                 <PerfumeCardItem
-                                    perfume={perfume}
+                                    perfume={job}
                                     colSize={2}
                                     link={"/product/list/edit"}
                                     btnName={"Edit"}/>
