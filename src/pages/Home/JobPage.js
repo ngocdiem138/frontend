@@ -31,16 +31,17 @@ class JobPage extends Component {
     const { pathname } = this.props.location;
     const currentParams = getParams(pathname);
     console.log(currentParams);
+    console.log("id: ", currentParams);
 
     if (this.state.isLoading) {
       axios
-        .get(`${BASE_REST_API_URL}/job-post/get-one/${currentParams.id}`)
+        .get(`${BASE_REST_API_URL}/common/job-post/get-one/${currentParams.id}`)
         .then(async (response) => {
           const text = response.data.data.createdEmployerId;
           const settings = {
             method: "GET",
           };
-
+          
           this.setState({
             job: response.data.data,
             employer: await fetch(
