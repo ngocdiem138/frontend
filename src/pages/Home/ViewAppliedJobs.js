@@ -51,7 +51,7 @@ const ViewAppliedJobs = () => {
   const jobList = jobs.length ? (jobs.map(job => {
     return <tr key={job.id}>
       <td><input type="checkbox" value={job.id} onChange={handleCheck}></input></td>
-      <td style={{ whiteSpace: 'nowrap' }}><Link to={"/job-post/get-one/" + job.id} >{job.id}</Link></td>
+      <td style={{ whiteSpace: 'nowrap' }}><Link to={"/common/job-post/get-one/" + job.id} >{job.id}</Link></td>
       <td>{job.title}</td>
       <td>{job.educationLevel}</td>
       <td>{job.experienceYear}</td>
