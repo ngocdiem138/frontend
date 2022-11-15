@@ -73,7 +73,7 @@ export const CompanyServiceIml = new CompanyService();
 class SkillService {
 
     getAllSkills(type) {
-        return axios.get(BASE_REST_API_URL + "/get-all-extra-info-by-type?type="+type, config)
+        return axios.get(BASE_REST_API_URL + "/common/get-all-extra-info-by-type?type="+type, config)
     }
 
     createCompany(company) {

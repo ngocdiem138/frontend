@@ -33,7 +33,10 @@ class UserProfile extends Component {
 
     componentDidMount() {
         axios
-            .get(BASE_REST_API_URL + "/employer/edit-profile")
+            .get(BASE_REST_API_URL + "/employer/edit-profile", {        
+                headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }})
             .then((response) => {
                 if (response.data.resp === 1) {
                     this.setState({

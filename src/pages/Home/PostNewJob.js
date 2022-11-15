@@ -71,7 +71,8 @@ const AddJobPostComponent = () => {
 
     } else {
       jobPost.number = parseInt(jobPost.number);
-      JobPostServiceIml.createJobPost(jobPost).then((response) => {
+      const {id, ...data} = jobPost
+      JobPostServiceIml.createJobPost(data).then((response) => {
 
         console.log(response.data)
 

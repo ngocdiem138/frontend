@@ -29,7 +29,7 @@ const MenuCards = ({ data, itemsPerPage, startFrom, searchByData }) => {
                         changePage={changePage}
                         nextPage={nextPage} />
                     <div className="row" style={{paddingBottom:"100px"}}>
-                        {slicedData.map((job) => {
+                        {slicedData?.map((job) => {
                             return (
                                 <JobItem
                                     job={job}
