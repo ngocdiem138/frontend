@@ -55,7 +55,7 @@ const AddJobPostComponent = () => {
     e.preventDefault();
 
     const jobPost = {
-      id, number, title, blind, deaf, handDis, description, labor, city, address, workplaceType, workStatus, communicationDis
+      id,  title, blind, deaf, handDis, description, labor, city, address, workplaceType, workStatus, communicationDis
       , communicationDis, skills, level, type, quantity, experienceYear, educationLevel, employmentType, minBudget, maxBudget, dueTime
     }
 
@@ -68,7 +68,7 @@ const AddJobPostComponent = () => {
       })
 
     } else {
-      jobPost.number = parseInt(jobPost.number);
+      jobPost.id = -1;
       JobPostServiceIml.createJobPost(jobPost).then((response) => {
 
         console.log(response.data)
@@ -107,7 +107,7 @@ const AddJobPostComponent = () => {
       setMaxBudget(response.data.data.maxBudget)
       setDueTime(response.data.data.dueTime)
     }).catch(error => {
-      setNumber('')
+      setNumber('-1')
       setTitle('')
       setBlind('')
       setDeaf('')
