@@ -16,7 +16,10 @@ const UserList = () => {
     const isAdmin = localStorage.getItem("userRole") === "ADMIN";
     const [accounts, setAccounts] = useState([]);
     useEffect(() => {
-        AccountServiceIml.getAllAccounts().then((response) => { setAccounts(response.data.data) });
+        AccountServiceIml.getAllAccounts().then((response) => { 
+            setAccounts(response.data.data);
+            console.log("res:",response.data); 
+        });
     }, [])
 
     const [keyword, setKeyword] = useState('');
@@ -53,7 +56,7 @@ const UserList = () => {
             setChecked(updatedList);
         })
     }
-    const accountList = accounts.map(account => {
+    const accountList = accounts?.map(account => {
         return <tr key={account.id}>
             <td><input type="checkbox" disabled={account.active == false ? false : true} value={account.id} onChange={handleCheck}></input></td>
             <td style={{ whiteSpace: 'nowrap' }}><Link to={"/admin/accounts/addOrUpdateAccount/" + account.id} >{account.id}</Link></td>

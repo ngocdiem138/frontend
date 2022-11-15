@@ -45,7 +45,7 @@ class JobPage extends Component {
           this.setState({
             job: response.data.data,
             employer: await fetch(
-              `http://localhost:8080/api/employer/${text}`,
+              `http://localhost:8080/api/common/employer/get-employer-by-id/${text}`,
               settings
             ).then((response) => {
               let dataJson = response.json();
