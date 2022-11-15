@@ -31,20 +31,20 @@ class Menu extends Component {
         }
     };
 
-    componentDidMount() {
-        const perfumeData = this.props.location.state.id;
+    // componentDidMount() {
+    //     const perfumeData = this.props.location.state.id;
 
-        if (perfumeData === "female" || perfumeData === "male") {
-            this.props.fetchPerfumesByGender({ perfumeGender: perfumeData });
-            window.scrollTo(0, 0);
-        } else if (perfumeData === "all") {
-            this.props.fetchPerfumes();
-            window.scrollTo(0, 0);
-        } else if (perfumeData) {
-            this.props.fetchPerfumesByPerfumer({ perfumer: perfumeData });
-            window.scrollTo(0, 0);
-        }
-    }
+    //     if (perfumeData === "female" || perfumeData === "male") {
+    //         this.props.fetchPerfumesByGender({ perfumeGender: perfumeData });
+    //         window.scrollTo(0, 0);
+    //     } else if (perfumeData === "all") {
+    //         this.props.fetchPerfumes();
+    //         window.scrollTo(0, 0);
+    //     } else if (perfumeData) {
+    //         this.props.fetchPerfumesByPerfumer({ perfumer: perfumeData });
+    //         window.scrollTo(0, 0);
+    //     }
+    // }
 
     getProducts = (variables) => {
         this.props.fetchPerfumesByFilterParams(variables);

@@ -17,6 +17,7 @@ class JobPage extends Component {
       job: {},
       employer: {},
       isLoading: true,
+      display: false,
     };
   }
 
@@ -83,9 +84,12 @@ class JobPage extends Component {
           }
         )
         .then((response) => {
-          if (response.data.data) {
+          if (response.data.message === 'Apply success') {
             //show success message
             alert("Successfuly applied for job");
+            this.setState({
+              display: true
+            })
           } else if (!response.data.data) {
             alert(response.data.data.message);
           } else {
@@ -141,6 +145,7 @@ class JobPage extends Component {
                       </h3>
                       <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
                       onClick={this.applyForJob}>Ứng tuyển</button>
+                      <p style={{color: "green", display:this.state.display ? "block": "none"}}>Úng tuyển thành công</p>
                     </div>
                   <ul>
                     <div className="basic-info border-bottom mb-2 mt-2">

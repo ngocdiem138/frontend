@@ -94,9 +94,9 @@ class NavBar extends Component {
                                                 <NavLink to={{ pathname: "/menu", state: { id: "all" } }}>
                                                     <span className="nav-link pl-5 pr-5 header-link">Việc làm</span></NavLink>
                                             </li>
-                                            {/* <li className="nav-item ">
+                                            <li className="nav-item ">
                                                 <NavLink to={"/contacts"}><span className="nav-link pl-5 pr-5 header-link">Công ty</span></NavLink>
-                                            </li> */}
+                                            </li>
                                             <li className="nav-item ">
                                                 <NavLink to={"/resumes"}><span className="nav-link pl-5 pr-5 header-link">Cv</span></NavLink>
                                             </li>

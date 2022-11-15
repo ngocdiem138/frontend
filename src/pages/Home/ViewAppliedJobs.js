@@ -11,7 +11,7 @@ const ViewAppliedJobs = () => {
 
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    JobPostServiceIml.getJobPostCreateByEmployer().then((response) => { setJobs(response.data.data) });
+    JobPostServiceIml.getJobPostAppliedByCandidate().then((response) => { setJobs(response.data.data) });
   }, [])
 
   const [keyword, setKeyword] = useState('');
@@ -25,7 +25,7 @@ const ViewAppliedJobs = () => {
     setJobs(data);
   }
   function remove(number) {
-    JobPostServiceIml.deleteJob(number).then(() => JobPostServiceIml.getAllJobs().then((response) => { setJobs(response.data.data) }));
+    JobPostServiceIml.cancelAppliedJob(number).then(() => JobPostServiceIml.getJobPostAppliedByCandidate().then((response) => { setJobs(response.data.data) }));
   }
   const [checked, setChecked] = useState([]);
   // Add/Remove checked item from list
