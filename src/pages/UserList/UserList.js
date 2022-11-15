@@ -69,7 +69,7 @@ const UserList = () => {
             {/* <td>{account.joinDate}</td>
             <td>{account.lastOnline}</td> */}
             <td>{account.active == false ? "INACTIVE" : "ACTIVE"}</td>
-            <td>{account.roleCodes}</td>
+            <td>{account.roleCodes.join(',')}</td>
             {/* <td>{account.followingCandidate.length}</td>
             <td>{account.jobPostEntities.length}</td> */}
             <td style={{ textAlign: 'right' }}>
