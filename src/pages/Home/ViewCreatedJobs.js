@@ -25,7 +25,9 @@ const ViewCreatedJobs = () => {
     setJobs(data);
   }
   function remove(number) {
-    JobPostServiceIml.deleteJob(number).then(() => JobPostServiceIml.getAllJobs().then((response) => { setJobs(response.data.data) }));
+    console.log('delete', number);
+    JobPostServiceIml.deleteJob(number)
+    .then(() => JobPostServiceIml.getAllJobs().then((response) => { setJobs(response.data.data) }))
   }
   const [checked, setChecked] = useState([]);
   // Add/Remove checked item from list

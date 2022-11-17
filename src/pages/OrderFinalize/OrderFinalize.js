@@ -15,8 +15,8 @@ class OrderFinalize extends Component {
 
         return (
             <div className="container text-center mt-5">
-                <h2>Thank you for the order!</h2>
-                <p>Your order number is: <span>{orderIndex}</span></p>
+                <h2>Thank you for your application!</h2>
+                <p>Your job post applied is: <span>{orderIndex}</span></p>
             </div>
         );
     }

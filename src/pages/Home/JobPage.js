@@ -5,8 +5,7 @@ import BannerEmployer from "./BannerEmployer";
 import Loader from "./Loader";
 import { EmployerServiceIml } from "../../actions/admin-actions";
 import './main.css'
-
-const BASE_REST_API_URL = "http://localhost:8080/api";
+import { API_BASE_URL } from "../../utils/constants/url";
 
 
 class JobPage extends Component {
@@ -17,6 +16,7 @@ class JobPage extends Component {
       job: {},
       employer: {},
       isLoading: true,
+      display: false,
     };
   }
 
@@ -35,7 +35,7 @@ class JobPage extends Component {
 
     if (this.state.isLoading) {
       axios
-        .get(`${BASE_REST_API_URL}/common/job-post/get-one/${currentParams.id}`)
+        .get(`${API_BASE_URL}/common/job-post/get-one/${currentParams.id}`)
         .then(async (response) => {
           const text = response.data.data.createdEmployerId;
           const settings = {
@@ -45,7 +45,7 @@ class JobPage extends Component {
           this.setState({
             job: response.data.data,
             employer: await fetch(
-              `http://localhost:8080/api/common/employer/get-employer-by-id/${text}`,
+              `${API_BASE_URL}/common/employer/get-employer-by-id/${text}`,
               settings
             ).then((response) => {
               let dataJson = response.json();
@@ -68,13 +68,11 @@ class JobPage extends Component {
     const isAuthenticated = localStorage.getItem("isLoggedIn");
 
     if (!isAuthenticated) {
-      alert("you must login to apply for jobs");
+      alert("You must login to apply for jobs");
     } else {
-      const BASE_REST_API_URL = "http://localhost:8080/api";
-
       axios
         .get(
-          BASE_REST_API_URL + "/candidate/apply-job-post/" + this.state.job.id,
+          API_BASE_URL + "/candidate/apply-job-post/" + this.state.job.id,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -83,9 +81,12 @@ class JobPage extends Component {
           }
         )
         .then((response) => {
-          if (response.data.data) {
+          if (response.data.message === 'Apply success') {
             //show success message
             alert("Successfuly applied for job");
+            this.setState({
+              display: true
+            })
           } else if (!response.data.data) {
             alert(response.data.data.message);
           } else {
@@ -141,6 +142,7 @@ class JobPage extends Component {
                       </h3>
                       <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
                       onClick={this.applyForJob}>Ứng tuyển</button>
+                      <p style={{color: "green", display:this.state.display ? "block": "none"}}>Úng tuyển thành công</p>
                     </div>
                   <ul>
                     <div className="basic-info border-bottom mb-2 mt-2">
@@ -163,9 +165,6 @@ class JobPage extends Component {
                       Tình trạng công việc: <span>{job.workStatus}</span>
                     </li>
                     </div>
-                    {/* <li>
-                      Active: <span>{job.active.toString()}</span>
-                    </li> */}
                     <li className="border-0">
                       Tình trạng người làm:
                     </li>

@@ -8,9 +8,10 @@ import {
     FETCH_PERFUMES_BY_FILTER_PARAMS
 } from "../utils/constants/actions-types";
 import {API_BASE_URL} from "../utils/constants/url";
+import { JobPostServiceIml } from './user-actions';
 
-export const fetchPerfumes = () => async (dispatch) => {
-    const response = await axios.get(API_BASE_URL);
+export const fetchJobPosts = () => async (dispatch) => {
+    const response = await JobPostServiceIml.getAllJobPosts();
 
     dispatch({
         type: FETCH_PERFUMES,
@@ -47,7 +48,6 @@ export const fetchPerfumesByPerfumer = (perfumer) => async (dispatch) => {
 
 export const fetchPerfumesByFilterParams = (filter) => async (dispatch) => {
     const response = await axios.post(API_BASE_URL + "/common/job-post-filter", filter);
-    console.log('response filter: ', response);
     dispatch({
         type: FETCH_PERFUMES_BY_FILTER_PARAMS,
         payload: response.data.data

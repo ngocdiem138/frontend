@@ -6,7 +6,6 @@ function ImageUpload() {
   const { about, setAbout } = useResume();
 
   const onFilesChange = (files) => {
-    console.log(files[0].preview.url);
     setAbout({ ...about, picture: files[0].preview.url });
   };
 

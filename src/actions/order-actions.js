@@ -8,6 +8,7 @@ import {
     FETCH_USER_ORDERS_SUCCESS
 } from "../utils/constants/actions-types";
 import {API_BASE_URL} from "../utils/constants/url";
+import { JobPostServiceIml } from './user-actions';
 
 export const fetchOrder = () => async (dispatch) => {
     const response = await axios({
@@ -67,8 +68,8 @@ export const fetchUserOrders = () => async (dispatch) => {
     })
 };
 
-export const finalizeOrder = () => async (dispatch) => {
-    const response = await axios.get(API_BASE_URL + "/order/finalize");
+export const finalizeOrder = (jobPostId) => async (dispatch) => {
+    const response = await JobPostServiceIml.getJobPostById(jobPostId);
 
     dispatch({
         type: ORDER_CONFIRMED_SUCCESS,

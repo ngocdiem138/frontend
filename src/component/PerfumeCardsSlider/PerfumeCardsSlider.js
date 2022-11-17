@@ -5,12 +5,12 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import {IMG_URL} from "../../utils/constants/url";
-import {fetchPerfumes} from "../../actions/perfume-actions"
+import {fetchJobPosts} from "../../actions/perfume-actions"
 import "./PerfumeCardsSlider.css";
 
 class PerfumeCardsSlider extends Component {
     componentDidMount() {
-        this.props.fetchPerfumes();
+        this.props.fetchJobPosts();
     }
 
     addCarouselItems = (array, counter) => {
@@ -70,7 +70,7 @@ class PerfumeCardsSlider extends Component {
 }
 
 PerfumeCardsSlider.propTypes = {
-    fetchPerfumes: PropTypes.func.isRequired,
+    fetchJobPosts: PropTypes.func.isRequired,
     perfumes: PropTypes.array.isRequired
 };
 
@@ -78,4 +78,4 @@ const mapStateToProps = (state) => ({
     perfumes: state.perfume.perfumes,
 });
 
-export default connect(mapStateToProps, {fetchPerfumes})(PerfumeCardsSlider);
+export default connect(mapStateToProps, {fetchJobPosts})(PerfumeCardsSlider);

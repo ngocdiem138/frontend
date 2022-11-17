@@ -15,7 +15,6 @@ const Home = () => {
     useEffect(() => {
         JobPostServiceIml.getAllJobPosts().then((response) => {
             if (response.data.data.length != 0) {
-                console.log(response.data.data);
                 setJobs(response.data.data);
                 setLoading(false);
             }
@@ -27,17 +26,12 @@ const Home = () => {
 
     return (
         <div>
-            {/* <CarouselImageSlider/> */}
-            {/* <SliderBrands /> */}
-            {/* <HomePageTheme /> */}
-            {/* <SliderCards /> */}
-            {/* <JobBoxSm/> */}
-        <div className='search-group' style={{marginLeft: "auto", marginRight: "auto"}}>
-            <input className='search-box' placeholder='Nhập công việc bạn cần tìm ...'/>
-            <button className='search-button'>
-            <i className="fa fa-search" aria-hidden="true"></i>
-            </button>
-        </div>
+            <div className='search-group' style={{ marginLeft: "auto", marginRight: "auto" }}>
+                <input className='search-box' placeholder='Nhập công việc bạn cần tìm ...' />
+                <button className='search-button'>
+                    <i className="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
             {!loading ? (
                 <HotJobs jobs={jobs} />
             ) : (

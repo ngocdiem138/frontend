@@ -11,11 +11,10 @@ const PerfumeCardItem = ({ job, colSize, link, btnName1, btnName2 }) => {
 
     const saveForJob = (id) => {
         const auth = localStorage.getItem("userRole");
-        // console.log(auth.entity);
         const isAuthenticated = localStorage.getItem("isLoggedIn");
     
         if (!isAuthenticated) {
-          alert("you must login to apply for jobs");
+          alert("You must login to apply for jobs");
         } else {
           const BASE_REST_API_URL = "http://localhost:8080/api";
     

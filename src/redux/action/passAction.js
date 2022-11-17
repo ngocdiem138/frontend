@@ -36,7 +36,6 @@ export const fetchPassCat=(user_id)=>{
         .then(res=>
             {
                 const categories=res.data.results;
-               // console.log(categories);
                dispatch(getPassCat(categories));
             })
         .catch(err=>console.log(err)); 

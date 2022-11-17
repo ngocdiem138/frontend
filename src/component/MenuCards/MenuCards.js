@@ -3,9 +3,8 @@ import React from 'react';
 import usePagination from "../Pagination/usePagination";
 import JobItem from "../JobItem/JobItem";
 import PaginationItem from "../Pagination/PaginationItem";
-import SearchForm from "../SearchForm/SearchForm";
 
-const MenuCards = ({ data, itemsPerPage, startFrom, searchByData }) => {
+const MenuCards = ({ data, itemsPerPage, startFrom}) => {
     const { slicedData, pagination, prevPage, nextPage, changePage, setFilteredData, setSearching } = usePagination({
         itemsPerPage,
         data,
@@ -14,13 +13,6 @@ const MenuCards = ({ data, itemsPerPage, startFrom, searchByData }) => {
 
     return (
         <div className="container">
-            {/* <div className="container-fluid row mt-5 ml-2">
-                <SearchForm
-                    data={data}
-                    searchByData={searchByData}
-                    setFilteredData={setFilteredData}
-                    setSearching={setSearching} />
-            </div> */}
             <div className="row mt-0 ml-0">
                 <div className="container-fluid">
                     <PaginationItem

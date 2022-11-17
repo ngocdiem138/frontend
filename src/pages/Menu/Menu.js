@@ -6,12 +6,11 @@ import PropTypes from "prop-types";
 import Checkbox from "../../component/CheckBox/Checkbox";
 import CheckboxRadio from "../../component/CheckboxRadio/CheckboxRadio";
 import MenuCards from "../../component/MenuCards/MenuCards";
-import JobBox from "../Home/JobBoxSm";
 import { employmentType, minBuget } from "./MenuData";
-import { Tag, TagCloseButton, TagLabel, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, VStack, Textarea, Select, Text, Col } from '@chakra-ui/react';
-import { MdDelete } from 'react-icons/md';
+import { Tag, TagCloseButton, TagLabel, Box, FormControl, FormLabel, HStack, Input } from '@chakra-ui/react';
+
 import {
-    fetchPerfumes,
+    fetchJobPosts,
     fetchPerfumesByPerfumer,
     fetchPerfumesByGender,
     fetchPerfumesByFilterParams
@@ -30,21 +29,6 @@ class Menu extends Component {
             others: []
         }
     };
-
-    componentDidMount() {
-        // const perfumeData = this.props.location.state.id;
-
-        // if (perfumeData === "female" || perfumeData === "male") {
-        //     this.props.fetchPerfumesByGender({ perfumeGender: perfumeData });
-        //     window.scrollTo(0, 0);
-        // } else if (perfumeData === "all") {
-        //     this.props.fetchPerfumes();
-        //     window.scrollTo(0, 0);
-        // } else if (perfumeData) {
-        //     this.props.fetchPerfumesByPerfumer({ perfumer: perfumeData });
-        //     window.scrollTo(0, 0);
-        // }
-    }
 
     getProducts = (variables) => {
         this.props.fetchPerfumesByFilterParams(variables);
@@ -68,7 +52,6 @@ class Menu extends Component {
         if(value){
             newFilters[category].push(value)
         }
-        this.getProducts(newFilters)
         this.setState(newFilters);
     }
 
@@ -122,7 +105,7 @@ class Menu extends Component {
                         </li>
                         <h5>ExperienceYear</h5>
                         <li className="active mb-2">
-                            <Input className="input-field" onBlur={(filters) => this.handleFilters(filters.target.value, "experienceYear")} />
+                            <Input className="input-field" onChange={(filters) => this.handleFilters(filters.target.value, "experienceYear")} />
                         </li>
                     </ul>
                 </nav>
@@ -241,7 +224,7 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-    fetchPerfumes: PropTypes.func.isRequired,
+    fetchJobPosts: PropTypes.func.isRequired,
     fetchPerfumesByPerfumer: PropTypes.func.isRequired,
     fetchPerfumesByGender: PropTypes.func.isRequired,
     fetchPerfumesByFilterParams: PropTypes.func.isRequired,
@@ -253,7 +236,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-    fetchPerfumes,
+    fetchJobPosts,
     fetchPerfumesByPerfumer,
     fetchPerfumesByGender,
     fetchPerfumesByFilterParams

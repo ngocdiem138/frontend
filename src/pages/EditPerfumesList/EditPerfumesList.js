@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import EditPerfumes from "./EditPerfumes";
-import {fetchPerfumes} from "../../actions/perfume-actions";
+import {fetchJobPosts} from "../../actions/perfume-actions";
 
 class EditPerfumesList extends Component {
 
     componentDidMount() {
-        this.props.fetchPerfumes();
+        this.props.fetchJobPosts();
     }
 
     render() {
@@ -31,7 +31,7 @@ class EditPerfumesList extends Component {
 }
 
 EditPerfumesList.propTypes = {
-    fetchPerfumes: PropTypes.func.isRequired,
+    fetchJobPosts: PropTypes.func.isRequired,
     perfumes: PropTypes.array.isRequired
 };
 
@@ -39,4 +39,4 @@ const mapStateToProps = (state) => ({
     perfumes: state.perfume.perfumes
 });
 
-export default connect(mapStateToProps, {fetchPerfumes})(EditPerfumesList);
+export default connect(mapStateToProps, {fetchJobPosts})(EditPerfumesList);

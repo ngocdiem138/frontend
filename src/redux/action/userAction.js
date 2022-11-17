@@ -59,7 +59,6 @@ export const loginUser=(username,password)=>{
         const token=res.data.token;
         localStorage.setItem("jwtToken",token);
         setAuthenticationToken(token);
-       // console.log(jwt.decode(token));
          dispatch(setCurrentUser(jwt.decode(token)));
         
       dispatch({

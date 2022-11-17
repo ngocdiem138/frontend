@@ -34,7 +34,6 @@ const Experience = () => {
         experienceList.map((work) => (
             work.id == '-1' && work.title != "" ? ExperienceServiceIml.createExperience(work) : ExperienceServiceIml.updateExperience(work)
         ));
-        console.log(experienceList);
     }
 
     const handleChange = (e, id) => {
