@@ -15,6 +15,7 @@ import JobseekerProfile from "../images/jobseeker-profile.png";
 import { ProfileImg } from "../../component/Styles";
 
 const BASE_REST_API_URL = 'http://localhost:8080/api';
+const userRole = localStorage.getItem('userRole')
 class UserProfile extends Component {
     constructor(props) {
         super(props);
@@ -33,7 +34,10 @@ class UserProfile extends Component {
 
     componentDidMount() {
         axios
-            .get(BASE_REST_API_URL + "/employer/edit-profile")
+            .get(BASE_REST_API_URL + "/employer/edit-profile", {        
+                headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }})
             .then((response) => {
                 if (response.data.resp === 1) {
                     this.setState({
@@ -58,12 +62,13 @@ class UserProfile extends Component {
             .value;
         formData.append("gender", genderValue);
 
-        console.log(genderValue);
-
+        const post_api = userRole === 'CANDIDATE' ? "/candidate/update":"/employer/update/"
+        console.log('Form data', formData);
         axios
-            .post(apiPath + "/jobseeker/edit-profile", formData, {
+            .post(apiPath + post_api, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
                 },
             })
             .then((response) => {
@@ -304,8 +309,7 @@ class UserProfile extends Component {
                         </Row>
 
 
-
-                        <Row>
+                        { userRole === 'CANDIDATE' ?                         <Row>
                             <Col md="12">
                                 <Card>
                                     <Card.Header>
@@ -314,7 +318,10 @@ class UserProfile extends Component {
                                     <Experience />
                                 </Card>
                             </Col>
-                        </Row>
+                        </Row>:
+                        
+                        ""}
+
                         {/* <Row>
                             <Col md="12">
                                 <Card>

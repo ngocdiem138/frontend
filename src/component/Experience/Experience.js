@@ -129,7 +129,7 @@ const Experience = () => {
                                     <Box  borderWidth={'1px'} rounded={'sm'} my={4} p={2} marginLeft={20}>
                                         {work.skills ? work.skills.split(',').map((skill) => (
                                             <Tag
-                                                className='skill-tag'
+                                                className='show-tag'
                                                 size={'lg'}
                                                 borderRadius='full'
                                                 variant='solid'
@@ -139,7 +139,7 @@ const Experience = () => {
                                                 marginRight={2}
                                             >
                                                 <TagLabel>{skill}</TagLabel>
-                                                {skill ? <TagCloseButton className='delete-skill' onClick={() => deleteSkill(skill,work.id)}/>:""}
+                                                {skill ? <TagCloseButton className='delete-tag' onClick={() => deleteSkill(skill,work.id)}/>:""}
                                                 
                                             </Tag>
                                         )) : (

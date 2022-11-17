@@ -31,6 +31,7 @@ class JobPage extends Component {
     const { pathname } = this.props.location;
     const currentParams = getParams(pathname);
     console.log(currentParams);
+    console.log("id: ", currentParams);
 
     if (this.state.isLoading) {
       axios
@@ -40,11 +41,11 @@ class JobPage extends Component {
           const settings = {
             method: "GET",
           };
-
+          
           this.setState({
             job: response.data.data,
             employer: await fetch(
-              `http://localhost:8080/api/employer/${text}`,
+              `http://localhost:8080/api/common/employer/get-employer-by-id/${text}`,
               settings
             ).then((response) => {
               let dataJson = response.json();

@@ -28,15 +28,15 @@ const MenuCards = ({ data, itemsPerPage, startFrom, searchByData }) => {
                         prevPage={prevPage}
                         changePage={changePage}
                         nextPage={nextPage} />
-                    <div className="row">
-                        {slicedData.map((job) => {
+                    <div className="row" style={{paddingBottom:"100px"}}>
+                        {slicedData?.map((job) => {
                             return (
                                 <JobItem
                                     job={job}
                                     colSize={4}
                                     link={"/common/job-post/get-one"}
-                                    btnName1={"SHOW MORE"}
-                                    btnName2={"SAVE JOB"} />
+                                    btnName1={"Xem thêm"}
+                                    btnName2={"Lưu"} />
                             );
                         })}
                     </div>

@@ -59,6 +59,8 @@ const AddJobPostComponent = () => {
       , communicationDis, skills, level, type, quantity, experienceYear, educationLevel, employmentType, minBudget, maxBudget, dueTime
     }
 
+    console.log(jobPost);
+
     if (id != 'new') {
       jobPost.id=id;
       JobPostServiceIml.updateJobPost(jobPost).then((response) => {
@@ -68,8 +70,10 @@ const AddJobPostComponent = () => {
       })
 
     } else {
-      jobPost.id = -1;
-      JobPostServiceIml.createJobPost(jobPost).then((response) => {
+
+      jobPost.number = parseInt(jobPost.number);
+      const {id, ...data} = jobPost
+      JobPostServiceIml.createJobPost(data).then((response) => {
 
         console.log(response.data)
 

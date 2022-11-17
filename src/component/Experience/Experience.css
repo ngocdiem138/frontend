@@ -43,7 +43,7 @@
     background-color: var(--secondary-color);
 }
 
-.skill-tag {
+.show-tag {
     background-color: var(--main-color);
     padding-left: 2px;
     padding-right: 2px;
@@ -51,7 +51,7 @@
     border-radius: 10px;
 }
 
-.delete-skill {
+.delete-tag {
     background-color: transparent;
     border: 0;
     padding: 0;

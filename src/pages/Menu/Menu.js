@@ -32,18 +32,18 @@ class Menu extends Component {
     };
 
     componentDidMount() {
-        const perfumeData = this.props.location.state.id;
+        // const perfumeData = this.props.location.state.id;
 
-        if (perfumeData === "female" || perfumeData === "male") {
-            this.props.fetchPerfumesByGender({ perfumeGender: perfumeData });
-            window.scrollTo(0, 0);
-        } else if (perfumeData === "all") {
-            this.props.fetchPerfumes();
-            window.scrollTo(0, 0);
-        } else if (perfumeData) {
-            this.props.fetchPerfumesByPerfumer({ perfumer: perfumeData });
-            window.scrollTo(0, 0);
-        }
+        // if (perfumeData === "female" || perfumeData === "male") {
+        //     this.props.fetchPerfumesByGender({ perfumeGender: perfumeData });
+        //     window.scrollTo(0, 0);
+        // } else if (perfumeData === "all") {
+        //     this.props.fetchPerfumes();
+        //     window.scrollTo(0, 0);
+        // } else if (perfumeData) {
+        //     this.props.fetchPerfumesByPerfumer({ perfumer: perfumeData });
+        //     window.scrollTo(0, 0);
+        // }
     }
 
     getProducts = (variables) => {
@@ -104,6 +104,7 @@ class Menu extends Component {
 
         return (
             <div className="container d-flex" style={{ "width": "100vw" }}>
+                <div>
                 <nav id="sidebar" style={{ "width": "20vw" }}>
                     <div className="sidebar-header">
                         <h3>Search Job</h3>
@@ -121,7 +122,7 @@ class Menu extends Component {
                         </li>
                         <h5>ExperienceYear</h5>
                         <li className="active mb-2">
-                            <Input onBlur={(filters) => this.handleFilters(filters.target.value, "experienceYear")} />
+                            <Input className="input-field" onBlur={(filters) => this.handleFilters(filters.target.value, "experienceYear")} />
                         </li>
                     </ul>
                 </nav>
@@ -129,13 +130,14 @@ class Menu extends Component {
                     <HStack spacing={4} alignItems={'flex-end'} as='form'>
                         <FormControl>
                             <FormLabel htmlFor='skill'>Add Skills</FormLabel>
-                            <Input onBlur={(filters) => this.handleAddTag(filters.target.value, "skills")} />
+                            <Input className="input-field" onBlur={(filters) => this.handleAddTag(filters.target.value, "skills")} />
                         </FormControl>
                     </HStack>
 
                     <Box borderWidth={'1px'} rounded={'sm'} my={4} p={2}>
                         {this.state.filterParams.skills.length>0 ? this.state.filterParams.skills.map((skill) => (
                             <Tag
+                                className="show-tag"
                                 size={'lg'}
                                 borderRadius='full'
                                 variant='solid'
@@ -143,7 +145,7 @@ class Menu extends Component {
                                 m={0.5}
                             >
                                 <TagLabel>{skill}</TagLabel>
-                                {skill ? <TagCloseButton onClick={() => this.handleDeleteTag(skill, "skills")} /> : ""}
+                                {skill ? <TagCloseButton className="delete-tag" onClick={() => this.handleDeleteTag(skill, "skills")} /> : ""}
 
                             </Tag>
                         )) : (
@@ -154,14 +156,15 @@ class Menu extends Component {
                 <FormControl mt={3}>
                     <HStack spacing={4} alignItems={'flex-end'} as='form'>
                         <FormControl>
-                            <FormLabel htmlFor='position'>Add Positions</FormLabel>
-                            <Input onBlur={(filters) => this.handleAddTag(filters.target.value, "positions")} />
+                            <FormLabel  htmlFor='position'>Add Positions</FormLabel>
+                            <Input className="input-field" onBlur={(filters) => this.handleAddTag(filters.target.value, "positions")} />
                         </FormControl>
                     </HStack>
 
                     <Box borderWidth={'1px'} rounded={'sm'} my={4} p={2}>
                         {this.state.filterParams.positions.length>0 ? this.state.filterParams.positions.map((position) => (
                             <Tag
+                                className="show-tag"
                                 size={'lg'}
                                 borderRadius='full'
                                 variant='solid'
@@ -169,7 +172,7 @@ class Menu extends Component {
                                 m={0.5}
                             >
                                 <TagLabel>{position}</TagLabel>
-                                {position ? <TagCloseButton onClick={() => this.handleDeleteTag(position, "positions")} /> : ""}
+                                {position ? <TagCloseButton className='delete-tag' onClick={() => this.handleDeleteTag(position, "positions")} /> : ""}
 
                             </Tag>
                         )) : (
@@ -180,14 +183,14 @@ class Menu extends Component {
                 <FormControl mt={3}>
                     <HStack spacing={4} alignItems={'flex-end'} as='form'>
                         <FormControl>
-                            <FormLabel htmlFor='city'>Add Cities</FormLabel>
-                            <Input onBlur={(filters) => this.handleAddTag(filters.target.value, "cities")} />
+                            <FormLabel htmlFor='city'>Thành phố</FormLabel>
+                            <Input className="input-field" onBlur={(filters) => this.handleAddTag(filters.target.value, "cities")} />
                         </FormControl>
                     </HStack>
 
                     <Box borderWidth={'1px'} rounded={'sm'} my={4} p={2}>
                         {this.state.filterParams.cities.length>0 ? this.state.filterParams.cities.map((city) => (
-                            <Tag
+                            <Tag className="show-tag"
                                 size={'lg'}
                                 borderRadius='full'
                                 variant='solid'
@@ -195,7 +198,7 @@ class Menu extends Component {
                                 m={0.5}
                             >
                                 <TagLabel>{city}</TagLabel>
-                                {city ? <TagCloseButton onClick={() => this.handleDeleteTag(city, "cities")} /> : ""}
+                                {city ? <TagCloseButton className='delete-tag' onClick={() => this.handleDeleteTag(city, "cities")} /> : ""}
 
                             </Tag>
                         )) : (
@@ -207,13 +210,14 @@ class Menu extends Component {
                     <HStack spacing={4} alignItems={'flex-end'} as='form'>
                         <FormControl>
                             <FormLabel htmlFor='others'>Add Others</FormLabel>
-                            <Input onBlur={(filters) => this.handleAddTag(filters.target.value, "others")} />
+                            <Input className="input-field" onBlur={(filters) => this.handleAddTag(filters.target.value, "others")} />
                         </FormControl>
                     </HStack>
 
                     <Box borderWidth={'1px'} rounded={'sm'} my={4} p={2}>
                         {this.state.filterParams.others.length>0 ? this.state.filterParams.others.map((other) => (
                             <Tag
+                            className="show-tag"
                                 size={'lg'}
                                 borderRadius='full'
                                 variant='solid'
@@ -221,7 +225,7 @@ class Menu extends Component {
                                 m={0.5}
                             >
                                 <TagLabel>{other}</TagLabel>
-                                {other ? <TagCloseButton onClick={() => this.handleDeleteTag(other, "others")} /> : ""}
+                                {other ? <TagCloseButton className='delete-tag' onClick={() => this.handleDeleteTag(other, "others")} /> : ""}
 
                             </Tag>
                         )) : (
@@ -229,6 +233,7 @@ class Menu extends Component {
                         )}
                     </Box>
                 </FormControl>
+                </div>
                 <Route exact component={() => <MenuCards data={perfumes} itemsPerPage={15} searchByData={[]} />} />
             </div>
         );
