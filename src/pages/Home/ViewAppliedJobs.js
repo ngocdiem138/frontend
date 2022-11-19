@@ -76,7 +76,7 @@ const ViewAppliedJobs = () => {
           <Row>
             <Col xl={11}>
               <p className="name">
-                <h1>JobSave List</h1>
+                <h1>Job Applied List</h1>
               </p>
             </Col>
           </Row>

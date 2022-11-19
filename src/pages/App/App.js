@@ -10,7 +10,7 @@ import Login from "../Login/Login";
 import Registration from "../Registration/Registration";
 import Product from "../Perfume/Perfume";
 import Account from "../Account/Account";
-import Cart from "../Cart/Cart";
+import JobSave from "../JobSave/JobSave";
 import Order from "../Order/Order";
 import OrderFinalize from "../OrderFinalize/OrderFinalize";
 import AddProduct from "../AddProduct/AddProduct";
@@ -39,10 +39,11 @@ class App extends Component {
     render() {
         const isAdmin = localStorage.getItem("userRole") === "ADMIN";
         const isEmployer = localStorage.getItem("userRole") === "EMPLOYER";
+        const isCandidate = localStorage.getItem("userRole") === "CANDIDATE";
         return (
             <div>
                 <NavBar />
-                <Switch>
+                <Switch paddingTop={500}>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/registration" component={Registration} />
@@ -54,8 +55,8 @@ class App extends Component {
                     <Route exact path="/contacts" component={Contacts} />
                     <Route exact path="/resumes" component={Resumes} />
                     <Route exact path="/account" component={Account} />
-                    <Route exact path="/job" render={() => localStorage.getItem("isLoggedIn") ?
-                        (<Route component={Cart} />) : (<Route component={Login} />)} />
+                    <Route exact path="/jobs" render={() => (isCandidate) ?
+                        (<Route component={JobSave} />) : (<Route component={Login} />)} />
                     <Route exact path="/order" component={Order} />
                     <Route exact path="/order/finalize" component={OrderFinalize} />
                     <Route exact path="/admin/add" render={() => (isAdmin) ?

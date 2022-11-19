@@ -321,17 +321,6 @@ class UserProfile extends Component {
                         </Row>:
                         
                         ""}
-
-                        {/* <Row>
-                            <Col md="12">
-                                <Card>
-                                    <Card.Header>
-                                        <Card.Title as="h2">Skill</Card.Title>
-                                    </Card.Header>
-                                    <Skill skill={this.props.skill} />
-                                </Card>
-                            </Col>
-                        </Row> */}
                     </Container>
                 </div>
             </div >

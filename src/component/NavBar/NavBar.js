@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faSignOutAlt, faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { logout } from "../../actions/auth-actions";
-import { fetchCart } from "../../actions/cart-actions";
+import { fetchSaveJob } from "../../actions/job-actions";
 import "./NavBar.css";
 import logo from '../../assets/img/logo.png';
 import { Container, Row, Col, Nav, input } from 'react-bootstrap';
@@ -21,7 +21,7 @@ const checkActive = (match, location) => {
 
 class NavBar extends Component {
     componentDidMount() {
-        this.props.fetchCart();
+        this.props.fetchSaveJob();
     }
 
     handleLogout = () => {
@@ -30,7 +30,7 @@ class NavBar extends Component {
 
 
     render() {
-        let cart;
+        let saveJob;
         let links;
         let signOut;
 
@@ -48,10 +48,10 @@ class NavBar extends Component {
                     </button>
                 </Link>
             );
-            cart = (
+            saveJob = (
                 <h5 className="d-inline"
                     style={{ position: "relative", right: "15px", bottom: "8px" }}>
-                    <span className="badge badge-success">{this.props.cartItems.length}</span>
+                    <span className="badge badge-success">{this.props.saveJobItems.length}</span>
                 </h5>
             );
         } else {
@@ -67,7 +67,7 @@ class NavBar extends Component {
                     </li>
                 </>
             );
-            cart = null;
+            saveJob = null;
         }
 
         return (
@@ -104,7 +104,7 @@ class NavBar extends Component {
                                             <li className="nav-item">
                                                 <NavLink className="nav-link" to={"/jobs"}>
                                                     <i className="fas fa-lg pl-5" style={{ color: "white" }}>JOBS</i>
-                                                    {cart}
+                                                    {saveJob}
                                                 </NavLink>
                                             </li>
                                             {links}
@@ -115,13 +115,6 @@ class NavBar extends Component {
                             </div>
                         </Col>
                     </Row>
-                        {/* <div className='search-group' style={{marginLeft: "auto", marginRight: "auto"}}>
-                            <input className='search-box' placeholder='Nhập công việc bạn cần tìm ...'/>
-                            <button className='search-button'>
-                            <i className="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </div> */}
-
                 </Container>
             </div>
         );
@@ -130,20 +123,20 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
     logout: PropTypes.func.isRequired,
-    fetchCart: PropTypes.func.isRequired,
+    fetchSaveJob: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    cartItems: PropTypes.array.isRequired
+    saveJobItems: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    cartItems: state.cart.cartItems
+    saveJobItems: state.saveJob.saveJobItems
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => dispatch(logout()),
-        fetchCart: () => dispatch(fetchCart())
+        fetchSaveJob: () => dispatch(fetchSaveJob())
     }
 };
 

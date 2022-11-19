@@ -62,15 +62,15 @@ const PerfumeCardItem = ({ job, colSize, link, btnName1, btnName2 }) => {
                     <h5 color='blue'>{job.title}</h5>
                     <div className='job-content'>
                       <br></br>
-                      {/* <h7>Quantity: {job.quantity}</h7>
+                      {/* <p>Quantity: {job.quantity}</p>
                       <br></br> */}
-                      {/* <h7>Deadline: {job.dueTime}</h7>
+                      {/* <p>Deadline: {job.dueTime}</p>
                       <br></br> */}
-                      <h7>Kinh nghiệm: {job.experienceYear} năm</h7>
+                      <p>Kinh nghiệm: {job.experienceYear} năm</p>
                       <br></br>
-                      <h7>Trình độ: {job.educationLevel}</h7>
+                      <p>Trình độ: {job.educationLevel}</p>
                       <br></br>
-                      <h7><span>${job.minBudget}-{job.maxBudget}</span></h7>
+                      <p><span>${job.minBudget}-{job.maxBudget}</span></p>
                     </div>
                 </div>
                 <div className='button-container'>

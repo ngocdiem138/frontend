@@ -15,7 +15,7 @@ export const fetchJobPosts = () => async (dispatch) => {
 
     dispatch({
         type: FETCH_PERFUMES,
-        payload: response.data
+        payload: response.data.data
     })
 };
 

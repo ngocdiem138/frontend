@@ -76,10 +76,6 @@ export const JobPostServiceIml = new JobPostService();
 
 class ExperienceService {
 
-    getAllJobPosts() {
-        return axios.get(API_BASE_URL + "/job-post/get-all")
-    }
-
     getExperienceByCandidate(){
         return axios.get(API_BASE_URL + "/candidate/get-experience", {
             headers: {

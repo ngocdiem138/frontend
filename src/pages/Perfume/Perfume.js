@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCartPlus, faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import {faPlusCircle, faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 
 import {IMG_URL} from "../../utils/constants/url";
 import {fetchPerfume} from "../../actions/perfume-actions";
-import {addToCart} from "../../actions/cart-actions";
+import {addToSaveJob} from "../../actions/job-actions";
 import {addReviewToPerfume} from "../../actions/user-actions";
 
 class Perfume extends Component {
@@ -21,11 +21,11 @@ class Perfume extends Component {
         window.scrollTo(0, 0);
     }
 
-    addToCart = () => {
+    addToSaveJob = () => {
         if (!localStorage.getItem("isLoggedIn")) {
             this.props.history.push("/login");
         } else {
-            this.props.addToCart(this.props.perfume, this.props.history);
+            this.props.addToSaveJob(this.props.perfume, this.props.history);
         }
     }
 
@@ -70,8 +70,8 @@ class Perfume extends Component {
                             <h6 className="mr-5"><span>${perfume.price}</span>.00</h6>
                             <button type="submit"
                                     className="btn btn-success mx-3"
-                                    onClick={this.addToCart}>
-                                <FontAwesomeIcon className="mr-2 fa-lg" icon={faCartPlus}/> ADD TO CART
+                                    onClick={this.addToSaveJob}>
+                                <FontAwesomeIcon className="mr-2 fa-lg" icon={faPlusCircle}/> ADD TO CART
                             </button>
                         </div>
                         <br/>
@@ -175,7 +175,7 @@ class Perfume extends Component {
 
 Perfume.propTypes = {
     fetchPerfume: PropTypes.func.isRequired,
-    addToCart: PropTypes.func.isRequired,
+    addToSaveJob: PropTypes.func.isRequired,
     perfume: PropTypes.object.isRequired,
     reviews: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
@@ -190,7 +190,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPerfume: (id) => dispatch(fetchPerfume(id)),
-        addToCart: (id, history) => dispatch(addToCart(id, history)),
+        addToSaveJob: (id, history) => dispatch(addToSaveJob(id, history)),
         addReviewToPerfume: (data) => dispatch(addReviewToPerfume(data)),
     }
 };

@@ -7,6 +7,7 @@ import Checkbox from "../../component/CheckBox/Checkbox";
 import CheckboxRadio from "../../component/CheckboxRadio/CheckboxRadio";
 import MenuCards from "../../component/MenuCards/MenuCards";
 import { employmentType, minBuget } from "./MenuData";
+import { fetchAllJobPost } from "../../actions/job-actions";
 import { Tag, TagCloseButton, TagLabel, Box, FormControl, FormLabel, HStack, Input } from '@chakra-ui/react';
 
 import {
@@ -21,7 +22,7 @@ class Menu extends Component {
     state = {
         filterParams: {
             minBuget: 0,
-            experienceYear: 0,
+            experienceYear: 999,
             employmentTypes: [],
             cities: [],
             positions: [],
@@ -29,6 +30,10 @@ class Menu extends Component {
             others: []
         }
     };
+
+    componentDidMount() {
+        this.props.fetchJobPosts();
+    }
 
     getProducts = (variables) => {
         this.props.fetchPerfumesByFilterParams(variables);
@@ -74,6 +79,9 @@ class Menu extends Component {
 
         if (category === "experienceYear") {
             let experienceYearValues = parseInt(filters)
+            if(experienceYearValues.toString()==="NaN"){
+                experienceYearValues = 999;
+            }
             newFilters[category] = experienceYearValues
         }
 
@@ -233,10 +241,12 @@ Menu.propTypes = {
 
 const mapStateToProps = (state) => ({
     perfumes: state.perfume.perfumes,
+    fetchAllJobPost: PropTypes.func.isRequired,
 });
 
 export default connect(mapStateToProps, {
     fetchJobPosts,
+    fetchAllJobPost,
     fetchPerfumesByPerfumer,
     fetchPerfumesByGender,
     fetchPerfumesByFilterParams
