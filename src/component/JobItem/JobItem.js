@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { Alert } from 'react-bootstrap';
 import axios from "axios";
 import { IMG_URL } from "../../utils/constants/url";
 import Spinner from "../Spinner/Spinner";
@@ -14,7 +15,7 @@ const PerfumeCardItem = ({ job, colSize, link, btnName1, btnName2 }) => {
         const isAuthenticated = localStorage.getItem("isLoggedIn");
     
         if (!isAuthenticated) {
-          alert("You must login to apply for jobs");
+          <Alert>You must login to apply for jobs</Alert>
         } else {
           const BASE_REST_API_URL = "http://localhost:8080/api";
     
@@ -31,11 +32,11 @@ const PerfumeCardItem = ({ job, colSize, link, btnName1, btnName2 }) => {
             .then((response) => {
               if (response.data.data) {
                 //show success message
-                alert("Successfuly saved for job");
+                <Alert>Successfuly saved for job</Alert>
               } else if (!response.data.data) {
-                alert(response.data.data.message);
+                <Alert>{response.data.message}</Alert>
               } else {
-                alert("Request Failed");
+                <Alert>Request Failed</Alert>
               }
             })
             .catch((error) => {

@@ -5,7 +5,7 @@ const employmentType = [
     {"name": "FREELANCE", "label":"FREELANCE"},
 ]
 
-const minBuget = [
+const minBudget = [
     {"id": 1, "name": "any", "value":0},
     {"id": 2, "name": "150$", "value":150},
     {"id": 3, "name": "250$", "value":250},
@@ -13,4 +13,4 @@ const minBuget = [
     {"id": 5, "name": "900$", "value":900}
 ]
 
-export {employmentType, minBuget};
+export {employmentType, minBudget};

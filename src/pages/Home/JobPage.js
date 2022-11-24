@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { matchPath, withRouter } from "react-router-dom";
+import { Alert } from 'react-bootstrap';
 import axios from "axios";
 import BannerEmployer from "./BannerEmployer";
 import Loader from "./Loader";
@@ -7,6 +8,10 @@ import { EmployerServiceIml } from "../../actions/admin-actions";
 import './main.css'
 import { API_BASE_URL } from "../../utils/constants/url";
 
+
+const error = () => {
+
+}
 
 class JobPage extends Component {
   constructor(props) {
@@ -17,6 +22,7 @@ class JobPage extends Component {
       employer: {},
       isLoading: true,
       display: false,
+      err: "",
     };
   }
 
@@ -41,7 +47,7 @@ class JobPage extends Component {
           const settings = {
             method: "GET",
           };
-          
+
           this.setState({
             job: response.data.data,
             employer: await fetch(
@@ -50,7 +56,7 @@ class JobPage extends Component {
             ).then((response) => {
               let dataJson = response.json();
               if (dataJson.data) {
-                return dataJson.data.data;
+                return dataJson.data.data;applyForJob
               } else {
                 return dataJson;
               }
@@ -68,7 +74,7 @@ class JobPage extends Component {
     const isAuthenticated = localStorage.getItem("isLoggedIn");
 
     if (!isAuthenticated) {
-      alert("You must login to apply for jobs");
+      this.setState({ err: "You must login to apply for jobs" })
     } else {
       axios
         .get(
@@ -81,16 +87,21 @@ class JobPage extends Component {
           }
         )
         .then((response) => {
-          if (response.data.message === 'Apply success') {
+          if (response.data.errorCode==200) {
             //show success message
-            alert("Successfuly applied for job");
+            // <Alert variant="info">Successfuly applied for job</Alert>
+            // this.setState({err:"Successfuly applied for job"})
             this.setState({
-              display: true
-            })
-          } else if (!response.data.data) {
-            alert(response.data.data.message);
+              display: true,
+              err: "Successfuly applied for job"
+            });
+          } else if (response.data.errorCode!=200) {
+            this.setState({ err: response.data.message });
+            window.location.assign("http://localhost:3000/registerOfUser");
+            // <Alert variant="danger">{response.data.message}</Alert>
           } else {
-            alert("Request Failed");
+            this.setState({ err: "Request Failed" })
+            // <Alert variant="danger">Request Failed</Alert>
           }
         })
         .catch((error) => {
@@ -99,7 +110,7 @@ class JobPage extends Component {
     }
   };
 
- 
+
 
   render() {
     const { employer, job } = this.state;
@@ -137,38 +148,39 @@ class JobPage extends Component {
                 <div className="job-info-container">
                   <h5 className="border-0">Basic Job Information</h5>
                   <div className="info-header border-bottom">
-                      <h3 className="border-0 ">
-                        <span>{job.title}</span>
-                      </h3>
-                      <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
+                    <h3 className="border-0 ">
+                      <span>{job.title}</span>
+                    </h3>
+                    <button className="w-100 rounded bg-danger text-white border-0 p-2 mb-5"
                       onClick={this.applyForJob}>Ứng tuyển</button>
-                      <p style={{color: "green", display:this.state.display ? "block": "none"}}>Úng tuyển thành công</p>
-                    </div>
+                    {this.state.err ? <Alert variant="danger">{this.state.err}</Alert> : null}
+                    <p style={{ color: "green", display: this.state.display ? "block" : "none" }}>Úng tuyển thành công</p>
+                  </div>
                   <ul>
                     <div className="basic-info border-bottom mb-2 mt-2">
-                    <li className="border-0 " style={{fontSize:"medium"}}>
-                      Cần tuyển: <span>{job.quantity}</span>
-                    </li>
-                    <li className="border-0" style={{fontSize:"small"}}>
-                      Salary:
-                      <span>
-                        {job.minBudget}$ - {job.maxBudget}
-                      </span>
-                    </li>
-                    <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
-                      Địa chỉ: <span>{`${job.address}, ${job.city}`}</span>
-                    </li>
-                    <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
-                      Làm việc tại: <span>{job.workplaceType}</span>
-                    </li>
-                    <li className="border-0 basic-info-item" style={{fontSize:"small"}}>
-                      Tình trạng công việc: <span>{job.workStatus}</span>
-                    </li>
+                      <li className="border-0 " style={{ fontSize: "medium" }}>
+                        Cần tuyển: <span>{job.quantity}</span>
+                      </li>
+                      <li className="border-0" style={{ fontSize: "small" }}>
+                        Salary:
+                        <span>
+                          {job.minBudget}$ - {job.maxBudget}
+                        </span>
+                      </li>
+                      <li className="border-0 basic-info-item" style={{ fontSize: "small" }}>
+                        Địa chỉ: <span>{`${job.address}, ${job.city}`}</span>
+                      </li>
+                      <li className="border-0 basic-info-item" style={{ fontSize: "small" }}>
+                        Làm việc tại: <span>{job.workplaceType}</span>
+                      </li>
+                      <li className="border-0 basic-info-item" style={{ fontSize: "small" }}>
+                        Tình trạng công việc: <span>{job.workStatus}</span>
+                      </li>
                     </div>
                     <li className="border-0">
                       Tình trạng người làm:
                     </li>
-                    <div className="disability-wrap d-flex" style={{columnGap:"10rem"}}>
+                    <div className="disability-wrap d-flex" style={{ columnGap: "10rem" }}>
                       <li className="border-0">
                         <span>{job.blind ? "Blind: ✅" : ""}</span>
                       </li>
@@ -224,7 +236,7 @@ class JobPage extends Component {
                   ></div>
                 </div>
                 <div className="job-apply-btn">
-                  {!(auth === "EMPLOYER") && (
+                  {(
                     <button
                       type="submit"
                       className="post-job-btn b-0 px-3 primary"

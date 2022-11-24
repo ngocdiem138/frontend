@@ -6,14 +6,16 @@ import { JobPostServiceIml } from '../../actions/user-actions';
 import './main.css'
 import { useState, useEffect } from 'react';
 import HotJobs from "./HotJobs";
+import DueSoonJobs from './DueSoonJobs';
 
 
 const Home = () => {
     const [jobs, setJobs] = React.useState([]);
+    const [dueSoonJobs, setDueSoonJobs] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
-
+    const [loadingDueSoon, setLoadingDueSoon] = React.useState(true);
     useEffect(() => {
-        JobPostServiceIml.getAllJobPosts().then((response) => {
+        JobPostServiceIml.getHotJobPosts().then((response) => {
             if (response.data.data.length != 0) {
                 setJobs(response.data.data);
                 setLoading(false);
@@ -22,7 +24,21 @@ const Home = () => {
             .catch((error) => {
                 console.log(error);
             });
+    }, []);
+
+    useEffect(() => {
+        JobPostServiceIml.getDueSoonJobPosts().then((response) => {
+            if (response.data.data.length != 0) {
+                setDueSoonJobs(response.data.data);
+                setLoadingDueSoon(false);
+            }
+        })
+            .catch((error) => {
+                console.log(error);
+            });
     }, [])
+
+
 
     return (
         <div>
@@ -32,8 +48,11 @@ const Home = () => {
                     <i className="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>
-            {!loading ? (
-                <HotJobs jobs={jobs} />
+            {!loading || !loadingDueSoon ? (
+                <>
+                    <HotJobs jobs={jobs} />
+                    <DueSoonJobs jobs={jobs} />
+                </>
             ) : (
                 <div className="text-center  mt-5">
                     <div className="spinner-grow" role="status">

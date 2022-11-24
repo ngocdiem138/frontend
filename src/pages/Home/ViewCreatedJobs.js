@@ -60,7 +60,7 @@ const ViewCreatedJobs = () => {
       <td>{job.quantity}</td>
       <td>{job.city}</td>
       <td>{job.minBudget}$-{job.minBudget}$ </td>
-      <td>{job.dueTime}</td>
+      <td>{job.dueTime ? (new Date(job.dueTime)).getDate()+"/" + (new Date(job.dueTime)).getMonth() +"/"+ (new Date (job.dueTime)).getFullYear():job.dueTime}</td>
       <td style={{ textAlign: 'right' }}>
         <Button className='btn-delete' onClick={() => remove(job.id)}><Trash /></Button>
       </td>

@@ -11,17 +11,21 @@ import "./NavBar.css";
 import logo from '../../assets/img/logo.png';
 import { Container, Row, Col, Nav, input } from 'react-bootstrap';
 
+
+const isCandidate = localStorage.getItem("userRole") === "CANDIDATE"
 // use for root navlink not active in another address
 const checkActive = (match, location) => {
     //some additional logic to verify you are in the home URI
-    if(!location) return false;
-    const {pathname} = location;
+    if (!location) return false;
+    const { pathname } = location;
     return pathname === "/";
 }
 
 class NavBar extends Component {
     componentDidMount() {
-        this.props.fetchSaveJob();
+        if (isCandidate) {
+            this.props.fetchSaveJob();
+        }
     }
 
     handleLogout = () => {
@@ -48,12 +52,14 @@ class NavBar extends Component {
                     </button>
                 </Link>
             );
-            saveJob = (
-                <h5 className="d-inline"
-                    style={{ position: "relative", right: "15px", bottom: "8px" }}>
-                    <span className="badge badge-success">{this.props.saveJobItems.length}</span>
-                </h5>
-            );
+            if (isCandidate) {
+                saveJob = (
+                    <h5 className="d-inline"
+                        style={{ position: "relative", right: "15px", bottom: "8px" }}>
+                        <span className="badge badge-success">{this.props.saveJobItems.length}</span>
+                    </h5>
+                );
+            }
         } else {
             links = (
                 <>
@@ -100,13 +106,18 @@ class NavBar extends Component {
                                                 <NavLink to={"/resumes"}><span className="nav-link pl-5 pr-5 header-link">Cv</span></NavLink>
                                             </li>
                                         </ul>
+                                        {
+                                            isCandidate ?
+                                                <li className="nav-item">
+                                                    <NavLink className="nav-link" to={"/jobs"}>
+                                                        <i className="fas fa-lg pl-5" style={{ color: "white" }}>JOBS</i>
+                                                        {saveJob}
+                                                    </NavLink>
+                                                </li>
+                                                : null
+                                        }
+
                                         <ul className="navbar-nav ml-auto">
-                                            <li className="nav-item">
-                                                <NavLink className="nav-link" to={"/jobs"}>
-                                                    <i className="fas fa-lg pl-5" style={{ color: "white" }}>JOBS</i>
-                                                    {saveJob}
-                                                </NavLink>
-                                            </li>
                                             {links}
                                         </ul>
                                         {signOut}

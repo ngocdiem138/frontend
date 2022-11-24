@@ -206,7 +206,7 @@ export const addCompany = (data) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PERFUME_ADDED_FAILURE,
-            payload: error.response.data
+            payload: response.data.message
         })
     }
 };

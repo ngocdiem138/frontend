@@ -13,35 +13,35 @@ import axios from "axios";
 import Editor from "../Home/widgets/Editor";
 import JobseekerProfile from "../images/jobseeker-profile.png";
 import { ProfileImg } from "../../component/Styles";
+import { API_BASE_URL } from '../../utils/constants/url';
 
-const BASE_REST_API_URL = 'http://localhost:8080/api';
 const userRole = localStorage.getItem('userRole')
 class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            first_name: "",
-            last_name: "",
-            address: "",
+            username: "",
+            email: "",
             phone: "",
-            description: "",
             profile: "",
             cv: "",
-            profile_label: "Upload profile (jpg, png)",
+            active: false,
+            avatar: "Upload avatar (jpg, png)",
             cv_label: "Upload Cv (pdf)",
         };
     }
 
     componentDidMount() {
         axios
-            .get(BASE_REST_API_URL + "/employer/edit-profile", {        
+            .get(API_BASE_URL + "/user/profile", {
                 headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }})
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then((response) => {
-                if (response.data.resp === 1) {
+                if (response.data.data) {
                     this.setState({
-                        ...response.data.user,
+                        ...response.data.data,
                     });
                 }
             })
@@ -50,29 +50,36 @@ class UserProfile extends Component {
             });
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const apiPath = BASE_REST_API_URL;
+        const apiPath = API_BASE_URL;
         removeError();
-
         let formData = new FormData(document.getElementById("edit-jobseeker"));
-        formData.append("description", this.state.description);
+        let activeValue = document.querySelector('input[name="active"]:checked').value;
+        formData.append("active", activeValue);
 
-        let genderValue = document.querySelector('input[name="gender"]:checked')
-            .value;
-        formData.append("gender", genderValue);
-
-        const post_api = userRole === 'CANDIDATE' ? "/candidate/update":"/employer/update/"
+        const put_api = "/user/"
         console.log('Form data', formData);
-        axios
-            .post(apiPath + post_api, formData, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                },
-            })
+        // axios({
+        //     method: "POST",
+        //     url: API_BASE_URL + "/common/register",
+        //     data: data,
+        //     headers: {
+        //         "Content-Type": "multipart/form-data",
+        //     }
+        // });
+        const response = await axios({
+            method: "PUT",
+            url: API_BASE_URL + "/user/" + this.state.id,
+            data: formData,
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            }
+        })
+        
             .then((response) => {
-                if (response.data.resp === 1) {
+                if (response.data.status == 200) {
                     //show success message
                     alert("Successfuly edited profile");
 
@@ -82,7 +89,7 @@ class UserProfile extends Component {
 
                     //reset placeholder of profile and cv
                     this.setState({
-                        profile_label: "Upload profile (jpg, png)",
+                        avatar: "Upload profile (jpg, png)",
                     });
 
                     this.setState({
@@ -106,11 +113,11 @@ class UserProfile extends Component {
     changeProfileLabel = (e) => {
         if (e.target.files.length > 0) {
             this.setState({
-                profile_label: e.target.files[0].name,
+                avatar: e.target.files[0].name,
             });
         } else {
             this.setState({
-                profile_label: "Upload profile (jpg, png)",
+                avatar: "Upload profile (jpg, png)",
             });
         }
     };
@@ -169,34 +176,34 @@ class UserProfile extends Component {
                                         encType="multipart/form-data"
                                         id="edit-jobseeker"
                                     >
-                                        <div className="row my-30" style={{marginTop: "5%"}}>
+                                        <div className="row my-30" style={{ marginTop: "5%" }}>
                                             <div className="col-lg-6">
                                                 <input
-                                                    style={{marginLeft: "-5%"}}
+                                                    style={{ marginLeft: "-5%" }}
                                                     type="text"
-                                                    name="first_name"
+                                                    name="username"
                                                     className="form-control p-3"
-                                                    placeholder="First Name"
-                                                    value={this.state.first_name || ""}
+                                                    placeholder="User name"
+                                                    value={this.state.username || ""}
                                                     onChange={this.onChange}
                                                 />
                                             </div>
                                             <div className="col-lg-6 mt-4 mt-lg-0">
                                                 <input
                                                     type="text"
-                                                    name="last_name"
+                                                    name="email"
                                                     className="form-control p-3"
                                                     placeholder="Last Name"
-                                                    value={this.state.last_name || ""}
+                                                    value={this.state.email || ""}
                                                     onChange={this.onChange}
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="row my-30" style={{marginTop: "5%"}}>
+                                        <div className="row my-30" style={{ marginTop: "5%" }}>
                                             <div className="col-lg-6">
                                                 <input
-                                                    style={{marginLeft: "-5%"}}
+                                                    style={{ marginLeft: "-5%" }}
                                                     type="text"
                                                     name="phone"
                                                     className="form-control p-3"
@@ -209,60 +216,31 @@ class UserProfile extends Component {
                                                 <div className="row no-gutters mt-lg-2">
                                                     <label className="radio-wrapper col-3  ml-5  ml-lg-4">
                                                         <input
+                                                            disabled={true}
                                                             type="radio"
-                                                            name="gender"
-                                                            value="male"
+                                                            name="active"
+                                                            value="true"
                                                             onChange={this.onChange}
-                                                            checked={this.state.gender === "male" ? true : false}
+                                                            checked={this.state.active === true ? true : false}
                                                         />
                                                         <span className="checkmark"></span>
-                                                        Male
+                                                        Active
                                                     </label>
                                                     <label className="radio-wrapper col-3">
                                                         <input
+                                                            disabled={true}
                                                             type="radio"
-                                                            name="gender"
-                                                            value="female"
-                                                            checked={this.state.gender === "female" ? true : false}
+                                                            name="active"
+                                                            value="false"
+                                                            checked={this.state.active === false ? true : false}
                                                             onChange={this.onChange}
                                                         />
                                                         <span className="checkmark"></span>
-                                                        Female
-                                                    </label>
-                                                    <label className="radio-wrapper col-3">
-                                                        <input
-                                                            type="radio"
-                                                            name="gender"
-                                                            value="other"
-                                                            checked={this.state.gender === "other" ? true : false}
-                                                            onChange={this.onChange}
-                                                        />
-                                                        <span className="checkmark"></span>
-                                                        Other
+                                                        Inactive
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div className="form-group my-30">
-                                            <input
-                                                type="text"
-                                                placeholder="Address"
-                                                className="form-control  p-3"
-                                                name="address"
-                                                value={this.state.address || ""}
-                                                onChange={this.onChange}
-                                            />
-                                        </div>
-
-                                        <div className="form-group my-30">
-                                            <Editor 
-                                                placeholder="Write about yourself ....."
-                                                handleChange={this.updateDescription || ""}
-                                                editorHtml={this.state.description}
-                                            />
-                                        </div>
-
                                         <div className="form-group my-30">
                                             <div className="custom-file">
                                                 <input
@@ -272,7 +250,7 @@ class UserProfile extends Component {
                                                     onChange={this.onChange}
                                                 />
                                                 <label className="custom-file-label" htmlFor="customFile">
-                                                    {this.state.profile_label}
+                                                    {this.state.avatar}
                                                 </label>
                                             </div>
                                         </div>
@@ -309,7 +287,7 @@ class UserProfile extends Component {
                         </Row>
 
 
-                        { userRole === 'CANDIDATE' ?                         <Row>
+                        {userRole === 'CANDIDATE' ? <Row>
                             <Col md="12">
                                 <Card>
                                     <Card.Header>
@@ -318,9 +296,9 @@ class UserProfile extends Component {
                                     <Experience />
                                 </Card>
                             </Col>
-                        </Row>:
-                        
-                        ""}
+                        </Row> :
+
+                            ""}
                     </Container>
                 </div>
             </div >

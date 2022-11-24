@@ -38,29 +38,35 @@ export const validateLoginForm = (email, password, setError) => {
 
 /** Handle form validation for the register form */
 export const validateRegisterForm = (
-  email,
-  password,
-  confirmPassword,
+  userFirstName,
+  userLastName,
+  recruitmentEmail,
+  recruitmentPhone,
   setError
 ) => {
   // Check for undefined or empty input fields
-  if (!email) {
+  if (!userFirstName) {
+    setError("FirstName field is required");
+    return false;
+  }
+
+  if (!userLastName) {
+    setError("LastName field is required");
+    return false;
+  }
+
+  if (!recruitmentEmail && recruitmentEmail!="candidate") {
     setError("Email field is required");
     return false;
   }
 
-  if (!password) {
-    setError("Password field is required");
-    return false;
-  }
-
-  if (!confirmPassword) {
-    setError("Password confirmation field is required");
+  if (!recruitmentPhone && recruitmentPhone!="candidate") {
+    setError("Phone field is required");
     return false;
   }
 
   // Validate email
-  if (!validator.isEmail(email)) {
+  if (!validator.isEmail(recruitmentEmail) && recruitmentEmail!="candidate") {
     setError("Please enter a valid email address.");
     return false;
   }

@@ -16,10 +16,11 @@ class JobSave extends Component {
         this.props.fetchSaveJob();
     }
 
-    deleteFromSaveJob = (jobPostId) => {
+    removeFromSaveJob = (jobPostId) => {
         const jobPost = this.props.saveJobItems.find((jobPost) => jobPost.id === jobPostId);
 
         this.props.removeFromSaveJob(jobPost);
+        window.location.reload();
     };
 
     applyToSaveJob = (jobPostId) => {
@@ -69,11 +70,11 @@ class JobSave extends Component {
                                                             <FontAwesomeIcon className="mr-2" icon={faShoppingBag} /> Apply
                                                         </button>
                                                         <button className="btn btn-warning mb-2"
-                                                            onClick={() => this.deleteFromSaveJob(jobPost.id)}>
+                                                            onClick={() => this.removeFromSaveJob(jobPost.id)}>
                                                             <FontAwesomeIcon className="mr-2" icon={faMinusSquare} /> Remove
                                                         </button>
                                                         <button className="btn btn-info mb-2">
-                                                            <Link className="text-white" to={`${API_BASE_URL}/common/job-post/get-one/${jobPost.id}`}>
+                                                            <Link className="text-white" to={`/common/job-post/get-one/${jobPost.id}`}>
                                                                 <FontAwesomeIcon className="mr-2" icon={faStreetView} /> View
                                                             </Link>
                                                         </button>

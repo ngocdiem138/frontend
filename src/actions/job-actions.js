@@ -82,19 +82,17 @@ export const applyToSaveJob = (jobPost) => async (dispatch) => {
     })
 };
 
-export const removeFromSaveJob = (perfume) => async (dispatch) => {
+export const removeFromSaveJob = (jobPost) => async (dispatch) => {
     const response = await axios({
-        method: "POST",
-        url: API_BASE_URL + "/job/remove",
-        data: perfume,
+        method: "GET",
+        url: API_BASE_URL + "/candidate/cancel-saved-job-post/" + jobPost.id,
+        data: jobPost,
         headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
-    });
-
+    })
     dispatch({
         type: PERFUME_REMOVED_FROM_SAVEJOB_SUCCESS,
-        payload: response.data
     })
 };

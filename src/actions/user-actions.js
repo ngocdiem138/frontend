@@ -18,6 +18,14 @@ class JobPostService {
         return axios.get(API_BASE_URL + "/common/job-post/get-all")
     }
 
+    getHotJobPosts() {
+        return axios.get(API_BASE_URL + "/common/get-hot-job-post")
+    }
+
+    getDueSoonJobPosts() {
+        return axios.get(API_BASE_URL + "/common/get-job-post-due-soon")
+    }
+
     getJobPostAppliedByCandidate(){
         return axios.get(API_BASE_URL + "/candidate/get-job-post-applied", {
             headers: {

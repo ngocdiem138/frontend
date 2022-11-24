@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { faList, faLock, faUsers, faHistory, faHouseUser, faStickyNote, faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { faChalkboard, faList, faLock, faUsers, faHistory, faHouseUser, faStickyNote, faKeyboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../pages/Menu/MenuStyle.css";
 
 const AccountNavbar = () => {
     return (
-        <nav id="sidebar" style={{ marginLeft: "1vw"}}>
+        <nav id="sidebar" style={{ marginLeft: "1vw" }}>
             {(localStorage.getItem("userRole") === "ADMIN") ?
                 <ul className="list-unstyled">
                     <li className="mb-2">
@@ -40,6 +40,11 @@ const AccountNavbar = () => {
                 </ul>
                 : (localStorage.getItem("userRole") === "EMPLOYER") ?
                     <ul className="list-unstyled ">
+                        <li className="mb-2">
+                            <Link to={"/employer/dashboard"} className="nav-link mx-3">
+                                <FontAwesomeIcon className="mr-2" icon={faChalkboard} />Dashboard</Link>
+                        </li>
+
                         <li className="mb-2">
                             <Link to={"/employer/jobs"} className="nav-link mx-3">
                                 <FontAwesomeIcon className="mr-2" icon={faList} />List of all JobPost</Link>

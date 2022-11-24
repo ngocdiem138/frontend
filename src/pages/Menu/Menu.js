@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Checkbox from "../../component/CheckBox/Checkbox";
 import CheckboxRadio from "../../component/CheckboxRadio/CheckboxRadio";
 import MenuCards from "../../component/MenuCards/MenuCards";
-import { employmentType, minBuget } from "./MenuData";
+import { employmentType, minBudget } from "./MenuData";
 import { fetchAllJobPost } from "../../actions/job-actions";
 import { Tag, TagCloseButton, TagLabel, Box, FormControl, FormLabel, HStack, Input } from '@chakra-ui/react';
 
@@ -21,7 +21,7 @@ import "./MenuStyle.css";
 class Menu extends Component {
     state = {
         filterParams: {
-            minBuget: 0,
+            minBudget: 0,
             experienceYear: 999,
             employmentTypes: [],
             cities: [],
@@ -40,7 +40,7 @@ class Menu extends Component {
     };
 
     handleNumber = (value) => {
-        const data = minBuget;
+        const data = minBudget;
         let number = 0;
 
         for (let key in data) {
@@ -72,7 +72,7 @@ class Menu extends Component {
         const newFilters = this.state.filterParams
         newFilters[category] = filters
 
-        if (category === "minBuget") {
+        if (category === "minBudget") {
             let minSalaryValues = this.handleNumber(filters)
             newFilters[category] = minSalaryValues
         }
@@ -108,8 +108,8 @@ class Menu extends Component {
                         </li>
                         <h5>Min Salary</h5>
                         <li className="active mb-2">
-                            <CheckboxRadio list={minBuget}
-                                handleFilters={(filters) => this.handleFilters(filters, "minBuget")} />
+                            <CheckboxRadio list={minBudget}
+                                handleFilters={(filters) => this.handleFilters(filters, "minBudget")} />
                         </li>
                         <h5>ExperienceYear</h5>
                         <li className="active mb-2">
