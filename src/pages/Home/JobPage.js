@@ -56,7 +56,7 @@ class JobPage extends Component {
             ).then((response) => {
               let dataJson = response.json();
               if (dataJson.data) {
-                return dataJson.data.data;applyForJob
+                return dataJson.data.data;
               } else {
                 return dataJson;
               }

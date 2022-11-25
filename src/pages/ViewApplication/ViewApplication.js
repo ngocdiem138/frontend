@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import { Button, Table } from 'reactstrap';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Trash, Bullseye } from 'react-bootstrap-icons';
+import { Trash, Spellcheck } from 'react-bootstrap-icons';
 import { useState, useEffect } from 'react';
-import { JobPostServiceIml } from '../../actions/user-actions';
+import { EmployerServiceIml } from "../../actions/admin-actions";
 import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
 import { API_BASE_URL } from "../../utils/constants/url";
+import { useHistory, useParams } from 'react-router-dom';
 
-const ViewCreatedJobs = () => {
+const ViewApplication = () => {
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { id } = useParams();
   useEffect(() => {
-    JobPostServiceIml.getJobPostCreateByEmployer().then((response) => { setJobs(response.data.data) }).then(()=>setLoading(false));
+    EmployerServiceIml.getApplication(id).then((response) => { setJobs(response.data.data) }).then(()=>setLoading(false));
   }, [])
 
   const [keyword, setKeyword] = useState('');
@@ -26,17 +28,18 @@ const ViewCreatedJobs = () => {
     console.log(data);
     setJobs(data);
   }
-  function remove(number) {
-    console.log('delete', number);
-    JobPostServiceIml.deleteJob(number)
+  function remove(applicationId) {
+    console.log('delete', applicationId);
+    EmployerServiceIml.responseApplication(applicationId, false, "reject")
       .then(() => JobPostServiceIml.getAllJobs().then((response) => { setJobs(response.data.data) }))
   }
 
-  function view(number) {
-    console.log('delete', number);
-    JobPostServiceIml.deleteJob(number)
+  function allow(applicationId) {
+    console.log('allow', applicationId);
+    EmployerServiceIml.responseApplication(applicationId, true, "allow")
       .then(() => JobPostServiceIml.getAllJobs().then((response) => { setJobs(response.data.data) }))
   }
+
   const [checked, setChecked] = useState([]);
   // Add/Remove checked item from list
   const handleCheck = (event) => {
@@ -82,26 +85,26 @@ const ViewCreatedJobs = () => {
   
 
   const jobList = !loading&& jobs && jobs.length ? (jobs.map(job => {
-    return <tr key={job.id}>
-      <td><input type="checkbox" value={job.id} onChange={handleCheck}></input></td>
-      <td style={{ whiteSpace: 'nowrap' }}><Link to={"/employer/jobPost/" + job.id} >{job.id}</Link></td>
-      <td>{job.title}</td>
+    return <tr key={job.candidateDTO}>
+      <td><input type="checkbox" value={job.candidateDTO.id} onChange={handleCheck}></input></td>
+      <td style={{ whiteSpace: 'nowrap' }}><Link to={"/employer/viewCandidate" + job.candidateDTO.id} >{job.candidateDTO.id}</Link></td>
+      <td>{job.candidateDTO.firstName}</td>
       {/* <td>{job.applicationIds.length}</td> */}
       {/* <td>{job.savedCandidateIds.length}</td> */}
       {/* <td style={{ whiteSpace: 'nowrap' }}><Link to={"/employer/jobPost/" + job.id} >{jobApplication(job.id).then(data => console.log(data.data.length))}</Link></td> */}
-      <td>{job.city}</td>
-      <td>{job.minBudget}$-{job.minBudget}$ </td>
-      <td>{job.dueTime ? (new Date(job.dueTime)).getDate() + "/" + (new Date(job.dueTime)).getMonth() + "/" + (new Date(job.dueTime)).getFullYear() : job.dueTime}</td>
+      <td>{job.candidateDTO.lastName}</td>
+      <td>{job.candidateDTO.phoneNum} </td>
+      <td>{job.candidateDTO.educationLevel} </td>
       <td style={{ textAlign: 'right' }}>
-        <Button className='btn-delete' onClick={() => remove(job.id)}><Trash /></Button>
+        <Button className='btn-delete' onClick={() => remove(job.candidateDTO.id)}><Trash /></Button>
       </td>
-      <td style={{ textAlign: 'right' }}>
-        <Link className='btn-delete' to={"/employer/viewApplication/"+job.id}><Bullseye /></Link>
+      <td style={{ textAlign: 'center' }}>
+        <Link className='btn-delete' onClick={() => allow(job.candidateDTO.id)}><Spellcheck /></Link>
       </td>
     </tr>
   })) : (
     <tr>
-      <td colSpan="5">No jobs created yet</td>
+      <td colSpan="5">No candidate apply</td>
     </tr>
   );
 
@@ -114,7 +117,7 @@ const ViewCreatedJobs = () => {
           <Row>
             <Col xl={11}>
               <p className="name">
-                <h1>Job Created List</h1>
+                <h1>Job Application List</h1>
               </p>
             </Col>
           </Row>
@@ -134,7 +137,7 @@ const ViewCreatedJobs = () => {
                     <button type="button" class="btn btn-light">Reset Search</button>
                   </div>
                   <div class="col-md-2">
-                    <button type="button" class="btn btn-light"><Link to={"/employer/jobPost/new"} >New Job</Link></button>
+                    {/* <button type="button" class="btn btn-light"><Link to={"/employer/viewCandidate"} >New Job</Link></button> */}
                   </div>
                 </div>
               </div>
@@ -148,14 +151,12 @@ const ViewCreatedJobs = () => {
                   <tr>
                     <th width="5%"></th>
                     <th width="5%">S.N</th>
-                    <th width="15%">Job Title</th>
-                    {/* <th width="10%">N.Applied</th> */}
-                    {/* <th width="10%">Quantity</th> */}
-                    <th width="15%">City</th>
-                    <th width="15%">Salary</th>
-                    <th width="10%">Expiry Date</th>
-                    <th width="5%">Delete</th>
-                    <th width="5%">View</th>
+                    <th width="15%">First Name</th>
+                    <th width="15%">Last Name</th>
+                    <th width="15%">Phone N.</th>
+                    <th width="10%">Education</th>
+                    <th width="5%">Reject</th>
+                    <th width="5%">Accept</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -174,4 +175,4 @@ const ViewCreatedJobs = () => {
     </div >
   );
 }
-export default ViewCreatedJobs;
+export default ViewApplication;

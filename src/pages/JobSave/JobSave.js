@@ -31,13 +31,13 @@ class JobSave extends Component {
 
     render() {
         const { saveJobItems, loading } = this.props;
-        let totalSaveJob = saveJobItems.length;
+        let totalSaveJob = saveJobItems? saveJobItems.length :0;
 
         return (
             <div className="container mt-5 pb-5">
                 {loading ? <Spinner /> :
                     <div>
-                        {saveJobItems.length === 0 ?
+                        {saveJobItems &&saveJobItems.length === 0 ?
                             <div style={{ textAlign: "center" }}>
                                 <h2>Saved Job is empty</h2>
                             </div> :

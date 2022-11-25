@@ -36,6 +36,7 @@ import { validatePostNewJob } from '../../utils/Helpers';
 import PostNewJob from '../Home/PostNewJob'
 import EmployerLanding from '../EmployerLanding/EmployerLanding';
 import Register from '../RegisterOfUser/Register';
+import ViewApplication from '../ViewApplication/ViewApplication';
 
 class App extends Component {
     render() {
@@ -95,6 +96,8 @@ class App extends Component {
                         (<Route component={ViewCreatedJobs} />) : (<Route component={Home} />)} />
                     <Route exact path="/registerOfUser" render={() => (isUser) ?
                         (<Route component={Register} />) : (<Route component={Home} />)} />
+                    <Route exact path="/employer/viewApplication/:id" render={() => (isEmployer) ?
+                        (<Route component={ViewApplication} />) : (<Route component={Home} />)} />
                     {/* <Route exact path="/user/orders" render={() => localStorage.getItem("isLoggedIn") ?
                         (<Route component={UserOrdersList} />) : (<Route component={Home} />)} /> */}
                     <Route exact path="/user/profile" render={() => localStorage.getItem("isLoggedIn") ?

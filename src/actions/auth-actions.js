@@ -57,7 +57,7 @@ export const login = (data, history) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOGIN_FAILURE,
-            payload: error.response.data
+            payload: "Email or password invalid"
         })
     }
 };

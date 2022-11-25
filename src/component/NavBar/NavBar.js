@@ -56,7 +56,7 @@ class NavBar extends Component {
                 saveJob = (
                     <h5 className="d-inline"
                         style={{ position: "relative", right: "15px", bottom: "8px" }}>
-                        <span className="badge badge-success">{this.props.saveJobItems.length}</span>
+                        <span className="badge badge-success">{this.props.saveJobItems? this.props.saveJobItems.length:0}</span>
                     </h5>
                 );
             }

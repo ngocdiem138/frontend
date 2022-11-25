@@ -146,6 +146,20 @@ export class EmployerService {
               Authorization: "Bearer " + localStorage.getItem("token")
             }});
     }
+    getApplication(jobId){
+        return axios.get(API_BASE_URL + "/employer/get-application-by-job-post/" + jobId, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
+    }
+    responseApplication(applicationId, result, note){
+        return axios.get(API_BASE_URL + "/employer/response-application?result="+result+"?applicationId="+applicationId+"?note="+note, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
+    }
 
 }
 
