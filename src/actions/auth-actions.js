@@ -38,22 +38,22 @@ function setRole(roles) {
 export const login = (data, history) => async (dispatch) => {
     try {
         const response = await axios.post(API_BASE_URL + "/login", data);
-        if (response.data.status === 200) {
-
+        if (!response.data.errorCode) {
             let inforUser = response.config.data.replaceAll("\"", "");
             localStorage.setItem("email", cutInformation("email:", ",", inforUser));
             localStorage.setItem("token", response.data.data.jwt);
             localStorage.setItem("userRole", setRole(response.data.data.roles));
             localStorage.setItem("isLoggedIn", true);
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: "Login success. Welcome!"
+            });
+        } else {
+            dispatch({
+                type: LOGIN_FAILURE,
+                payload: "Email or password invalid"
+            });
         }
-
-        dispatch({
-            type: LOGIN_SUCCESS,
-            payload: response.data
-        })
-
-        history.push("/account");
-        window.location.reload();
     } catch (error) {
         dispatch({
             type: LOGIN_FAILURE,
@@ -64,19 +64,18 @@ export const login = (data, history) => async (dispatch) => {
 
 export const registration = (data) => async (dispatch) => {
     try {
-        const response = await axios({
-            method: "POST",
-            url: API_BASE_URL + "/common/register",
-            data: data,
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
-        });
-
-        dispatch({
-            type: REGISTER_SUCCESS,
-            payload: response.data
-        })
+        const response = await axios.post(API_BASE_URL + "/common/register", data);
+        if (!response.data.errorCode) {
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: response.data.message
+            });
+        } else {
+            dispatch({
+                type: REGISTER_FAILURE,
+                payload: response.data.message
+            })
+        }
     } catch (error) {
         dispatch({
             type: REGISTER_FAILURE,
@@ -85,12 +84,12 @@ export const registration = (data) => async (dispatch) => {
     }
 };
 
-export const logout = () => async (dispatch) => {
-    localStorage.clear();
-
-    dispatch({
-        type: LOGOUT_SUCCESS
-    })
+export const logout = () => {
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('isLoggedIn');
+    window.location.assign('/');
 };
 
 export const activateAccount = (code) => async (dispatch) => {

@@ -20,10 +20,7 @@ class CompanyService {
 
 
     getAllCompanys() {
-        return axios.get(API_BASE_URL + "/company", {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            }})
+        return axios.get(API_BASE_URL + "/common/company")
     }
 
     createCompany(company) {
@@ -220,7 +217,7 @@ export const addCompany = (data) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PERFUME_ADDED_FAILURE,
-            payload: response.data.message
+            payload: "response.data.message"
         })
     }
 };

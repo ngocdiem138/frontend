@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
 
     switch (type) {
         case LOGIN_SUCCESS:
-            return {...state, isLoggedIn: true};
+            return {...state, success: payload, isLoggedIn: true};
 
         case LOGIN_FAILURE:
             return {...state, error: payload};
